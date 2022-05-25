@@ -42,6 +42,7 @@
 // }
 
 .navigation {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -67,4 +68,10 @@
   width: 29px;
   height: 29px;
   @include font-navigation-text-money;
+}
+
+.buttonOnBag {
+  background-color: $color-white;
+  border: transparent;
+  cursor: pointer;
 }

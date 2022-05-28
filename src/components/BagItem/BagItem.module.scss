@@ -1,0 +1,56 @@
+@import "../../assets/styles/colors";
+
+.menu {
+  //   display: flex;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.itemColor {
+  //   outline: 1px solid green;
+  background-color: green;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.menuColor {
+  display: flex;
+}
+
+.menuSize {
+  display: flex;
+}
+
+.itemSize {
+  width: 24px;
+  height: 24px;
+  outline: 1px solid $color-black;
+  margin-right: 8px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.menuAboutThing {
+  width: 136px;
+  height: 190px;
+}
+
+.menuAvatar {
+  width: 121px;
+  height: 190px;
+}
+
+.menuAmount {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 24px;
+  height: 190px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+}

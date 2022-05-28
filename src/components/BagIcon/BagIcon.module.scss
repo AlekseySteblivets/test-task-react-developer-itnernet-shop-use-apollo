@@ -1,0 +1,25 @@
+@import "../../assets/styles/fonts";
+@import "../../assets/styles/colors";
+
+.bag {
+  display: flex;
+  align-items: center;
+}
+
+.textMoney {
+  width: 29px;
+  height: 29px;
+  @include font-navigation-text-money;
+}
+
+.buttonOnBag {
+  background-color: $color-white;
+  border: transparent;
+  cursor: pointer;
+}
+
+.emptyCartImg {
+  margin-left: 20px;
+  width: 20px;
+  height: 20px;
+}

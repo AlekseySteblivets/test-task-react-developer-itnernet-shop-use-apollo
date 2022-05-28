@@ -30,6 +30,8 @@ class Modal extends Component {
   };
 
   render() {
+    if (!this.props.visible) return null;
+
     return createPortal(
       <div className={s.modalBackdrop} onClick={this.handleBackdropClick}>
         <div className={s.modalContent}>{this.props.children}</div>

@@ -2,6 +2,8 @@ import { Component } from "react";
 
 import logo from "../../assets/img/Brand-icon.png";
 import BagIcon from "../BagIcon/BagIcon";
+// import NavLink from "../NavLink/NavLink";
+import NavLinkList from "../NavLinkList/NavLinkList";
 
 import styles from "./Navigation.module.scss";
 
@@ -9,24 +11,7 @@ export default class Navigation extends Component {
   render() {
     return (
       <nav className={styles.navigation}>
-        <ul className={styles.menu}>
-          <li className={styles.item}>
-            <a href="/" className={styles.link}>
-              women
-            </a>
-          </li>
-          <li className={styles.item}>
-            <a href="/" className={styles.link}>
-              men
-            </a>
-          </li>
-          <li className={styles.item}>
-            <a href="/" className={styles.link}>
-              kids
-            </a>
-          </li>
-        </ul>
-
+        <NavLinkList />
         <a href="/">
           <img
             alt="logo"

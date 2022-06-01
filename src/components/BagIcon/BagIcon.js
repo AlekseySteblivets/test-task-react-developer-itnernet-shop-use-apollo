@@ -1,7 +1,8 @@
 import { Component } from "react";
 
 import emptyCartImg from "../../assets/img/empty-cart.svg";
-import vector from "../../assets/img/vector.svg";
+import DropDownLink from "../../lib/DropDownLink/DropDownLink";
+// import vector from "../../assets/img/vector.svg";
 import Modal from "../../lib/Modal/Modal";
 import BagItem from "../BagItem/BagItem";
 
@@ -10,6 +11,20 @@ import styles from "./BagIcon.module.scss";
 export default class BagIcon extends Component {
   state = {
     showModal: false,
+    items: [
+      {
+        simbol: "$",
+        title: "USD",
+      },
+      {
+        simbol: "@",
+        title: "EUR",
+      },
+      {
+        simbol: "&",
+        title: "JPY",
+      },
+    ],
   };
 
   togleModal = () => {
@@ -23,8 +38,7 @@ export default class BagIcon extends Component {
     return (
       <>
         <div className={styles.bag}>
-          <p className={styles.textMoney}>$</p>
-          <img alt="vector" src={vector} />
+          <DropDownLink items={this.state.items} />
 
           <button
             type="button"

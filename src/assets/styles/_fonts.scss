@@ -38,12 +38,48 @@
   line-height: 1.63;
 }
 
-@mixin font-modal-Amount-Imems {
+@mixin font-modal-amount-items {
   font-weight: 500;
   font-size: 16px;
   line-height: 1.6;
 }
 
+@mixin font-modal-heading-h3 {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.63;
+}
+
+@mixin font-modal-text-h3 {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.63;
+}
+
+@mixin font-modal-text-size {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.14;
+}
+
+@mixin font-modal-items-size {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.57;
+  font-family: "Source Sans Pro";
+}
+
+@mixin font-modal-text-color {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.14;
+}
+
+@mixin font-modal-text-amount {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.63;
+}
 // @mixin font-heading-h2 {
 //   font-weight: 400;
 //   font-size: 42px;

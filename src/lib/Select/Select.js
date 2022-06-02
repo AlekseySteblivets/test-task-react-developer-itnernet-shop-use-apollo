@@ -3,7 +3,7 @@ import { Component } from "react";
 import cn from "classnames";
 // import vector from "../../assets/img/vector.svg";
 
-import styles from "./DropDownLink.module.scss";
+import styles from "./Select.module.scss";
 
 export default class DropDownLink extends Component {
   state = {

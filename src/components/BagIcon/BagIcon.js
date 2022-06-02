@@ -1,16 +1,16 @@
 import { Component } from "react";
 
 import emptyCartImg from "../../assets/img/empty-cart.svg";
-import DropDownLink from "../../lib/DropDownLink/DropDownLink";
 // import vector from "../../assets/img/vector.svg";
 import Modal from "../../lib/Modal/Modal";
+import Select from "../../lib/Select";
 import BagItem from "../BagItem/BagItem";
 
 import styles from "./BagIcon.module.scss";
 
 export default class BagIcon extends Component {
   state = {
-    showModal: false,
+    showModal: true,
     items: [
       {
         simbol: "$",
@@ -38,7 +38,7 @@ export default class BagIcon extends Component {
     return (
       <>
         <div className={styles.bag}>
-          <DropDownLink items={this.state.items} />
+          <Select items={this.state.items} />
 
           <button
             type="button"
@@ -53,14 +53,14 @@ export default class BagIcon extends Component {
           </button>
         </div>
         <Modal onClose={this.togleModal} visible={showModal}>
-          <h1>
+          <h1 className={styles.title}>
             <span className={styles.modalTitle}>My Bag</span>
-            <span className={styles.modalAmountImems}>,3 items</span>
+            <span className={styles.modalAmountImems}>, 3 items</span>
           </h1>
           <BagItem />
-          <button type="button" onClick={this.togleModal}>
+          {/* <button type="button" onClick={this.togleModal}>
             Закрыть модалку
-          </button>
+          </button> */}
         </Modal>
       </>
     );

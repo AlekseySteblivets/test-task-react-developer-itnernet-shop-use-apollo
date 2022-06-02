@@ -1,4 +1,5 @@
 @import "../../assets/styles/colors";
+@import "../../assets/styles/fonts";
 
 .menu {
   //   display: flex;
@@ -8,10 +9,15 @@
 
 .itemColor {
   //   outline: 1px solid green;
-  background-color: green;
-  width: 16px;
-  height: 16px;
+  // border: 1px $color-primary transparent;
+  background-color: yellow;
+  border: 2px solid $color-white;
+  width: 20px;
+  height: 20px;
   margin-right: 8px;
+  &:hover {
+    outline: 1px solid #5ece7b;
+  }
 }
 
 .menuColor {
@@ -20,6 +26,9 @@
 
 .menuSize {
   display: flex;
+  justify-content: start;
+  margin-bottom: 8px;
+  @include font-modal-items-size;
 }
 
 .itemSize {
@@ -28,7 +37,11 @@
   outline: 1px solid $color-black;
   margin-right: 8px;
   text-align: center;
-  line-height: 1.4;
+  padding-top: 2px;
+  &:hover {
+    background-color: $color-black;
+    color: $color-white;
+  }
 }
 
 .menuAboutThing {
@@ -42,6 +55,7 @@
 }
 
 .menuAmount {
+  // position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -53,4 +67,68 @@
 .item {
   display: flex;
   justify-content: space-between;
+  outline: 1px solid tomato;
+  &:not(:last-child) {
+    margin-bottom: 40px;
+  }
+}
+
+.thingTemplateForSmallModall {
+  width: 121px;
+  height: 190px;
+}
+
+.titleThing {
+  margin-bottom: 4px;
+  text-align: start;
+  @include font-modal-heading-h3;
+}
+
+.textPriceThing {
+  text-align: start;
+  margin-bottom: 8px;
+  @include font-modal-text-h3;
+}
+
+.textSize {
+  margin-bottom: 8px;
+  @include font-modal-text-size;
+}
+
+.textColor {
+  margin-bottom: 8px;
+  @include font-modal-text-color;
+}
+
+.buttonAmount {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  background-color: $color-white;
+  cursor: pointer;
+  border: 1px solid $color-black;
+}
+
+.buttonAmount::after {
+  content: "";
+  position: absolute;
+  left: 33.33%;
+  right: 33.33%;
+  top: 50%;
+  bottom: 50%;
+  border: 1px solid $color-black;
+}
+.buttonAmount::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  top: 33.33%;
+  bottom: 33.33%;
+
+  border: 1px solid $color-black;
+}
+
+.textAmount {
+  @include font-modal-text-amount;
 }

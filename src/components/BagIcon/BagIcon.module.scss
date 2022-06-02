@@ -25,3 +25,17 @@
   width: 20px;
   height: 20px;
 }
+
+.modalTitle {
+  @include font-modal-title;
+}
+
+.modalAmountImems {
+  @include font-modal-amount-items;
+}
+
+.title {
+  display: flex;
+  // width: 118px;
+  // height: 26px;
+}

@@ -1,5 +1,6 @@
 @import "../../assets/styles/fonts";
 @import "../../assets/styles/colors";
+@import "../../assets/styles/media";
 
 .bag {
   display: flex;
@@ -38,4 +39,26 @@
   display: flex;
   // width: 118px;
   // height: 26px;
+}
+
+.blockButtons {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.showBigModal {
+  width: 1440px;
+  height: 1435px;
+  @include media-big-modal {
+    padding: 80px 100px 274px 100px;
+  }
+}
+
+.titleBigModal {
+  text-transform: uppercase;
+  // padding-top: 80px;
+  padding-bottom: 80px;
+  @include font-big-modal-title;
 }

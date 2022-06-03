@@ -80,6 +80,39 @@
   font-size: 16px;
   line-height: 1.63;
 }
+
+@mixin font-modal-text-block-total {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.125;
+  font-family: "Roboto";
+  font-style: normal;
+}
+
+@mixin font-modal-price-block-total {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.63;
+}
+
+@mixin font-modal-text-button {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.214;
+}
+
+@mixin font-big-modal-title {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.25;
+}
+
+@mixin font-big-modal-heading-h3 {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 0.9;
+}
+
 // @mixin font-heading-h2 {
 //   font-weight: 400;
 //   font-size: 42px;

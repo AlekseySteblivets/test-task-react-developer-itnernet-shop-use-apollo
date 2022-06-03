@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { createPortal } from "react-dom";
+import cn from "classnames";
 
 import s from "./Modal.module.scss";
 
@@ -34,7 +35,9 @@ class Modal extends Component {
 
     return createPortal(
       <div className={s.modalBackdrop} onClick={this.handleBackdropClick}>
-        <div className={s.modalContent}>{this.props.children}</div>
+        <div className={cn(s.modalContent, this.props.classNameProps)}>
+          {this.props.children}
+        </div>
       </div>,
       modalRoot
     );

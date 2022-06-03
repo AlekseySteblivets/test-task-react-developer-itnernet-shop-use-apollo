@@ -1,4 +1,17 @@
+@import "../../assets/styles/colors";
+@import "../../assets/styles/fonts";
+
 .button {
   width: 140px;
   height: 43px;
+  background: $color-white;
+  border: 1px solid $color-black;
+  text-transform: uppercase;
+  @include font-modal-text-button;
+  &:hover {
+    background-color: $color-primary;
+    color: $color-white;
+    border: transparent;
+    cursor: pointer;
+  }
 }

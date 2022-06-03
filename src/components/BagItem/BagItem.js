@@ -71,6 +71,10 @@ export default class BagItem extends Component {
             </div>
           </li>
         </ul>
+        <div className={styles.blockTotal}>
+          <p className={styles.textBlockTotal}>Total:</p>
+          <p className={styles.priceBlockTotal}>$200.00</p>
+        </div>
       </div>
     );
   }

@@ -5,7 +5,7 @@ import cn from "classnames";
 
 import styles from "./Select.module.scss";
 
-export default class DropDownLink extends Component {
+export default class Select extends Component {
   state = {
     isOptionsOpen: false,
     selectedOption: 0,

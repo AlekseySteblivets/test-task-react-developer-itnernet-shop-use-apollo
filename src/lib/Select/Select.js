@@ -82,8 +82,11 @@ export default class Select extends Component {
           </button>
           <ul
             className={cn(
-              styles.options,
-              this.state.isOptionsOpen ? styles.show : ""
+              {
+                [styles.show]: this.state.isOptionsOpen,
+                [styles.options]: true,
+              }
+              // this.state.isOptionsOpen ? styles.show : ""
             )}
             role="listbox"
             aria-activedescendant={items[this.state.selectedOption]}

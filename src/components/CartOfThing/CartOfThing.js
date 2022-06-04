@@ -39,6 +39,8 @@ export default class CartOfThing extends Component {
             <li className={styles.itemColor}></li>
             <li className={styles.itemColor}></li>
           </ul>
+          <p>Price:</p>
+          <p>$50</p>
           <Button classNameProps={styles.buttonAddToCart}>Add to cart</Button>
           <p className={styles.textAboutThing}>
             Find stunning women's cocktail dresses and party dresses. Stand out

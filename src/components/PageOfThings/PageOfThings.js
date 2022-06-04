@@ -21,14 +21,7 @@ export default class PageOfThings extends Component {
       <div>
         <h2 className={styles.title}>Category name</h2>
         <ul className={styles.menu}>
-          <li
-            className={styles.item}
-            onClick={() =>
-              this.setState((state) => ({
-                showCartOfThing: !state.showCartOfThing,
-              }))
-            }
-          >
+          <li className={styles.item} onClick={this.togleModal}>
             {/* <img width="354" height="330" /> */}
             <AvatarOfThing />
             <h3 className={styles.titleThing}>Apollo Running Short</h3>

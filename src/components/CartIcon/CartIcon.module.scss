@@ -1,0 +1,14 @@
+@import "../../assets/styles/colors";
+
+.buttonCart {
+  background-color: $color-white;
+  border: transparent;
+  cursor: pointer;
+  padding: 0px;
+}
+
+.emptyCartImg {
+  margin-left: 22px;
+  width: 20px;
+  height: 20px;
+}

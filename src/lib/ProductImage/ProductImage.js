@@ -4,9 +4,9 @@ import cn from "classnames";
 
 import thingTemplate from "../../assets/img/thing-template.jpg";
 
-import styles from "./AvatarOfThing.module.scss";
+import styles from "./ProductImage.module.scss";
 
-export default class AvatarOfThing extends Component {
+export default class ProductImage extends Component {
   render() {
     return (
       <img

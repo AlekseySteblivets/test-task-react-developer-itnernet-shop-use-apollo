@@ -1,5 +1,6 @@
 import { Component } from "react";
-import AvatarOfThing from "../../lib/AvatarOfThing";
+
+import ProductImage from "../../lib/ProductImage";
 import Modal from "../../lib/Modal/Modal";
 import CartOfThing from "../CartOfThing";
 
@@ -23,37 +24,37 @@ export default class PageOfThings extends Component {
         <ul className={styles.menu}>
           <li className={styles.item} onClick={this.togleModal}>
             {/* <img width="354" height="330" /> */}
-            <AvatarOfThing />
+            <ProductImage />
             <h3 className={styles.titleThing}>Apollo Running Short</h3>
             <p className={styles.textPriceThing}>$50.00</p>
           </li>
           <li className={styles.item}>
             {/* <img width="354" height="330" /> */}
-            <AvatarOfThing />
+            <ProductImage />
             <h3 className={styles.titleThing}>Apollo Running Short</h3>
             <p className={styles.textPriceThing}>$50.00</p>
           </li>
           <li className={styles.item}>
             {/* <img width="354" height="330" /> */}
-            <AvatarOfThing />
+            <ProductImage />
             <h3 className={styles.titleThing}>Apollo Running Short</h3>
             <p className={styles.textPriceThing}>$50.00</p>
           </li>
           <li className={styles.item}>
             {/* <img width="354" height="330" /> */}
-            <AvatarOfThing />
+            <ProductImage />
             <h3 className={styles.titleThing}>Apollo Running Short</h3>
             <p className={styles.textPriceThing}>$50.00</p>
           </li>
           <li className={styles.item}>
             {/* <img width="354" height="330" /> */}
-            <AvatarOfThing />
+            <ProductImage />
             <h3 className={styles.titleThing}>Apollo Running Short</h3>
             <p className={styles.textPriceThing}>$50.00</p>
           </li>
           <li className={styles.item}>
             {/* <img width="354" height="330" /> */}
-            <AvatarOfThing />
+            <ProductImage />
             <h3 className={styles.titleThing}>Apollo Running Short</h3>
             <p className={styles.textPriceThing}>$50.00</p>
           </li>

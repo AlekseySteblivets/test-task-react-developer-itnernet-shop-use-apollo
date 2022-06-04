@@ -1,13 +1,10 @@
 import { Component } from "react";
-import AvatarOfThing from "../../lib/AvatarOfThing";
-import styles from "./BagItem.module.scss";
-import modalImgTemplate from "../../assets/img/thing-template-for-modal.png";
 
-export default class BagItem extends Component {
-  state = {
-    modalImg: modalImgTemplate,
-  };
+import ProductImage from "../../lib/ProductImage";
 
+import styles from "./CartItem.module.scss";
+
+export default class CartItem extends Component {
   render() {
     return (
       <div>
@@ -36,7 +33,7 @@ export default class BagItem extends Component {
               <button className={styles.buttonAmount}></button>
             </div>
             <div className={styles.menuAvatar}>
-              <AvatarOfThing
+              <ProductImage
                 classNameProps={styles.thingTemplateForSmallModall}
               />
             </div>
@@ -65,7 +62,7 @@ export default class BagItem extends Component {
               <button className={styles.buttonAmount}></button>
             </div>
             <div className={styles.menuAvatar}>
-              <AvatarOfThing
+              <ProductImage
                 classNameProps={styles.thingTemplateForSmallModall}
               />
             </div>

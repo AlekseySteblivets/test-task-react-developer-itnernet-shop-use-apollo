@@ -1,0 +1,10 @@
+@import "../../assets/styles/media";
+@import "../../assets/styles/fonts";
+
+.fullScreenModal {
+  width: 1440px;
+  height: 1435px;
+  @include media-big-modal {
+    padding: 80px 100px 274px 100px;
+  }
+}

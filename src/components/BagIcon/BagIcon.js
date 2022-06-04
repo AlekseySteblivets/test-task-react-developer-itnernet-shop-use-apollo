@@ -4,8 +4,8 @@ import emptyCartImg from "../../assets/img/empty-cart.svg";
 import Button from "../../lib/Button/Button";
 // import vector from "../../assets/img/vector.svg";
 import Modal from "../../lib/Modal/Modal";
-import Select from "../../lib/Select";
-import BagItem from "../BagItem/BagItem";
+// import Select from "../../lib/Select";
+import BagItem from "../CartItem/CartItem";
 
 import styles from "./BagIcon.module.scss";
 
@@ -13,20 +13,20 @@ export default class BagIcon extends Component {
   state = {
     showModal: false,
     showBigModal: false,
-    items: [
-      {
-        simbol: "$",
-        title: "USD",
-      },
-      {
-        simbol: "@",
-        title: "EUR",
-      },
-      {
-        simbol: "&",
-        title: "JPY",
-      },
-    ],
+    // items: [
+    //   {
+    //     simbol: "$",
+    //     title: "USD",
+    //   },
+    //   {
+    //     simbol: "@",
+    //     title: "EUR",
+    //   },
+    //   {
+    //     simbol: "&",
+    //     title: "JPY",
+    //   },
+    // ],
   };
 
   togleModal = () => {
@@ -46,7 +46,7 @@ export default class BagIcon extends Component {
     return (
       <>
         <div className={styles.bag}>
-          <Select items={this.state.items} />
+          {/* <Select items={this.state.items} /> */}
 
           <button
             type="button"

@@ -1,5 +1,6 @@
 import { Component } from "react";
-import AvatarOfThing from "../../lib/AvatarOfThing";
+
+import ProductImage from "../../lib/ProductImage";
 import Button from "../../lib/Button";
 
 import styles from "./CartOfThing.module.scss";
@@ -10,17 +11,17 @@ export default class CartOfThing extends Component {
       <div className={styles.cartOneThing}>
         <ul className={styles.blockThingViewExamples}>
           <li>
-            <AvatarOfThing classNameProps={styles.thingViewExamples} />
+            <ProductImage classNameProps={styles.thingViewExamples} />
           </li>
           <li>
-            <AvatarOfThing classNameProps={styles.thingViewExamples} />
+            <ProductImage classNameProps={styles.thingViewExamples} />
           </li>
           <li>
-            <AvatarOfThing classNameProps={styles.thingViewExamples} />
+            <ProductImage classNameProps={styles.thingViewExamples} />
           </li>
         </ul>
         <div className={styles.menuAvatar}>
-          <AvatarOfThing classNameProps={styles.thingMainView} />
+          <ProductImage classNameProps={styles.thingMainView} />
         </div>
         <div className={styles.menuAboutThing}>
           <h3 className={styles.titleThing}> Apollo</h3>

@@ -1,7 +1,6 @@
 import { Component } from "react";
 
 import cn from "classnames";
-// import vector from "../../assets/img/vector.svg";
 
 import styles from "./Select.module.scss";
 
@@ -115,41 +114,3 @@ export default class Select extends Component {
     );
   }
 }
-
-// export default class DropDownLink extends Component {
-//   state = {
-//     isShowMenu: false,
-//   };
-
-//   onClickBtnMoney = () => {
-//     this.setState({ isShowMenu: !this.state.isShowMenu });
-//   };
-
-//   render() {
-//     const items = this.props.items;
-//     const { isShowMenu } = this.state;
-//     return (
-//       <div>
-//         <div className={styles.btnBlock}>
-//           <button
-//             type="button"
-//             className={styles.textBtnMoney}
-//             onClick={this.onClickBtnMoney}
-//           >
-//             {items[0].simbol}
-//           </button>
-//           <img alt="vector" src={vector} className={styles.vector} />
-//         </div>
-//         {isShowMenu && (
-//           <ul className={styles.menu} id="menu">
-//             {items.map((itemMoney) => (
-//               <li className={styles.item} key={itemMoney.title}>
-//                 {itemMoney.simbol + " " + itemMoney.title}
-//               </li>
-//             ))}
-//           </ul>
-//         )}
-//       </div>
-//     );
-//   }
-// }

@@ -1,8 +1,8 @@
 import { Component } from "react";
 import LayoutSection from "../../views/LayoutSection/LayoutSection";
 import Container from "../../components/Container";
-import Navigation from "../../components/Navigation";
 import PageOfThings from "../../components/PageOfThings";
+import Header from "../../components/Header";
 
 export class PreviewPage extends Component {
   render() {
@@ -10,7 +10,7 @@ export class PreviewPage extends Component {
       <>
         <LayoutSection element="header">
           <Container>
-            <Navigation />
+            <Header />
           </Container>
         </LayoutSection>
         <main>

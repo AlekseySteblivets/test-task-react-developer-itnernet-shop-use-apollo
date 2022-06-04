@@ -1,4 +1,6 @@
 .container {
+  display: flex;
+  justify-content: space-between;
   margin: 0 auto;
   outline: 1px solid aqua;
 }

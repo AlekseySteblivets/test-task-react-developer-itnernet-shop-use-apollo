@@ -1,78 +1,26 @@
 import { Component } from "react";
 
-import ProductImage from "../../lib/ProductImage";
+import cn from "classnames";
+
+import CartItemDescription from "../CartItemDescription";
+import CartItemAmount from "../CartItemAmount";
+import CartItemImage from "../CartItemImage";
 
 import styles from "./CartItem.module.scss";
 
 export default class CartItem extends Component {
   render() {
     return (
-      <div>
-        <ul className={styles.menu}>
-          <li className={styles.item}>
-            <div className={styles.menuAboutThing}>
-              <h3 className={styles.titleThing}> Apollo Running Short</h3>
-              <p className={styles.textPriceThing}>$50.00</p>
-              <p className={styles.textSize}>Size:</p>
-              <ul className={styles.menuSize}>
-                <li className={styles.itemSize}>XS</li>
-                <li className={styles.itemSize}>S</li>
-                <li className={styles.itemSize}>M</li>
-                <li className={styles.itemSize}>L</li>
-              </ul>
-              <p className={styles.textColor}>Color:</p>
-              <ul className={styles.menuColor}>
-                <li className={styles.itemColor}></li>
-                <li className={styles.itemColor}></li>
-                <li className={styles.itemColor}></li>
-              </ul>
-            </div>
-            <div className={styles.menuAmount}>
-              <button className={styles.buttonAmount}></button>
-              <p className={styles.textAmount}>1</p>
-              <button className={styles.buttonAmount}></button>
-            </div>
-            <div className={styles.menuAvatar}>
-              <ProductImage
-                classNameProps={styles.thingTemplateForSmallModall}
-              />
-            </div>
-          </li>
-          <li className={styles.item}>
-            <div className={styles.menuAboutThing}>
-              <h3 className={styles.titleThing}> Apollo Running Short</h3>
-              <p className={styles.textPriceThing}>$50.00</p>
-              <p className={styles.textSize}>Size:</p>
-              <ul className={styles.menuSize}>
-                <li className={styles.itemSize}>XS</li>
-                <li className={styles.itemSize}>S</li>
-                <li className={styles.itemSize}>M</li>
-                <li className={styles.itemSize}>L</li>
-              </ul>
-              <p className={styles.textColor}>Color:</p>
-              <ul className={styles.menuColor}>
-                <li className={styles.itemColor}></li>
-                <li className={styles.itemColor}></li>
-                <li className={styles.itemColor}></li>
-              </ul>
-            </div>
-            <div className={styles.menuAmount}>
-              <button className={styles.buttonAmount}></button>
-              <p className={styles.textAmount}>1</p>
-              <button className={styles.buttonAmount}></button>
-            </div>
-            <div className={styles.menuAvatar}>
-              <ProductImage
-                classNameProps={styles.thingTemplateForSmallModall}
-              />
-            </div>
-          </li>
-        </ul>
-        <div className={styles.blockTotal}>
-          <p className={styles.textBlockTotal}>Total:</p>
-          <p className={styles.priceBlockTotal}>$200.00</p>
-        </div>
-      </div>
+      <li
+        className={cn({
+          [styles.item]: true,
+          [styles.itemFullScreen]: this.props.visibleFullScreen,
+        })}
+      >
+        <CartItemDescription visibleFullScreen={this.props.visibleFullScreen} />
+        <CartItemAmount visibleFullScreen={this.props.visibleFullScreen} />
+        <CartItemImage visibleFullScreen={this.props.visibleFullScreen} />
+      </li>
     );
   }
 }

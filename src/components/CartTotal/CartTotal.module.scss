@@ -1,0 +1,42 @@
+@import "../../assets/styles/fonts";
+@import "../../assets/styles/colors";
+
+.blockTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.blockTotalFullScreen {
+  display: block;
+  padding-bottom: 16px;
+  padding-top: 32px;
+  border-top: 1px solid $color-grey;
+}
+.textBlockTotal {
+  @include font-modal-text-block-total;
+}
+
+.priceBlockTotal {
+  @include font-modal-price-block-total;
+}
+
+.totalText {
+  @include font-big-modal-block-total-text;
+}
+
+.totalNumbers {
+  @include font-big-modal-block-total-numbers;
+}
+
+.text {
+  margin-bottom: 8px;
+}
+
+.textBlockTotalFullScreen {
+  @include font-big-modal-text-block-total;
+}
+
+.priceBlockTotalFullScreen {
+  @include font-big-modal-price-block-total;
+}

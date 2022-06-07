@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import CartItem from "../CartItem/CartItem";
+import CartList from "../CartList/CartList";
 
 import styles from "./CartContent.module.scss";
 
@@ -19,7 +19,7 @@ export default class CartContent extends Component {
             <span className={styles.titleBigModal}> cart</span>
           )}
         </h1>
-        <CartItem />
+        <CartList visibleFullScreen={this.props.visibleFullScreen} />
       </>
     );
   }

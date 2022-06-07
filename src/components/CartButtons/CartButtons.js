@@ -23,16 +23,13 @@ export default class CartButtons extends Component {
 
     return (
       <div>
-        <p>
-          <span>Tax 21%:</span>
-          <span> 42$</span>
-        </p>
-        <p>
-          <span>Quantity:</span>
-          <span> 3</span>
-        </p>
-
-        <Button>Order</Button>
+        <Button
+          classNameProps={{
+            [styles.buttonWhenFullScreen]: this.props.visibleFullScreen,
+          }}
+        >
+          Order
+        </Button>
       </div>
     );
   }

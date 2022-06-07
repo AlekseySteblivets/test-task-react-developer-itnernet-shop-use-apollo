@@ -1,0 +1,87 @@
+@import "../../assets/styles/colors";
+@import "../../assets/styles/fonts";
+@import "../../assets/styles/media";
+
+.menuAmount {
+  // position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 24px;
+  height: 190px;
+}
+
+.buttonAmount {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  background-color: $color-white;
+  cursor: pointer;
+  border: 1px solid $color-black;
+}
+
+.buttonAmount::after {
+  content: "";
+  position: absolute;
+  left: 33.33%;
+  right: 33.33%;
+  top: 50%;
+  bottom: 50%;
+  border: 1px solid $color-black;
+}
+
+.buttonAmount::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  top: 33.33%;
+  bottom: 33.33%;
+
+  border: 1px solid $color-black;
+}
+
+.textAmount {
+  @include font-modal-text-amount;
+}
+
+// styles for full screen
+
+.menuAmountFullScreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 24px;
+}
+
+.buttonAmountFullScreen {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  background-color: $color-white;
+  cursor: pointer;
+  border: 1px solid $color-black;
+}
+
+.buttonAmountFullScreen::after {
+  content: "";
+  position: absolute;
+  left: 33.33%;
+  right: 33.33%;
+  top: 50%;
+  bottom: 50%;
+  border: 1px solid $color-black;
+}
+
+.buttonAmountFullScreen::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  top: 33.33%;
+  bottom: 33.33%;
+
+  border: 1px solid $color-black;
+}

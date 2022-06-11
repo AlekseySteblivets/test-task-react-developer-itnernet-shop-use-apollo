@@ -2,8 +2,10 @@ import { Component } from "react";
 
 import LayoutSection from "../../views/LayoutSection/LayoutSection";
 import Container from "../../components/Container";
-import PageOfThings from "../../components/PageOfThings";
+import ProductList from "../../components/ProductList";
 import Header from "../../components/Header";
+
+// import styles from "./PreviewPage.module.scss";
 
 export class PreviewPage extends Component {
   render() {
@@ -17,7 +19,7 @@ export class PreviewPage extends Component {
         <main>
           <LayoutSection>
             <Container>
-              <PageOfThings />
+              <ProductList />
             </Container>
           </LayoutSection>
         </main>

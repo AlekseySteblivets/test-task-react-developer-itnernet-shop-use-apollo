@@ -3,12 +3,8 @@
 @import "../../assets/styles/media";
 
 .menuAboutThing {
-  width: 136px;
-  height: 190px;
+  flex: 3;
   outline: 1px solid tomato;
-  // @include media-big-modal {
-  //   padding-right: 695px;
-  // }
 }
 
 .titleThing {
@@ -44,9 +40,12 @@
   width: 24px;
   height: 24px;
   outline: 1px solid $color-black;
-  margin-right: 8px;
+  // margin-right: 8px;
   text-align: center;
   padding-top: 2px;
+  &:not(:last-child) {
+    margin-right: 8px;
+  }
   &:hover {
     background-color: $color-black;
     color: $color-white;
@@ -76,20 +75,17 @@
 // styles for fullscreen
 
 .titleThingFullScreen {
-  text-align: start;
   margin-bottom: 16px;
   @include font-modal-heading-h3-full-screen;
 }
 
 .titleThingNameFullScreen {
   margin-bottom: 20px;
-  text-align: start;
   @include font-modal-heading-h3-full-screen;
   font-weight: 400;
 }
 
 .textPriceThingFullScreen {
-  text-align: start;
   margin-bottom: 20px;
   @include font-modal-text-h3-full-screen;
 }
@@ -100,8 +96,6 @@
 }
 
 .menuSizeFullScreen {
-  display: flex;
-  justify-content: start;
   margin-bottom: 16px;
   @include font-modal-items-size-full-screen;
 }
@@ -109,34 +103,18 @@
 .itemSizeFullScreen {
   width: 63px;
   height: 45px;
-  outline: 1px solid $color-black;
-  text-align: center;
   padding-top: 12px;
-  &:not(:last-child) {
-    margin-right: 8px;
-  }
-  &:hover {
-    background-color: $color-black;
-    color: $color-white;
-  }
 }
 
 .textColorFullScreen {
-  margin-bottom: 8px;
   @include font-modal-text-color-full-screen;
 }
 
 .itemColorFullScreen {
-  background-color: yellow;
-  border: 2px solid $color-white;
   width: 36px;
   height: 36px;
-  margin-right: 8px;
-  &:hover {
-    outline: 1px solid $color-primary;
-  }
 }
 
 .menuAboutThingFullScreen {
-  padding-right: 695px;
+  flex: 3;
 }

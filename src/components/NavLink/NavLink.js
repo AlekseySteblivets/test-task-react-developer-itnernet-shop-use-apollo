@@ -5,7 +5,7 @@ import styles from "./NavLink.module.scss";
 export default class NavLink extends Component {
   render() {
     return (
-      <li key={this.props.title} className={styles.item}>
+      <li className={styles.item}>
         <a href={this.props.href} className={styles.link}>
           {this.props.title}
         </a>

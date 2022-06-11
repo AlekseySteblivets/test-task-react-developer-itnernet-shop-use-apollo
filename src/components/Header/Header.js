@@ -9,11 +9,14 @@ import Navigation from "../Navigation/Navigation";
 export default class Header extends Component {
   render() {
     return (
+      // <div className={styles.blockHeader}>
       <>
         <Navigation />
         <Logo />
         <HeaderActionButtons />
       </>
+
+      // </div>
     );
   }
 }

@@ -12,8 +12,7 @@ export default class CartItem extends Component {
   render() {
     return (
       <li
-        className={cn({
-          [styles.item]: true,
+        className={cn(styles.item, {
           [styles.itemFullScreen]: this.props.visibleFullScreen,
         })}
       >

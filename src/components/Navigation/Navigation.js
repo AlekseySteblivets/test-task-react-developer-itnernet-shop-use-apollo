@@ -16,9 +16,7 @@ export default class Navigation extends Component {
       <nav className={styles.navigation}>
         <ul className={styles.menu}>
           {dataLinks.map((link) => (
-            <div key={link.title + link.href}>
-              <NavLink title={link.title} href={link.href} />
-            </div>
+            <NavLink title={link.title} href={link.href} key={link.title} />
           ))}
         </ul>
       </nav>

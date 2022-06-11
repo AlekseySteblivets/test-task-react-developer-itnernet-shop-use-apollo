@@ -1,0 +1,48 @@
+// @import "../../assets/styles/colors";
+// @import "../../assets/styles/fonts";
+// @import "../../assets/styles/media";
+
+.cartOneThing {
+  display: flex;
+}
+
+.thingMainView {
+  width: 610px;
+  height: 511px;
+  margin-right: 100px;
+}
+
+.buttonAddToCart {
+  width: 292px;
+  height: 52px;
+}
+
+.textAboutThing {
+  margin-top: 40px;
+  width: 292px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.63;
+}
+
+.titleThing {
+  margin-bottom: 4px;
+  text-align: start;
+}
+
+.priceText {
+  margin-top: 36px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.priceNumber {
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 18px;
+}

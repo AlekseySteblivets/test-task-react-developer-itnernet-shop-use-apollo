@@ -4,7 +4,7 @@
 
 .item {
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   // outline: 1px solid tomato;
   &:not(:last-child) {
     margin-bottom: 40px;
@@ -14,8 +14,8 @@
 }
 
 .itemFullScreen {
-  display: flex;
-  justify-content: start;
+  // display: flex;
+  // justify-content: start;
   &:not(:last-child) {
     margin-bottom: 24px;
   }

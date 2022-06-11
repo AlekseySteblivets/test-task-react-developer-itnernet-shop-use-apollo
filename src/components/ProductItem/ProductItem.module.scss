@@ -16,16 +16,6 @@
   }
 }
 
-.menu {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  list-style: none;
-  margin: 0;
-  padding-left: 0;
-  padding-top: 103px;
-}
-
 .titleThing {
   margin-top: 24px;
   margin-bottom: 0px;
@@ -37,18 +27,4 @@
   margin: 0;
   text-align: start;
   @include font-text-h3;
-}
-
-.title {
-  margin: 0;
-  padding-top: 80px;
-  text-align: start;
-  @include font-heading-h2;
-}
-
-.modalCartOfThing {
-  margin: 0 auto;
-  width: 1440px;
-  height: 853px;
-  padding: 80px 219px 178px 100px;
 }

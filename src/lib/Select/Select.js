@@ -3,6 +3,7 @@ import { Component } from "react";
 import cn from "classnames";
 
 import styles from "./Select.module.scss";
+import OutsideClickHandler from "../OutsideClickHandler/OutsideClickHandler";
 
 export default class Select extends Component {
   state = {
@@ -18,6 +19,16 @@ export default class Select extends Component {
     this.setState({ selectedOption: index });
     this.setState({ isOptionsOpen: false });
   };
+
+  // handleEveryWhereClick = (index) => (e) => {
+  //   console.log(e.currentTarget);
+  //   console.log(e.target);
+
+  //   if (e.currentTarget === e.target) {
+  //     this.setSelectedThenCloseDropdown(index);
+  //   }
+  //   this.setState({ isOptionsOpen: !this.state.isOptionsOpen });
+  // };
 
   handleKeyDown = (index) => (e) => {
     switch (e.key) {
@@ -79,36 +90,43 @@ export default class Select extends Component {
           >
             {items[this.state.selectedOption].simbol}
           </button>
-          <ul
-            className={cn(
-              {
-                [styles.show]: this.state.isOptionsOpen,
-                [styles.options]: true,
-              }
-              // this.state.isOptionsOpen ? styles.show : ""
-            )}
-            role="listbox"
-            aria-activedescendant={items[this.state.selectedOption]}
-            tabIndex={-1}
-            onKeyDown={this.handleListKeyDown}
+          <OutsideClickHandler
+            onOutsideClick={() => {
+              this.setState({ isOptionsOpen: false });
+              // console.log("clicked outside!");
+            }}
           >
-            {items.map((option, index) => (
-              <li
-                className={styles.item}
-                key={option.title}
-                id={option.title}
-                role="option"
-                aria-selected={this.state.selectedOption === index}
-                tabIndex={0}
-                onKeyDown={this.handleKeyDown(index)}
-                onClick={() => {
-                  this.setSelectedThenCloseDropdown(index);
-                }}
-              >
-                {option.simbol + " " + option.title}
-              </li>
-            ))}
-          </ul>
+            <ul
+              className={cn(
+                {
+                  [styles.show]: this.state.isOptionsOpen,
+                  [styles.options]: true,
+                }
+                // this.state.isOptionsOpen ? styles.show : ""
+              )}
+              role="listbox"
+              aria-activedescendant={items[this.state.selectedOption]}
+              tabIndex={-1}
+              onKeyDown={this.handleListKeyDown}
+            >
+              {items.map((option, index) => (
+                <li
+                  className={styles.item}
+                  key={option.title}
+                  id={option.title}
+                  role="option"
+                  aria-selected={this.state.selectedOption === index}
+                  tabIndex={0}
+                  onKeyDown={this.handleKeyDown(index)}
+                  onClick={() => {
+                    this.setSelectedThenCloseDropdown(index);
+                  }}
+                >
+                  {option.simbol + " " + option.title}
+                </li>
+              ))}
+            </ul>
+          </OutsideClickHandler>
         </div>
       </div>
     );

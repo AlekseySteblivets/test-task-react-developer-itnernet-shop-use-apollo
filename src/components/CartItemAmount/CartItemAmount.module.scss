@@ -3,13 +3,11 @@
 @import "../../assets/styles/media";
 
 .menuAmount {
-  // position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 24px;
-  height: 190px;
+  padding-right: 8px;
 }
 
 .buttonAmount {
@@ -24,21 +22,19 @@
 .buttonAmount::after {
   content: "";
   position: absolute;
-  left: 33.33%;
-  right: 33.33%;
-  top: 50%;
-  bottom: 50%;
+  width: 8px;
+  top: 10px;
+  left: 7px;
   border: 1px solid $color-black;
 }
 
-.buttonAmount::before {
+.increment::before {
   content: "";
   position: absolute;
-  left: 50%;
-  right: 50%;
-  top: 33.33%;
-  bottom: 33.33%;
-
+  width: 8px;
+  top: 10px;
+  left: 7px;
+  transform: rotate(90deg);
   border: 1px solid $color-black;
 }
 
@@ -49,39 +45,22 @@
 // styles for full screen
 
 .menuAmountFullScreen {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
   padding-right: 24px;
 }
 
 .buttonAmountFullScreen {
-  position: relative;
   width: 45px;
   height: 45px;
-  background-color: $color-white;
-  cursor: pointer;
-  border: 1px solid $color-black;
 }
 
 .buttonAmountFullScreen::after {
-  content: "";
-  position: absolute;
-  left: 33.33%;
-  right: 33.33%;
-  top: 50%;
-  bottom: 50%;
-  border: 1px solid $color-black;
+  width: 15px;
+  top: 20px;
+  left: 14px;
 }
 
-.buttonAmountFullScreen::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  right: 50%;
-  top: 33.33%;
-  bottom: 33.33%;
-
-  border: 1px solid $color-black;
+.incrementFullScreen::before {
+  width: 15px;
+  top: 20px;
+  left: 14px;
 }

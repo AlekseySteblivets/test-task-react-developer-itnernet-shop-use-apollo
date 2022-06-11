@@ -11,12 +11,17 @@ export default class CartItemAmount extends Component {
 
   handleIncrement = () => {
     this.setState((prevState) => ({ amount: prevState.amount + 1 }));
+    this.props.counterProducts(1);
   };
 
   handleDecrement = () => {
-    this.state.amount === 0
-      ? this.setState({ amount: 0 })
-      : this.setState((prevState) => ({ amount: prevState.amount - 1 }));
+    if (this.state.amount === 0) {
+      this.setState({ amount: 0 });
+      this.props.counterProducts(0);
+    } else {
+      this.setState((prevState) => ({ amount: prevState.amount - 1 }));
+      this.props.counterProducts(-1);
+    }
   };
 
   render() {

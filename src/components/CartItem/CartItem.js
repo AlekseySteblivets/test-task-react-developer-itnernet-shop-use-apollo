@@ -17,7 +17,10 @@ export default class CartItem extends Component {
         })}
       >
         <CartItemDescription visibleFullScreen={this.props.visibleFullScreen} />
-        <CartItemAmount visibleFullScreen={this.props.visibleFullScreen} />
+        <CartItemAmount
+          counterProducts={this.props.counterProducts}
+          visibleFullScreen={this.props.visibleFullScreen}
+        />
         <CartItemImage visibleFullScreen={this.props.visibleFullScreen} />
       </li>
     );

@@ -9,6 +9,7 @@ import image2 from "../../assets/img/productImage2ForTest.jpg";
 import image3 from "../../assets/img/productImage3ForTest.jpg";
 
 import styles from "./CartItemImage.module.scss";
+import ProductImagesSlider from "../ProductImagesSlider/ProductImagesSlider";
 
 export default class CartItemImage extends Component {
   state = {

@@ -43,6 +43,7 @@ textBtnMoney:hover {
 
 .options {
   display: none;
+  z-index: 2;
   position: absolute;
   border: transparent;
   background-color: $color-white;

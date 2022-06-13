@@ -14,7 +14,7 @@ export default class CartList extends Component {
 
   counterProducts = (amount) => {
     this.setState((prevState) => ({
-      numbersProduct: this.state.numbersProduct + amount,
+      numbersProduct: prevState.numbersProduct + amount,
     }));
   };
 

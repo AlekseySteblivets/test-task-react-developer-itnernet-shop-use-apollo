@@ -1,4 +1,7 @@
 import { Component } from "react";
+import { useCategories } from "../../api/queriesHOC/withCategories";
+import { graphql } from "@apollo/client/react/hoc";
+import { GET_CATEGORIES } from "../../api/shemas/categories";
 
 import Modal from "../../lib/Modal/Modal";
 import Product from "../Product";
@@ -6,7 +9,7 @@ import ProductItem from "../ProductItem";
 
 import styles from "./ProductList.module.scss";
 
-export default class ProductList extends Component {
+class ProductList extends Component {
   state = {
     showCartOfThing: false,
   };
@@ -18,6 +21,7 @@ export default class ProductList extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <h2 className={styles.title}>Category name</h2>
@@ -40,3 +44,6 @@ export default class ProductList extends Component {
     );
   }
 }
+
+// eslint-disable-next-line react-hooks/rules-of-hooks
+export default graphql(GET_CATEGORIES)(ProductList);

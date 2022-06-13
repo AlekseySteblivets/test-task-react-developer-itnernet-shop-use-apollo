@@ -14,6 +14,7 @@ export default class ProductItem extends Component {
         <ProductImage />
         <h3 className={styles.titleThing}>Apollo Running Short</h3>
         <p className={styles.textPriceThing}>$50.00</p>
+        <div className={styles.icon}></div>
       </li>
     );
   }

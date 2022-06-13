@@ -10,8 +10,8 @@ export default class ProductImage extends Component {
   render() {
     return (
       <img
-        alt="thing"
-        src={this.props.image ? this.props.image : thingTemplate}
+        alt="product"
+        src={this.props.image}
         className={cn(styles.thingTemplate, this.props.classNameProps)}
       />
     );

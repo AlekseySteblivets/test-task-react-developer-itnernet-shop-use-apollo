@@ -4,21 +4,38 @@ import { Component } from "react";
 import Button from "../../lib/Button";
 import CartItemDescription from "../CartItemDescription";
 import CartItemImage from "../CartItemImage";
+import ProductImagesType from "../ProductImagesType/ProductImagesType";
+
+import image1 from "../../assets/img/thing-template.jpg";
+import image2 from "../../assets/img/productImage2ForTest.jpg";
+import image3 from "../../assets/img/productImage3ForTest.jpg";
 
 import styles from "./Product.module.scss";
-import ProductImagesSlider from "../ProductImagesSlider/ProductImagesSlider";
 
 export default class Product extends Component {
   state = {
-    // allImages: [],
-    currentProductImage: "",
+    allImages: [image1, image2, image3],
+    currentProductImage: image1,
+  };
+
+  onChangeMainImg = (index) => {
+    this.setState({ currentProductImage: this.state.allImages[index] });
+    console.log("onChangeMainImg");
   };
 
   render() {
     return (
       <div className={styles.cartOneThing}>
-        <ProductImagesSlider />
-        <CartItemImage classNameProps={styles.thingMainView} />
+        <ProductImagesType
+          allImages={this.state.allImages}
+          onChangeMainImg={this.onChangeMainImg}
+        />
+        <CartItemImage
+          // onChangeMainImg={this.onChangeMainImg}
+          currentProductImage={this.state.currentProductImage}
+          // allImages={this.state.allImages}
+          classNameProps={styles.thingMainView}
+        />
 
         <div>
           <CartItemDescription visibleFullScreen={true} />

@@ -1,17 +1,21 @@
 import { Component } from "react";
-import { useCategories } from "../../api/queriesHOC/withCategories";
+// import { useCategories } from "../../api/queriesHOC/withCategories";
 import { graphql } from "@apollo/client/react/hoc";
-import { GET_CATEGORIES } from "../../api/shemas/categories";
+// import { GET_CATEGORIES } from "../../api/shemas/categories";
 
 import Modal from "../../lib/Modal/Modal";
 import Product from "../Product";
 import ProductItem from "../ProductItem";
 
 import styles from "./ProductList.module.scss";
+import { GET_PRODUCTS } from "../../api/shemas/getProducts";
 
 class ProductList extends Component {
   state = {
     showCartOfThing: false,
+    categoryName: "all",
+    allCategories: this.props.data.categories,
+    currentCategories: [],
   };
 
   togleModal = () => {
@@ -20,11 +24,23 @@ class ProductList extends Component {
     }));
   };
 
+  // takeCategory = (array) => {
+  //   for (let i = 0; i < array.length; i++) {
+  //     const element = array[i];
+  //     if (element.name === this.state.categoryName) {
+  //       this.setState({ currentCategories: element.products });
+  //     }
+  //   }
+  // };
+
   render() {
-    console.log(this.props);
+    const arrCategories = this.props.data.categories;
+    console.log(arrCategories);
+
     return (
       <div>
-        <h2 className={styles.title}>Category name</h2>
+        <h2 className={styles.title}>{this.state.categoryName}</h2>
+        {/* <h2 className={styles.title}>{this.state.allCategories[0].name}</h2> */}
         <ul className={styles.menu}>
           <ProductItem onTogleModal={this.togleModal} />
           <ProductItem onTogleModal={this.togleModal} />
@@ -46,4 +62,4 @@ class ProductList extends Component {
 }
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
-export default graphql(GET_CATEGORIES)(ProductList);
+export default graphql(GET_PRODUCTS)(ProductList);

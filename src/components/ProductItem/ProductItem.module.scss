@@ -1,7 +1,9 @@
 @import "../../assets/styles/fonts";
+@import "../../assets/styles/colors";
 
 .item {
   position: relative;
+  // pointer-events: none;
   outline: 1px solid tomato;
   padding: 16px;
   width: 386px;
@@ -13,6 +15,10 @@
     }
   }
 }
+.itemNotActive {
+  pointer-events: none;
+}
+
 .icon {
   position: absolute;
   display: none;
@@ -42,4 +48,13 @@
   margin: 0;
   text-align: start;
   @include font-text-h3;
+}
+
+.textOutOfStock {
+  position: absolute;
+  top: 180px;
+  left: 119px;
+  @include textOutOfStock;
+
+  color: $color-grey-transparent;
 }

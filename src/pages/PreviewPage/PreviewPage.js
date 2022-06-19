@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import LayoutSection from "../../views/LayoutSection/LayoutSection";
 import Container from "../../components/Container";
@@ -6,8 +7,7 @@ import ProductList from "../../components/ProductList";
 import Header from "../../components/Header";
 
 // import styles from "./PreviewPage.module.scss";
-
-export class PreviewPage extends Component {
+class PreviewPage extends Component {
   render() {
     return (
       <>
@@ -19,7 +19,9 @@ export class PreviewPage extends Component {
         <main>
           <LayoutSection>
             <Container>
-              <ProductList />
+              <Switch>
+                <Route path="/:slug" component={ProductList} />
+              </Switch>
             </Container>
           </LayoutSection>
         </main>

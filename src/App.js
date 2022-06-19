@@ -8,9 +8,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
-        <div>
-          <PreviewPage />
-        </div>
+        <PreviewPage />
       </BrowserRouter>
     </ApolloProvider>
   );

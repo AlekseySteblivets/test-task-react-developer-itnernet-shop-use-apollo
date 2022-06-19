@@ -1,5 +1,7 @@
 import { Component } from "react";
 
+import cn from "classnames";
+
 import ProductImage from "../../lib/ProductImage";
 
 import styles from "./ProductItem.module.scss";
@@ -10,10 +12,26 @@ export default class ProductItem extends Component {
   };
   render() {
     return (
-      <li className={styles.item} onClick={this.handleClick}>
-        <ProductImage />
-        <h3 className={styles.titleThing}>Apollo Running Short</h3>
-        <p className={styles.textPriceThing}>$50.00</p>
+      <li
+        className={cn(styles.item, {
+          [styles.itemNotActive]: !this.props.isInStock,
+        })}
+        onClick={this.handleClick}
+      >
+        <ProductImage
+          image={this.props.image}
+          idProduct={this.props.idProduct}
+        />
+        {!this.props.isInStock && (
+          <p className={styles.textOutOfStock}>OUT OF STOCK</p>
+        )}
+
+        <h3 className={styles.titleThing}>
+          {this.props.brand} {this.props.name}
+        </h3>
+        <p
+          className={styles.textPriceThing}
+        >{`${this.props.currencySimbol}${this.props.amountMoney}`}</p>
         <div className={styles.icon}></div>
       </li>
     );

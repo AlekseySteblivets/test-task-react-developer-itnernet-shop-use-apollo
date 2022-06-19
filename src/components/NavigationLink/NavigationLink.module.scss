@@ -21,7 +21,8 @@
   text-transform: uppercase;
 }
 
-.item .link:hover {
+.item .link:hover,
+.active {
   color: $color-primary;
   &.link::before {
     content: "";

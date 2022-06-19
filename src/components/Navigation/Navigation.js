@@ -3,22 +3,16 @@ import { graphql } from "@apollo/client/react/hoc";
 
 import { GET_CATEGORIES_NAME } from "../../api/shemas/categoriesName";
 
-import NavLink from "../NavLink/NavLink";
+import NavigationLink from "../NavigationLink/NavigationLink";
 
 import styles from "./Navigation.module.scss";
-// import { GET_CATEGORIES } from "../../api/shemas/categories";
-
-// const dataLinks = [
-//   { title: "women", href: "/" },
-//   { title: "men", href: "/" },
-//   { title: "kids", href: "/" },
-// ];
 
 class Navigation extends Component {
   render() {
     const {
       data: { loading, categories },
     } = this.props;
+    // console.log("Navigation", this.props);
 
     return (
       <nav className={styles.navigation}>
@@ -26,11 +20,11 @@ class Navigation extends Component {
           <p>Loading...</p>
         ) : (
           <ul className={styles.menu}>
-            {categories.map((link) => (
-              <NavLink
-                title={link.name}
-                href={`/${link.name}`}
-                key={link.name}
+            {categories.map((category) => (
+              <NavigationLink
+                title={category.name}
+                href={`/${category.name}`}
+                key={category.name}
               />
             ))}
           </ul>

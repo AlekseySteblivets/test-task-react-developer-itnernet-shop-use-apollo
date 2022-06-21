@@ -1,11 +1,15 @@
 import { Component } from "react";
+import { GET_KIND_OF_CURRENCIES } from "../../api/shemas/getKindOfCurrencies";
+import { graphql } from "@apollo/client/react/hoc";
+import { withRouter } from "react-router";
+
+import OutsideClickHandler from "../OutsideClickHandler/OutsideClickHandler";
 
 import cn from "classnames";
 
 import styles from "./Select.module.scss";
-import OutsideClickHandler from "../OutsideClickHandler/OutsideClickHandler";
 
-export default class Select extends Component {
+class Select extends Component {
   state = {
     isOptionsOpen: false,
     selectedOption: 0,
@@ -19,16 +23,6 @@ export default class Select extends Component {
     this.setState({ selectedOption: index });
     this.setState({ isOptionsOpen: false });
   };
-
-  // handleEveryWhereClick = (index) => (e) => {
-  //   console.log(e.currentTarget);
-  //   console.log(e.target);
-
-  //   if (e.currentTarget === e.target) {
-  //     this.setSelectedThenCloseDropdown(index);
-  //   }
-  //   this.setState({ isOptionsOpen: !this.state.isOptionsOpen });
-  // };
 
   handleKeyDown = (index) => (e) => {
     switch (e.key) {
@@ -55,14 +49,14 @@ export default class Select extends Component {
           selectedOption:
             this.state.selectedOption - 1 >= 0
               ? this.state.selectedOption - 1
-              : this.props.items.length - 1,
+              : this.props.data.currencies.length - 1,
         });
         break;
       case "ArrowDown":
         e.preventDefault();
         this.setState({
           selectedOption:
-            this.state.selectedOption === this.props.items.length - 1
+            this.state.selectedOption === this.props.data.currencies.length - 1
               ? 0
               : this.state.selectedOption + 1,
         });
@@ -73,62 +67,72 @@ export default class Select extends Component {
   };
 
   render() {
-    const items = this.props.items;
+    const {
+      items,
+      data: { currencies, loading },
+    } = this.props;
+    console.log("Select", this.props);
+    console.log(currencies);
+
     return (
       <div className={styles.wrapper}>
-        <div className={styles.container}>
-          <button
-            type="button"
-            aria-haspopup="listbox"
-            aria-expanded={this.state.isOptionsOpen}
-            className={cn(
-              styles.textBtnMoney,
-              this.state.isOptionsOpen ? styles.expanded : ""
-            )}
-            onClick={this.toggleOptions}
-            onKeyDown={this.handleListKeyDown}
-          >
-            {items[this.state.selectedOption].simbol}
-          </button>
-          <OutsideClickHandler
-            onOutsideClick={() => {
-              this.setState({ isOptionsOpen: false });
-              // console.log("clicked outside!");
-            }}
-          >
-            <ul
+        {!loading && (
+          <div className={styles.container}>
+            <button
+              type="button"
+              aria-haspopup="listbox"
+              aria-expanded={this.state.isOptionsOpen}
               className={cn(
-                {
-                  [styles.show]: this.state.isOptionsOpen,
-                  [styles.options]: true,
-                }
-                // this.state.isOptionsOpen ? styles.show : ""
+                styles.textBtnMoney,
+                this.state.isOptionsOpen ? styles.expanded : ""
               )}
-              role="listbox"
-              aria-activedescendant={items[this.state.selectedOption]}
-              tabIndex={-1}
+              onClick={this.toggleOptions}
               onKeyDown={this.handleListKeyDown}
             >
-              {items.map((option, index) => (
-                <li
-                  className={styles.item}
-                  key={option.title}
-                  id={option.title}
-                  role="option"
-                  aria-selected={this.state.selectedOption === index}
-                  tabIndex={0}
-                  onKeyDown={this.handleKeyDown(index)}
-                  onClick={() => {
-                    this.setSelectedThenCloseDropdown(index);
-                  }}
-                >
-                  {option.simbol + " " + option.title}
-                </li>
-              ))}
-            </ul>
-          </OutsideClickHandler>
-        </div>
+              {currencies[this.state.selectedOption].symbol}
+            </button>
+            <OutsideClickHandler
+              onOutsideClick={() => {
+                this.setState({ isOptionsOpen: false });
+                // console.log("clicked outside!");
+              }}
+            >
+              <ul
+                className={cn(
+                  {
+                    [styles.show]: this.state.isOptionsOpen,
+                    [styles.options]: true,
+                  }
+                  // this.state.isOptionsOpen ? styles.show : ""
+                )}
+                role="listbox"
+                aria-activedescendant={currencies[this.state.selectedOption]}
+                tabIndex={-1}
+                onKeyDown={this.handleListKeyDown}
+              >
+                {currencies.map((option, index) => (
+                  <li
+                    className={styles.item}
+                    key={option.label}
+                    id={option.label}
+                    role="option"
+                    aria-selected={this.state.selectedOption === index}
+                    tabIndex={0}
+                    onKeyDown={this.handleKeyDown(index)}
+                    onClick={() => {
+                      this.setSelectedThenCloseDropdown(index);
+                    }}
+                  >
+                    {option.symbol + " " + option.label}
+                  </li>
+                ))}
+              </ul>
+            </OutsideClickHandler>
+          </div>
+        )}
       </div>
     );
   }
 }
+
+export default graphql(GET_KIND_OF_CURRENCIES)(withRouter(Select));

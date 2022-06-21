@@ -13,20 +13,6 @@ export default class BagIcon extends Component {
   state = {
     showModal: false,
     showBigModal: false,
-    // items: [
-    //   {
-    //     simbol: "$",
-    //     title: "USD",
-    //   },
-    //   {
-    //     simbol: "@",
-    //     title: "EUR",
-    //   },
-    //   {
-    //     simbol: "&",
-    //     title: "JPY",
-    //   },
-    // ],
   };
 
   togleModal = () => {

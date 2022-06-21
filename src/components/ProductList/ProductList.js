@@ -13,11 +13,13 @@ import { GET_PRODUCTS_BY_NAME } from "../../api/shemas/getProductsByName";
 class ProductList extends Component {
   state = {
     showCartOfThing: false,
+    idProduct: "",
   };
 
-  togleModal = () => {
+  togleModal = (id) => {
     this.setState((state) => ({
       showCartOfThing: !state.showCartOfThing,
+      idProduct: id,
     }));
   };
 
@@ -56,7 +58,7 @@ class ProductList extends Component {
           visible={this.state.showCartOfThing}
           classNameProps={styles.modalCartOfThing}
         >
-          <Product />
+          <Product idProductAfterClickLiEl={this.state.idProduct} />
         </Modal>
       </div>
     );
@@ -65,6 +67,8 @@ class ProductList extends Component {
 
 export default graphql(GET_PRODUCTS_BY_NAME, {
   options: (props) => ({
-    variables: { type: props.match.params.slug },
+    variables: {
+      type: props.match.params.slug ? props.match.params.slug : "all",
+    },
   }),
 })(withRouter(ProductList));

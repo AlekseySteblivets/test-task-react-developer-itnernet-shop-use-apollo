@@ -18,22 +18,26 @@ export default class CartItemDescription extends Component {
             [styles.titleThingFullScreen]: visibleFullScreen,
           })}
         >
-          Apollo
+          {this.props.brand}
         </h3>
         <p
           className={cn(styles.titleThingName, {
             [styles.titleThingNameFullScreen]: visibleFullScreen,
           })}
         >
-          Running Short
+          {this.props.name}
         </p>
-        <p
-          className={cn(styles.textPriceThing, {
-            [styles.textPriceThingFullScreen]: visibleFullScreen,
-          })}
-        >
-          $50.00
-        </p>
+
+        {!visibleFullScreen && (
+          <p
+            className={cn(styles.textPriceThing, {
+              [styles.textPriceThingFullScreen]: visibleFullScreen,
+            })}
+          >
+            $50.00
+          </p>
+        )}
+
         <p
           className={cn(styles.textSize, {
             [styles.textSizeFullScreen]: visibleFullScreen,
@@ -81,6 +85,7 @@ export default class CartItemDescription extends Component {
           })}
         >
           Color:
+          {/* {this.props.color} */}
         </p>
         <ul className={styles.menuColor}>
           <li

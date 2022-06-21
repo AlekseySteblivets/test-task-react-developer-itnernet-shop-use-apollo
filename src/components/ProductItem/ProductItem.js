@@ -7,16 +7,17 @@ import ProductImage from "../../lib/ProductImage";
 import styles from "./ProductItem.module.scss";
 
 export default class ProductItem extends Component {
-  handleClick = () => {
-    this.props.onTogleModal();
+  handleClick = (id) => {
+    this.props.onTogleModal(id);
   };
+
   render() {
     return (
       <li
         className={cn(styles.item, {
           [styles.itemNotActive]: !this.props.isInStock,
         })}
-        onClick={this.handleClick}
+        onClick={() => this.handleClick(this.props.idProduct)}
       >
         <ProductImage
           image={this.props.image}

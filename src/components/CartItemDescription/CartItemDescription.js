@@ -38,71 +38,53 @@ export default class CartItemDescription extends Component {
           </p>
         )}
 
-        <p
-          className={cn(styles.textSize, {
-            [styles.textSizeFullScreen]: visibleFullScreen,
-          })}
-        >
-          Size:
-        </p>
-        <ul
-          className={cn(styles.menuSize, {
-            [styles.menuSizeFullScreen]: visibleFullScreen,
-          })}
-        >
-          <li
-            className={cn(styles.itemSize, {
-              [styles.itemSizeFullScreen]: visibleFullScreen,
-            })}
-          >
-            XS
-          </li>
-          <li
-            className={cn(styles.itemSize, {
-              [styles.itemSizeFullScreen]: visibleFullScreen,
-            })}
-          >
-            S
-          </li>
-          <li
-            className={cn(styles.itemSize, {
-              [styles.itemSizeFullScreen]: visibleFullScreen,
-            })}
-          >
-            M
-          </li>
-          <li
-            className={cn(styles.itemSize, {
-              [styles.itemSizeFullScreen]: visibleFullScreen,
-            })}
-          >
-            L
-          </li>
-        </ul>
+        {this.props.atributes &&
+          this.props.atributes.map((oneAtribute) => (
+            <div key={oneAtribute.id}>
+              <p
+                className={cn(styles.textSize, {
+                  [styles.textSizeFullScreen]: visibleFullScreen,
+                })}
+              >
+                {oneAtribute.id}:
+              </p>
+              <ul
+                className={cn(styles.menuSize, {
+                  [styles.menuSizeFullScreen]: visibleFullScreen,
+                })}
+              >
+                {oneAtribute.items.map((oneSize) => (
+                  <li
+                    key={oneSize.value}
+                    className={cn(styles.itemSize, {
+                      [styles.itemSizeFullScreen]: visibleFullScreen,
+                    })}
+                  >
+                    {oneSize.value}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
         <p
           className={cn(styles.textColor, {
             [styles.textColorFullScreen]: visibleFullScreen,
           })}
         >
-          Color:
-          {/* {this.props.color} */}
+          {this.props.color && "Color:"}
         </p>
         <ul className={styles.menuColor}>
-          <li
-            className={cn(styles.itemColor, {
-              [styles.itemColorFullScreen]: visibleFullScreen,
-            })}
-          ></li>
-          <li
-            className={cn(styles.itemColor, {
-              [styles.itemColorFullScreen]: visibleFullScreen,
-            })}
-          ></li>
-          <li
-            className={cn(styles.itemColor, {
-              [styles.itemColorFullScreen]: visibleFullScreen,
-            })}
-          ></li>
+          {this.props.color &&
+            this.props.color.items.map((oneColor) => (
+              <li
+                key={oneColor.value}
+                className={cn(styles.itemColor, {
+                  [styles.itemColorFullScreen]: visibleFullScreen,
+                })}
+                style={{ backgroundColor: oneColor.value }}
+              ></li>
+            ))}
         </ul>
       </div>
     );

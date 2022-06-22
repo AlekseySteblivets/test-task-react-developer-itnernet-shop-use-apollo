@@ -22,6 +22,7 @@ export default class ProductItem extends Component {
         <ProductImage
           image={this.props.image}
           idProduct={this.props.idProduct}
+          // classNameProps={{ [styles.itemNotActive]: !this.props.isInStock }}
         />
         {!this.props.isInStock && (
           <p className={styles.textOutOfStock}>OUT OF STOCK</p>

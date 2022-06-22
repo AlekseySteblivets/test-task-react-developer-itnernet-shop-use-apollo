@@ -8,6 +8,7 @@ import OutsideClickHandler from "../OutsideClickHandler/OutsideClickHandler";
 import cn from "classnames";
 
 import styles from "./Select.module.scss";
+import { Link } from "react-router-dom";
 
 class Select extends Component {
   state = {
@@ -68,11 +69,11 @@ class Select extends Component {
 
   render() {
     const {
-      items,
       data: { currencies, loading },
     } = this.props;
-    console.log("Select", this.props);
-    console.log(currencies);
+
+    // console.log("Select", this.props);
+    // console.log(currencies);
 
     return (
       <div className={styles.wrapper}>
@@ -110,12 +111,12 @@ class Select extends Component {
                 tabIndex={-1}
                 onKeyDown={this.handleListKeyDown}
               >
-                {currencies.map((option, index) => (
+                {currencies.map((currency, index) => (
                   <li
                     className={styles.item}
-                    key={option.label}
-                    id={option.label}
-                    role="option"
+                    key={currency.label}
+                    id={currency.label}
+                    role="options"
                     aria-selected={this.state.selectedOption === index}
                     tabIndex={0}
                     onKeyDown={this.handleKeyDown(index)}
@@ -123,7 +124,7 @@ class Select extends Component {
                       this.setSelectedThenCloseDropdown(index);
                     }}
                   >
-                    {option.symbol + " " + option.label}
+                    {currency.symbol + " " + currency.label}
                   </li>
                 ))}
               </ul>

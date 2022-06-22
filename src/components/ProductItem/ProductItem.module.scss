@@ -17,6 +17,9 @@
 }
 .itemNotActive {
   pointer-events: none;
+  // background-color: #b4d2f4;
+  background-color: rgba(57, 55, 72, 0.22);
+  box-shadow: 1px 3px 8px -1px rgba(0, 0, 0, 0.39);
 }
 
 .icon {

@@ -17,12 +17,24 @@ class Product extends Component {
   };
 
   // componentDidMount() {
-  //   console.log(this.props);
-  //   this.setState({
-  //     currentProductImage:
-  //       this.props.data.observable.last.result.data.product.gallery[0],
-  //   });
+  //   console.log("componentDidMount", this.props);
+  //   const { data } = this.props;
+  //   if (this.state.currentProductImage) {
+  //     this.setState({
+  //       currentProductImage: data.product.gallery[0],
+  //     });
+  //   }
   // }
+
+  componentDidUpdate() {
+    console.log("componentDidUpdate", this.props);
+    const { data } = this.props;
+    if (!this.state.currentProductImage && !data.loading) {
+      this.setState({
+        currentProductImage: data.product.gallery[0],
+      });
+    }
+  }
 
   onChangeMainImg = (index) => {
     this.setState({
@@ -31,10 +43,36 @@ class Product extends Component {
     console.log("onChangeMainImg");
   };
 
+  textDescription = (text) => {
+    let p = document.createElement("p");
+    p.innerHTML = text;
+    let clearText = p.textContent || p.innerText || "";
+
+    return clearText;
+  };
+
+  price = (arr) => {
+    let money = null;
+    if (arr) {
+      money = arr.filter(
+        (kindCurrency) => kindCurrency.currency.symbol === "£"
+      );
+      return money[0].currency.symbol + money[0].amount;
+    }
+  };
+
+  color = (arr) => {
+    return arr?.find((oneAtribute) => oneAtribute.id === "Color");
+  };
+
+  atributes = (arr) => {
+    return arr.filter((oneAtribute) => oneAtribute.id !== "Color");
+  };
+
   render() {
-    // console.log("products-props", this.props);
+    // console.log("Products-props", this.props);
     const { loading, product } = this.props.data;
-    // console.log("producCT", product);
+    console.log("constProduct", product);
 
     return (
       <div className={styles.cartOneThing}>
@@ -47,9 +85,7 @@ class Product extends Component {
               onChangeMainImg={this.onChangeMainImg}
             />
             <CartItemImage
-              // onChangeMainImg={this.onChangeMainImg}
               currentProductImage={this.state.currentProductImage}
-              // allImages={this.state.allImages}
               classNameProps={styles.thingMainView}
             />
             <div>
@@ -57,14 +93,18 @@ class Product extends Component {
                 visibleFullScreen={true}
                 brand={product.brand}
                 name={product.name}
-                // color={product.attributes[1].id}
+                // size={this.size(product.attributes)}
+                color={this.color(product.attributes)}
+                atributes={this.atributes(product.attributes)}
               />
               <p className={styles.priceText}>Price:</p>
-              <p className={styles.priceNumber}>$50</p>
+              <p className={styles.priceNumber}>{this.price(product.prices)}</p>
               <Button classNameProps={styles.buttonAddToCart}>
                 Add to cart
               </Button>
-              <p className={styles.textAboutThing}>{product.description}</p>
+              <span className={styles.textAboutThing}>
+                {this.textDescription(product.description)}
+              </span>
             </div>
           </>
         )}
@@ -76,7 +116,7 @@ class Product extends Component {
 export default graphql(GET_ONE_PRODUCT_BY_ID, {
   options: (props) => ({
     variables: {
-      id: props.idProductAfterClickLiEl,
+      id: props.productId,
     },
   }),
 })(withRouter(Product));

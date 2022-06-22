@@ -29,8 +29,8 @@ class ProductList extends Component {
       data: { category, loading },
     } = this.props;
     // console.log("category", category);
+    // console.log("ProductList", this.props);
 
-    console.log("ProductList", this.props);
     return (
       <div>
         <h2 className={styles.title}>{params.slug}</h2>
@@ -58,7 +58,7 @@ class ProductList extends Component {
           visible={this.state.showCartOfThing}
           classNameProps={styles.modalCartOfThing}
         >
-          <Product idProductAfterClickLiEl={this.state.idProduct} />
+          <Product productId={this.state.idProduct} />
         </Modal>
       </div>
     );
@@ -68,7 +68,7 @@ class ProductList extends Component {
 export default graphql(GET_PRODUCTS_BY_NAME, {
   options: (props) => ({
     variables: {
-      type: props.match.params.slug ? props.match.params.slug : "all",
+      type: props.match.params.slug,
     },
   }),
 })(withRouter(ProductList));

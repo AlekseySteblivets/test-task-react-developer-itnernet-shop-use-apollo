@@ -5,8 +5,35 @@ import cn from "classnames";
 import styles from "./CartItemDescription.module.scss";
 
 export default class CartItemDescription extends Component {
+  state = {
+    activeColor: {},
+    activeAtribute: {},
+  };
+
+  onClickColorButton = (color) => {
+    // this.setState({ activeColor: color });
+    this.setState((prev) => ({
+      activeColor: {
+        // ...prev.activeColor,
+        [color]: true,
+      },
+    }));
+  };
+
+  onClickAtributes = (nameAtribute, sizeAtribute) => {
+    this.setState((prev) => ({
+      activeAtribute: {
+        ...prev.activeAtribute,
+        [nameAtribute]: sizeAtribute,
+        // [sizeAtribute]: !prev.activeAtribute[sizeAtribute],
+      },
+    }));
+  };
+
   render() {
     const visibleFullScreen = this.props.visibleFullScreen;
+    // console.log("123", this.state.activeAtribute);
+    console.log("CartItemDescription", this.props);
     return (
       <div
         className={cn(styles.menuAboutThing, {
@@ -55,9 +82,15 @@ export default class CartItemDescription extends Component {
               >
                 {oneAtribute.items.map((oneSize) => (
                   <li
+                    onClick={() =>
+                      this.onClickAtributes(oneAtribute.id, oneSize.value)
+                    }
                     key={oneSize.value}
                     className={cn(styles.itemSize, {
                       [styles.itemSizeFullScreen]: visibleFullScreen,
+                      [styles.activeItemSize]:
+                        this.state.activeAtribute[oneAtribute.id] ===
+                        oneSize.value,
                     })}
                   >
                     {oneSize.value}
@@ -76,13 +109,22 @@ export default class CartItemDescription extends Component {
         </p>
         <ul className={styles.menuColor}>
           {this.props.color &&
-            this.props.color.items.map((oneColor) => (
+            this.props.color.items.map((color) => (
               <li
-                key={oneColor.value}
+                onClick={() => this.onClickColorButton(color.id)}
+                key={color.value}
                 className={cn(styles.itemColor, {
                   [styles.itemColorFullScreen]: visibleFullScreen,
+                  [styles.activeColor]: this.state.activeColor[color.id],
                 })}
-                style={{ backgroundColor: oneColor.value }}
+                style={
+                  color.value !== "#FFFFFF"
+                    ? { backgroundColor: color.value }
+                    : {
+                        backgroundColor: color.value,
+                        borderColor: "#000000",
+                      }
+                }
               ></li>
             ))}
         </ul>

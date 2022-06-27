@@ -25,7 +25,10 @@ export default class ProductItem extends Component {
           // classNameProps={{ [styles.itemNotActive]: !this.props.isInStock }}
         />
         {!this.props.isInStock && (
-          <p className={styles.textOutOfStock}>OUT OF STOCK</p>
+          <>
+            <div className={styles.blockOutOfStock}> </div>
+            <p className={styles.textOutOfStock}>OUT OF STOCK</p>
+          </>
         )}
 
         <h3 className={styles.titleThing}>

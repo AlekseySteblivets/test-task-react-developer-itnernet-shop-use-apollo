@@ -14,7 +14,10 @@ import Header from "../../components/Header";
 // import styles from "./PreviewPage.module.scss";
 class PreviewPage extends Component {
   componentDidUpdate() {
-    // console.log(this.props);
+    const { data, location, history } = this.props;
+    if (location.pathname === "/") {
+      history.push(data.categories[0].name);
+    }
   }
 
   render() {

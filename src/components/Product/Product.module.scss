@@ -17,7 +17,7 @@
   height: 52px;
 }
 
-.textAboutThing {
+.textDescription {
   display: block;
   margin-top: 40px;
   width: 292px;
@@ -26,6 +26,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.63;
+  overflow: auto;
 }
 
 .titleThing {

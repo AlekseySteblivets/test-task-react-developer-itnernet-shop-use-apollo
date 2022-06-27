@@ -3,7 +3,6 @@
 
 .item {
   position: relative;
-  // pointer-events: none;
   outline: 1px solid tomato;
   padding: 16px;
   width: 386px;
@@ -17,9 +16,17 @@
 }
 .itemNotActive {
   pointer-events: none;
-  // background-color: #b4d2f4;
-  background-color: rgba(57, 55, 72, 0.22);
-  box-shadow: 1px 3px 8px -1px rgba(0, 0, 0, 0.39);
+  color: $color-grey-transparent;
+}
+
+.blockOutOfStock {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100px;
+  top: 0;
+  background-color: $color-light-grey;
+  // rgba(212, 208, 243, 0.22);
 }
 
 .icon {
@@ -58,6 +65,4 @@
   top: 180px;
   left: 119px;
   @include textOutOfStock;
-
-  color: $color-grey-transparent;
 }

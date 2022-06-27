@@ -16,25 +16,34 @@ class Product extends Component {
     currentProductImage: "",
   };
 
-  // componentDidMount() {
-  //   console.log("componentDidMount", this.props);
-  //   const { data } = this.props;
-  //   if (this.state.currentProductImage) {
-  //     this.setState({
-  //       currentProductImage: data.product.gallery[0],
-  //     });
-  //   }
-  // }
+  componentDidMount() {
+    console.log("componentDidMount", this.props);
+    this.setFirstProductAsCurrent();
+  }
 
   componentDidUpdate() {
-    console.log("componentDidUpdate", this.props);
+    // console.log("componentDidUpdate", this.props);
+    this.setFirstProductAsCurrent();
+  }
+
+  setFirstProductAsCurrent = () => {
     const { data } = this.props;
     if (!this.state.currentProductImage && !data.loading) {
       this.setState({
         currentProductImage: data.product.gallery[0],
       });
     }
-  }
+  };
+
+  // componentWillUnmount() {
+
+  //   this.setState({
+  //     currentProductImage: "",
+  //   });
+  // }
+  onClickToggleColorButton = () => {
+    this.setState({ activeColor: !this.state.activeColor });
+  };
 
   onChangeMainImg = (index) => {
     this.setState({
@@ -44,11 +53,7 @@ class Product extends Component {
   };
 
   textDescription = (text) => {
-    let p = document.createElement("p");
-    p.innerHTML = text;
-    let clearText = p.textContent || p.innerText || "";
-
-    return clearText;
+    return { __html: text };
   };
 
   price = (arr) => {
@@ -72,7 +77,7 @@ class Product extends Component {
   render() {
     // console.log("Products-props", this.props);
     const { loading, product } = this.props.data;
-    console.log("constProduct", product);
+    // console.log("constProduct", product);
 
     return (
       <div className={styles.cartOneThing}>
@@ -102,9 +107,12 @@ class Product extends Component {
               <Button classNameProps={styles.buttonAddToCart}>
                 Add to cart
               </Button>
-              <span className={styles.textAboutThing}>
-                {this.textDescription(product.description)}
-              </span>
+              <div
+                className={styles.textDescription}
+                dangerouslySetInnerHTML={this.textDescription(
+                  product.description
+                )}
+              ></div>
             </div>
           </>
         )}

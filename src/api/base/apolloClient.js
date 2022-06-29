@@ -5,18 +5,22 @@ export const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-client.writeQuery({
-  query: gql`
-    query State {
-      test {
-        id
-      }
-    }
-  `,
-  data: {
-    test: {
-      __typename: "test",
-      id: 5,
-    },
-  },
-});
+// client.writeQuery({
+//   query: gql`
+//     query Cart {
+//       test {
+//         id
+//         text
+//         completed
+//       }
+//     }
+//   `,
+//   data: {
+//     test: {
+//       __typename: "test",
+//       id: 5,
+//       text: "Buy grapes 🍇",
+//       completed: false,
+//     },
+//   },
+// });

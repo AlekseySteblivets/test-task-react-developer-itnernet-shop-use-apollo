@@ -8,6 +8,7 @@ export default class CartItemDescription extends Component {
   state = {
     activeColor: {},
     activeAtribute: {},
+    idProduct: "",
   };
 
   onClickColorButton = (color) => {
@@ -18,6 +19,10 @@ export default class CartItemDescription extends Component {
         [color]: true,
       },
     }));
+    this.props.choosedOptionsByUser(
+      this.state.activeColor,
+      this.state.activeAtribute
+    );
   };
 
   onClickAtributes = (nameAtribute, sizeAtribute) => {
@@ -28,12 +33,16 @@ export default class CartItemDescription extends Component {
         // [sizeAtribute]: !prev.activeAtribute[sizeAtribute],
       },
     }));
+    this.props.choosedOptionsByUser(
+      this.state.activeColor,
+      this.state.activeAtribute
+    );
   };
 
   render() {
     const visibleFullScreen = this.props.visibleFullScreen;
     // console.log("123", this.state.activeAtribute);
-    console.log("CartItemDescription", this.props);
+    // console.log("CartItemDescription", this.props);
     return (
       <div
         className={cn(styles.menuAboutThing, {

@@ -58,7 +58,10 @@ class ProductList extends Component {
           visible={this.state.showCartOfThing}
           classNameProps={styles.modalCartOfThing}
         >
-          <Product productId={this.state.idProduct} />
+          <Product
+            productId={this.state.idProduct}
+            onTogleModal={this.togleModal}
+          />
         </Modal>
       </div>
     );

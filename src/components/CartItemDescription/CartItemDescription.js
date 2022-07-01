@@ -6,43 +6,29 @@ import styles from "./CartItemDescription.module.scss";
 
 export default class CartItemDescription extends Component {
   state = {
-    activeColor: {},
-    activeAtribute: {},
+    currentColor: "",
+    currentAtribute: {},
     idProduct: "",
   };
 
   onClickColorButton = (color) => {
-    // this.setState({ activeColor: color });
-    this.setState((prev) => ({
-      activeColor: {
-        // ...prev.activeColor,
-        [color]: true,
-      },
-    }));
-    this.props.choosedOptionsByUser(
-      this.state.activeColor,
-      this.state.activeAtribute
-    );
+    this.setState({ currentColor: color });
+    this.props.choosedColorByUser(color);
   };
 
-  onClickAtributes = (nameAtribute, sizeAtribute) => {
+  onClickAtributes = (id, sizeAtribute) => {
     this.setState((prev) => ({
-      activeAtribute: {
-        ...prev.activeAtribute,
-        [nameAtribute]: sizeAtribute,
-        // [sizeAtribute]: !prev.activeAtribute[sizeAtribute],
+      currentAtribute: {
+        ...prev.currentAtribute,
+        [id]: sizeAtribute,
       },
     }));
-    this.props.choosedOptionsByUser(
-      this.state.activeColor,
-      this.state.activeAtribute
-    );
+    this.props.choosedAtributesByUser(id, sizeAtribute);
   };
 
   render() {
     const visibleFullScreen = this.props.visibleFullScreen;
-    // console.log("123", this.state.activeAtribute);
-    // console.log("CartItemDescription", this.props);
+
     return (
       <div
         className={cn(styles.menuAboutThing, {
@@ -98,7 +84,7 @@ export default class CartItemDescription extends Component {
                     className={cn(styles.itemSize, {
                       [styles.itemSizeFullScreen]: visibleFullScreen,
                       [styles.activeItemSize]:
-                        this.state.activeAtribute[oneAtribute.id] ===
+                        this.state.currentAtribute[oneAtribute.id] ===
                         oneSize.value,
                     })}
                   >
@@ -124,7 +110,7 @@ export default class CartItemDescription extends Component {
                 key={color.value}
                 className={cn(styles.itemColor, {
                   [styles.itemColorFullScreen]: visibleFullScreen,
-                  [styles.activeColor]: this.state.activeColor[color.id],
+                  [styles.activeColor]: this.state.currentColor === color.id,
                 })}
                 style={
                   color.value !== "#FFFFFF"

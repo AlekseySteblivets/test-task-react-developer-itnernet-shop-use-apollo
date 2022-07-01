@@ -11,17 +11,17 @@ import { gql } from "@apollo/client";
 
 import styles from "./Product.module.scss";
 import { GET_ONE_PRODUCT_BY_ID } from "../../api/shemas/getOneProductById";
+import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
 // import { cart } from "../../api/base/cart";
 
 class Product extends Component {
   state = {
     currentProductImage: "",
-    idProduct: "",
+    // idProduct: "",
     atributes: {},
   };
 
   componentDidMount() {
-    // console.log("componentDidMount", this.props);
     this.setFirstProductAsCurrent();
     this.setState({
       idProduct: this.props.productId,
@@ -74,32 +74,41 @@ class Product extends Component {
     return arr.filter((oneAtribute) => oneAtribute.id !== "Color");
   };
 
-  choosedOptionsByUser = (choosedColor, choosedAributes) => {
-    return this.setState({ atributes: { choosedColor, choosedAributes } });
+  choosedColorByUser = (color) => {
+    this.setState((prev) => ({
+      atributes: { ...prev.atributes, color: color },
+    }));
   };
 
-  onCLickAddToCart = () => {
-    client.writeQuery({
-      query: gql`
-        query Cart {
-          productIntoCart {
-            id
-            atributes
-          }
-        }
-      `,
-      // this.choosedOptionsByUser(),
-      data: {
-        productIntoCart: {
-          __typename: "productIntoCart",
+  choosedAtributesByUser = (id, sizeAtribute) => {
+    this.setState((prev) => ({
+      atributes: {
+        ...prev.atributes,
+        [id]: sizeAtribute,
+        // [sizeAtribute]: !prev.activeAtribute[sizeAtribute],
+      },
+    }));
+  };
+
+  onClickAddToCart = () => {
+    console.log(client);
+    client.cache.updateQuery(
+      {
+        query: READ_GET_PRODUCT_INTO_CART,
+      },
+      (data) => {
+        const product = {
           id: this.state.idProduct,
           atributes: this.state.atributes,
-        },
-        // variables: {
-        //   id: 5,
-        // },
-      },
-    });
+        };
+        const { productIntoCart } = data;
+        const copyProducts = [...productIntoCart];
+        console.log(productIntoCart);
+        copyProducts.push(product);
+        return { productIntoCart: copyProducts };
+      }
+    );
+    this.props.onTogleModal();
   };
 
   render() {
@@ -123,7 +132,8 @@ class Product extends Component {
             />
             <div>
               <CartItemDescription
-                choosedOptionsByUser={this.choosedOptionsByUser}
+                choosedAtributesByUser={this.choosedAtributesByUser}
+                choosedColorByUser={this.choosedColorByUser}
                 visibleFullScreen={true}
                 brand={product.brand}
                 name={product.name}
@@ -134,7 +144,7 @@ class Product extends Component {
               <p className={styles.priceNumber}>{this.price(product.prices)}</p>
               <Button
                 classNameProps={styles.buttonAddToCart}
-                onClickProps={this.onCLickAddToCart}
+                onClickProps={this.onClickAddToCart}
               >
                 Add to cart
               </Button>
@@ -157,6 +167,6 @@ export default graphql(GET_ONE_PRODUCT_BY_ID, {
     variables: {
       id: props.productId,
     },
-    fetchPolicy: "cache-first",
+    // fetchPolicy: "cache-first",
   }),
 })(withRouter(Product));

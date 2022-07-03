@@ -1,15 +1,29 @@
 import { Component } from "react";
 
+import { graphql } from "@apollo/client/react/hoc";
+import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
+
 import cn from "classnames";
 
 import styles from "./CartItemDescription.module.scss";
 
-export default class CartItemDescription extends Component {
+class CartItemDescription extends Component {
   state = {
     currentColor: "",
     currentAtribute: {},
     idProduct: "",
   };
+
+  // componentDidMount() {
+  //   console.log("CartItemDescription", this.props.data.productIntoCart[0]);
+  //   if (!this.state.currentAtribute && this.props.data.loading) {
+  //     this.setState({
+  //       currentAtribute: this.props.data.productIntoCart[0].atributes,
+  //     });
+  //   }
+  // }
+
+  // componentDidUpdate() {}
 
   onClickColorButton = (color) => {
     this.setState({ currentColor: color });
@@ -60,8 +74,8 @@ export default class CartItemDescription extends Component {
           </p>
         )}
 
-        {this.props.atributes &&
-          this.props.atributes.map((oneAtribute) => (
+        {this.props.attributes &&
+          this.props.attributes.map((oneAtribute) => (
             <div key={oneAtribute.id}>
               <p
                 className={cn(styles.textSize, {
@@ -127,3 +141,12 @@ export default class CartItemDescription extends Component {
     );
   }
 }
+
+export default graphql(READ_GET_PRODUCT_INTO_CART, {
+  options: (props) => ({
+    // variables: {
+    //   id: props.productId,
+    // },
+    fetchPolicy: "cache-only",
+  }),
+})(CartItemDescription);

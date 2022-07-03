@@ -7,7 +7,7 @@ import CartItemDescription from "../CartItemDescription";
 import CartItemImage from "../CartItemImage";
 import ProductImagesType from "../ProductImagesType/ProductImagesType";
 import { client } from "../../api/base/apolloClient";
-import { gql } from "@apollo/client";
+// import { gql } from "@apollo/client";
 
 import styles from "./Product.module.scss";
 import { GET_ONE_PRODUCT_BY_ID } from "../../api/shemas/getOneProductById";
@@ -138,7 +138,7 @@ class Product extends Component {
                 brand={product.brand}
                 name={product.name}
                 color={this.color(product.attributes)}
-                atributes={this.atributes(product.attributes)}
+                attributes={this.atributes(product.attributes)}
               />
               <p className={styles.priceText}>Price:</p>
               <p className={styles.priceNumber}>{this.price(product.prices)}</p>

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { withRouter } from "react-router";
+// import { withRouter } from "react-router";
 import { graphql } from "@apollo/client/react/hoc";
 
 import cn from "classnames";
@@ -7,7 +7,7 @@ import cn from "classnames";
 import CartItem from "../CartItem/CartItem";
 import CartTotal from "../CartTotal";
 import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
-import { client } from "../../api/base/apolloClient";
+// import { client } from "../../api/base/apolloClient";
 
 import styles from "./CartList.module.scss";
 
@@ -28,14 +28,17 @@ class CartList extends Component {
   // }
 
   counterProducts = (amount) => {
-    this.setState((prevState) => ({
-      numbersProduct: prevState.numbersProduct + amount,
-    }));
-    this.props.modalAmountImems(this.state.numbersProduct);
+    this.setState(
+      (prevState) => ({
+        numbersProduct: prevState.numbersProduct + amount,
+      }),
+      () => this.props.modalAmountImems(this.state.numbersProduct)
+    );
   };
 
   render() {
-    console.log(this.props);
+    const { productIntoCart } = this.props.data;
+    console.log("productIntoCart", productIntoCart);
     return (
       <div>
         <div className={styles.badge}>{this.state.numbersProduct}</div>
@@ -45,14 +48,19 @@ class CartList extends Component {
             [styles.menuFullScreen]: this.props.visibleFullScreen,
           })}
         >
-          <CartItem
+          {productIntoCart.map((product) => (
+            <CartItem
+              key={product.id}
+              productId={product.id}
+              counterProducts={this.counterProducts}
+              visibleFullScreen={this.props.visibleFullScreen}
+            />
+          ))}
+
+          {/* <CartItem
             counterProducts={this.counterProducts}
             visibleFullScreen={this.props.visibleFullScreen}
-          />
-          <CartItem
-            counterProducts={this.counterProducts}
-            visibleFullScreen={this.props.visibleFullScreen}
-          />
+          /> */}
         </ul>
         <CartTotal visibleFullScreen={this.props.visibleFullScreen} />
       </div>

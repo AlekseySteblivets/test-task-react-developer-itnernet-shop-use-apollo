@@ -21,7 +21,7 @@ class CartItem extends Component {
 
   render() {
     const { product } = this.props.data;
-    console.log("5555", this.props.data);
+    console.log("CartItem-this.props.data", this.props.data);
     return (
       <li
         className={cn(styles.item, {
@@ -34,11 +34,15 @@ class CartItem extends Component {
           color={this.color(product.attributes)}
           brand={product.brand}
           name={product.name}
+          productId={this.props.productId}
+          prices={product.prices}
+
           // attributes={this.atributes(product.attributes)}
         />
         <CartItemAmount
-          counterProducts={this.props.counterProducts}
+          // counterProducts={this.props.counterProducts}
           visibleFullScreen={this.props.visibleFullScreen}
+          productId={this.props.productId}
         />
         <CartItemImage
           visibleFullScreen={this.props.visibleFullScreen}

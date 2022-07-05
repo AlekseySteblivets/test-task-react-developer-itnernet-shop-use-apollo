@@ -2,6 +2,7 @@ import { Component } from "react";
 
 import { graphql } from "@apollo/client/react/hoc";
 import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
+import { client } from "../../api/base/apolloClient";
 
 import cn from "classnames";
 
@@ -15,15 +16,20 @@ class CartItemDescription extends Component {
   };
 
   // componentDidMount() {
-  //   console.log("CartItemDescription", this.props.data.productIntoCart[0]);
-  //   if (!this.state.currentAtribute && this.props.data.loading) {
+  //   console.log("componentDidMount-CartItemDescription", this.props);
+
+  //   if (this.props.data.productIntoCart.length !== 0) {
+  //     const atribute = this.props.data.productIntoCart.filter(
+  //       (product) => product.id === this.props.productId
+  //     );
   //     this.setState({
-  //       currentAtribute: this.props.data.productIntoCart[0].atributes,
+  //       currentAtribute: atribute[0].atributes,
+  //       currentColor: atribute[0].atributes.color
+  //         ? atribute[0].atributes.color
+  //         : "",
   //     });
   //   }
   // }
-
-  // componentDidUpdate() {}
 
   onClickColorButton = (color) => {
     this.setState({ currentColor: color });
@@ -37,12 +43,23 @@ class CartItemDescription extends Component {
         [id]: sizeAtribute,
       },
     }));
+    // if (
+    //   !this.props.data.productIntoCart.filter(
+    //     (product) => product.id === this.props.productId
+    //   )
+    // ) {
+    //   console.log("false");
     this.props.choosedAtributesByUser(id, sizeAtribute);
+    // } else {
+    //   console.log("true - можно вставлять апдейт квери");
+    // }
+
+    // }
   };
 
   render() {
     const visibleFullScreen = this.props.visibleFullScreen;
-
+    console.log(this.props);
     return (
       <div
         className={cn(styles.menuAboutThing, {
@@ -70,7 +87,8 @@ class CartItemDescription extends Component {
               [styles.textPriceThingFullScreen]: visibleFullScreen,
             })}
           >
-            $50.00
+            {this.props.prices[0].currency.symbol}
+            {this.props.prices[0].amount}
           </p>
         )}
 
@@ -150,3 +168,41 @@ export default graphql(READ_GET_PRODUCT_INTO_CART, {
     fetchPolicy: "cache-only",
   }),
 })(CartItemDescription);
+
+// }
+
+// const cart = client.readQuery({
+//   query: READ_GET_PRODUCT_INTO_CART,
+// });
+// if (!cart || !cart.productIntoCart || cart.productIntoCart.length == 0) {
+//   return;
+// }
+// let copy = JSON.parse(JSON.stringify(cart));
+// console.log("car is null? - ", copy == null);
+// console.log("car item size - ", copy.productIntoCart[0].atributes.Size);
+// this.setState({
+//   currentAtribute: cart.productIntoCart[0].atributes,
+// });
+
+// console.log(
+//   "CartItemDescription-componentDidMount",
+//   this.props.data.productIntoCart
+// );
+// // if (!this.state.currentAtribute && this.props.data.loading) {
+// setInterval(
+//   () =>
+//     this.setState({
+//       currentAtribute: cart.productIntoCart[0].atributes,
+//     }),
+//   1000
+// );
+
+// // }
+
+// setInterval(
+//   () =>
+//     this.setState({
+//       currentAtribute: atribute[0].atributes,
+//     }),
+//   1000
+// );

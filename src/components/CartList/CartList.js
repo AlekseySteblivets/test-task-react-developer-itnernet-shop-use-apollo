@@ -12,36 +12,28 @@ import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
 import styles from "./CartList.module.scss";
 
 class CartList extends Component {
-  state = {
-    numbersProduct: 0,
-  };
+  // state = {
+  //   numbersProduct: 0,
+  // };
 
-  // componentDidMount() {
-  //   const cart = client.readQuery({
-  //     query: READ_GET_PRODUCT_INTO_CART,
-  //     // variables: {
-  //     //   // Provide any required variables here.  Variables of mismatched types will return `null`.
-  //     //   id: 5,
-  //     // },
-  //   });
-  //   console.log("cart", cart);
-  // }
+  componentDidUpdate() {
+    // console.log("CartList-componentDidUpdate", this.props);
+  }
 
-  counterProducts = (amount) => {
-    this.setState(
-      (prevState) => ({
-        numbersProduct: prevState.numbersProduct + amount,
-      }),
-      () => this.props.modalAmountImems(this.state.numbersProduct)
-    );
-  };
+  // counterProducts = (amount) => {
+  //   this.setState(
+  //     (prevState) => ({
+  //       numbersProduct: prevState.numbersProduct + amount,
+  //     }),
+  //     () => this.props.modalAmountImems(this.state.numbersProduct)
+  //   );
+  // };
 
   render() {
     const { productIntoCart } = this.props.data;
-    console.log("productIntoCart", productIntoCart);
+    // console.log("productIntoCart", productIntoCart.length);
     return (
       <div>
-        <div className={styles.badge}>{this.state.numbersProduct}</div>
         <ul
           className={cn({
             [styles.menu]: true,
@@ -52,15 +44,10 @@ class CartList extends Component {
             <CartItem
               key={product.id}
               productId={product.id}
-              counterProducts={this.counterProducts}
+              // counterProducts={this.counterProducts}
               visibleFullScreen={this.props.visibleFullScreen}
             />
           ))}
-
-          {/* <CartItem
-            counterProducts={this.counterProducts}
-            visibleFullScreen={this.props.visibleFullScreen}
-          /> */}
         </ul>
         <CartTotal visibleFullScreen={this.props.visibleFullScreen} />
       </div>

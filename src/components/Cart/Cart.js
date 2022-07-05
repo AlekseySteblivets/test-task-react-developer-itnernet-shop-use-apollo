@@ -1,5 +1,8 @@
 import { Component } from "react";
 
+import { graphql } from "@apollo/client/react/hoc";
+
+import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
 import CartContent from "../CartContent";
 import CartIcon from "../CartIcon/CartIcon";
 import Modal from "../../lib/Modal/Modal";
@@ -9,7 +12,7 @@ import styles from "./Cart.module.scss";
 
 // import classNames from "classnames";
 
-export default class Cart extends Component {
+class Cart extends Component {
   state = {
     showModal: false,
     fullScreenModal: false,
@@ -29,10 +32,22 @@ export default class Cart extends Component {
 
   render() {
     const { showModal, fullScreenModal } = this.state;
-    return (
-      <div>
-        <CartIcon onClickByIconProps={this.togleModal} />
+    const { productIntoCart } = this.props.data;
+    // console.log("Cart-productIntoCart", productIntoCart);
 
+    return (
+      <div className={styles.cart}>
+        {productIntoCart.length > 0 && (
+          <div className={styles.badge}>
+            {productIntoCart.length > 1
+              ? productIntoCart.reduce((acc, currentValue) => {
+                  return acc + currentValue.numbersItem;
+                }, 0)
+              : productIntoCart[0].numbersItem}
+          </div>
+        )}
+
+        <CartIcon onClickByIconProps={this.togleModal} />
         <Modal
           onClose={this.togleModal}
           visible={showModal}
@@ -48,3 +63,12 @@ export default class Cart extends Component {
     );
   }
 }
+
+export default graphql(READ_GET_PRODUCT_INTO_CART, {
+  options: (props) => ({
+    // variables: {
+    //   id: props.productId,
+    // },
+    fetchPolicy: "cache-only",
+  }),
+})(Cart);

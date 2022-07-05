@@ -17,7 +17,7 @@ import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
 class Product extends Component {
   state = {
     currentProductImage: "",
-    // idProduct: "",
+    idProduct: "",
     atributes: {},
   };
 
@@ -49,7 +49,7 @@ class Product extends Component {
     this.setState({
       currentProductImage: this.props.data.product.gallery[index],
     });
-    console.log("onChangeMainImg");
+    // console.log("onChangeMainImg");
   };
 
   textDescription = (text) => {
@@ -91,7 +91,7 @@ class Product extends Component {
   };
 
   onClickAddToCart = () => {
-    console.log(client);
+    // console.log(client);
     client.cache.updateQuery(
       {
         query: READ_GET_PRODUCT_INTO_CART,
@@ -100,10 +100,11 @@ class Product extends Component {
         const product = {
           id: this.state.idProduct,
           atributes: this.state.atributes,
+          numbersItem: 1,
         };
         const { productIntoCart } = data;
         const copyProducts = [...productIntoCart];
-        console.log(productIntoCart);
+        // console.log(productIntoCart);
         copyProducts.push(product);
         return { productIntoCart: copyProducts };
       }

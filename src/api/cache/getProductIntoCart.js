@@ -1,11 +1,12 @@
 import { gql } from "@apollo/client";
-import { client } from "../../api/base/apolloClient";
+// import { client } from "../../api/base/apolloClient";
 
 export const READ_GET_PRODUCT_INTO_CART = gql`
   query Cart {
     productIntoCart {
       id
       atributes
+      numbersItem
     }
   }
 `;

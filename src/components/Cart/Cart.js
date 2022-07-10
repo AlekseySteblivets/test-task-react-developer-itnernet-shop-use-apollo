@@ -9,6 +9,7 @@ import Modal from "../../lib/Modal/Modal";
 import CartButtons from "../CartButtons";
 
 import styles from "./Cart.module.scss";
+import Badge from "../../lib/Badge/Badge";
 
 // import classNames from "classnames";
 
@@ -37,15 +38,7 @@ class Cart extends Component {
 
     return (
       <div className={styles.cart}>
-        {productIntoCart.length > 0 && (
-          <div className={styles.badge}>
-            {productIntoCart.length > 1
-              ? productIntoCart.reduce((acc, currentValue) => {
-                  return acc + currentValue.numbersItem;
-                }, 0)
-              : productIntoCart[0].numbersItem}
-          </div>
-        )}
+        <Badge productIntoCart={productIntoCart} />
 
         <CartIcon onClickByIconProps={this.togleModal} />
         <Modal

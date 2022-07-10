@@ -1,0 +1,20 @@
+@import "../../assets/styles/media";
+@import "../../assets/styles/fonts";
+@import "../../assets/styles/colors";
+
+.badge {
+  position: absolute;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  top: -13px;
+  right: -12px;
+  border-radius: 60px;
+  background-color: $color-black;
+  color: $color-white;
+  @include badge;
+}
+
+// .cart {
+//   position: relative;
+// }

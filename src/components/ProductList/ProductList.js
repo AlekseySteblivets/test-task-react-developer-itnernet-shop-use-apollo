@@ -1,14 +1,16 @@
 import { Component } from "react";
+
 import { withRouter } from "react-router";
-// import { useCategories } from "../../api/queriesHOC/withCategories";
 import { graphql } from "@apollo/client/react/hoc";
 
+// import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
+// import { client } from "../../api/base/apolloClient";
 import Modal from "../../lib/Modal/Modal";
 import Product from "../Product";
 import ProductItem from "../ProductItem";
+import { GET_PRODUCTS_BY_NAME } from "../../api/shemas/getProductsByName";
 
 import styles from "./ProductList.module.scss";
-import { GET_PRODUCTS_BY_NAME } from "../../api/shemas/getProductsByName";
 
 class ProductList extends Component {
   state = {
@@ -28,8 +30,6 @@ class ProductList extends Component {
       match: { params },
       data: { category, loading },
     } = this.props;
-    // console.log("category", category);
-    // console.log("ProductList", this.props);
 
     return (
       <div>

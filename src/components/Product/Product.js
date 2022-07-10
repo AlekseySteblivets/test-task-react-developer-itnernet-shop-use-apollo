@@ -1,18 +1,19 @@
 import { Component } from "react";
 import { withRouter } from "react-router";
+
 import { graphql } from "@apollo/client/react/hoc";
 
+import { client } from "../../api/base/apolloClient";
 import Button from "../../lib/Button";
-import CartItemDescription from "../CartItemDescription";
 import CartItemImage from "../CartItemImage";
 import ProductImagesType from "../ProductImagesType/ProductImagesType";
-import { client } from "../../api/base/apolloClient";
-// import { gql } from "@apollo/client";
-
-import styles from "./Product.module.scss";
 import { GET_ONE_PRODUCT_BY_ID } from "../../api/shemas/getOneProductById";
 import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
-// import { cart } from "../../api/base/cart";
+import ProductItemAtributes from "../ProductItemAtributes/ProductItemAtributes";
+import { filterAtribute } from "../../utils/filterAtribute";
+import { colorAtribute } from "../../utils/colorAtribute";
+
+import styles from "./Product.module.scss";
 
 class Product extends Component {
   state = {
@@ -41,15 +42,10 @@ class Product extends Component {
     }
   };
 
-  onClickToggleColorButton = () => {
-    this.setState({ activeColor: !this.state.activeColor });
-  };
-
   onChangeMainImg = (index) => {
     this.setState({
       currentProductImage: this.props.data.product.gallery[index],
     });
-    // console.log("onChangeMainImg");
   };
 
   textDescription = (text) => {
@@ -66,14 +62,6 @@ class Product extends Component {
     }
   };
 
-  color = (arr) => {
-    return arr?.find((oneAtribute) => oneAtribute.id === "Color");
-  };
-
-  atributes = (arr) => {
-    return arr.filter((oneAtribute) => oneAtribute.id !== "Color");
-  };
-
   choosedColorByUser = (color) => {
     this.setState((prev) => ({
       atributes: { ...prev.atributes, color: color },
@@ -85,18 +73,17 @@ class Product extends Component {
       atributes: {
         ...prev.atributes,
         [id]: sizeAtribute,
-        // [sizeAtribute]: !prev.activeAtribute[sizeAtribute],
       },
     }));
   };
 
   onClickAddToCart = () => {
-    // console.log(client);
     client.cache.updateQuery(
       {
         query: READ_GET_PRODUCT_INTO_CART,
       },
       (data) => {
+        // console.log(data);
         const product = {
           id: this.state.idProduct,
           atributes: this.state.atributes,
@@ -115,7 +102,7 @@ class Product extends Component {
   render() {
     // console.log("Products-props", this.props);
     const { loading, product } = this.props.data;
-    // console.log("constProduct", product);
+    console.log("product.attributes", product);
 
     return (
       <div className={styles.cartOneThing}>
@@ -132,14 +119,14 @@ class Product extends Component {
               classNameProps={styles.thingMainView}
             />
             <div>
-              <CartItemDescription
+              <ProductItemAtributes
                 choosedAtributesByUser={this.choosedAtributesByUser}
                 choosedColorByUser={this.choosedColorByUser}
                 visibleFullScreen={true}
                 brand={product.brand}
                 name={product.name}
-                color={this.color(product.attributes)}
-                attributes={this.atributes(product.attributes)}
+                color={colorAtribute(product.attributes)}
+                attributes={filterAtribute(product.attributes)}
               />
               <p className={styles.priceText}>Price:</p>
               <p className={styles.priceNumber}>{this.price(product.prices)}</p>
@@ -170,4 +157,16 @@ export default graphql(GET_ONE_PRODUCT_BY_ID, {
     },
     // fetchPolicy: "cache-first",
   }),
-})(withRouter(Product));
+})(
+  //   (
+  //   graphql(READ_GET_PRODUCT_INTO_CART, {
+  //     options: (props) => ({
+  //       // variables: {
+  //       //   id: props.productId,
+  //       // },
+  //       fetchPolicy: "cache-only",
+  //     }),
+  //   })
+  // )
+  withRouter(Product)
+);

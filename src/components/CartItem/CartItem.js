@@ -1,43 +1,35 @@
 import { Component } from "react";
-import { graphql } from "@apollo/client/react/hoc";
 
+import { graphql } from "@apollo/client/react/hoc";
 import cn from "classnames";
 
-import CartItemDescription from "../CartItemDescription";
 import CartItemAmount from "../CartItemAmount";
 import CartItemImage from "../CartItemImage";
+import { colorAtribute } from "../../utils/colorAtribute";
+import { filterAtribute } from "../../utils/filterAtribute";
+import { GET_ONE_PRODUCT_BY_ID } from "../../api/shemas/getOneProductById";
+import CartItemAtributes from "../CartItemAtributes";
 
 import styles from "./CartItem.module.scss";
-import { GET_ONE_PRODUCT_BY_ID } from "../../api/shemas/getOneProductById";
 
 class CartItem extends Component {
-  color = (arr) => {
-    return arr?.find((oneAtribute) => oneAtribute.id === "Color");
-  };
-
-  atributes = (arr) => {
-    return arr.filter((oneAtribute) => oneAtribute.id !== "Color");
-  };
-
   render() {
     const { product } = this.props.data;
-    console.log("CartItem-this.props.data", this.props.data);
+    console.log("CartItem-this.props.data", product);
     return (
       <li
         className={cn(styles.item, {
           [styles.itemFullScreen]: this.props.visibleFullScreen,
         })}
       >
-        <CartItemDescription
+        <CartItemAtributes
           visibleFullScreen={this.props.visibleFullScreen}
-          attributes={this.atributes(product.attributes)}
-          color={this.color(product.attributes)}
+          attributes={filterAtribute(product.attributes)}
+          color={colorAtribute(product.attributes)}
           brand={product.brand}
           name={product.name}
           productId={this.props.productId}
           prices={product.prices}
-
-          // attributes={this.atributes(product.attributes)}
         />
         <CartItemAmount
           // counterProducts={this.props.counterProducts}

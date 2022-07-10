@@ -8,7 +8,7 @@ import OutsideClickHandler from "../OutsideClickHandler/OutsideClickHandler";
 import cn from "classnames";
 
 import styles from "./Select.module.scss";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 class Select extends Component {
   state = {

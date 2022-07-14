@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 import cn from "classnames";
 
 import s from "./Modal.module.scss";
+import OutsideClickHandler from "../OutsideClickHandler/OutsideClickHandler";
 
 const modalRoot = document.querySelector("#modal-root");
 
@@ -33,9 +34,15 @@ class Modal extends Component {
 
     return createPortal(
       <div className={s.modalBackdrop} onClick={this.handleBackdropClick}>
-        <div className={cn(s.modalContent, this.props.classNameProps)}>
-          {this.props.children}
-        </div>
+        <OutsideClickHandler
+          onOutsideClick={() => {
+            this.props.onClose();
+          }}
+        >
+          <div className={cn(s.modalContent, this.props.classNameProps)}>
+            {this.props.children}
+          </div>
+        </OutsideClickHandler>
       </div>,
       modalRoot
     );

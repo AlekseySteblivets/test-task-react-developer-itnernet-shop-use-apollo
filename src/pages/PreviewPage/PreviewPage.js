@@ -10,6 +10,7 @@ import Container from "../../components/Container";
 import ProductList from "../../components/ProductList";
 import Product from "../../components/Product";
 import Header from "../../components/Header";
+import LayoutProductList from "../../components/LayoutProductList/LayoutProductList";
 
 // import styles from "./PreviewPage.module.scss";
 class PreviewPage extends Component {
@@ -32,7 +33,7 @@ class PreviewPage extends Component {
           <LayoutSection>
             <Container>
               <Switch>
-                <Route path="/:slug/" component={ProductList} />
+                <Route path="/:slug/" component={LayoutProductList} />
                 {/* <Route path="/:slug/:idProduct" component={Product} /> */}
               </Switch>
             </Container>

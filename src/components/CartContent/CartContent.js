@@ -5,8 +5,12 @@ import CartList from "../CartList/CartList";
 import styles from "./CartContent.module.scss";
 
 export default class CartContent extends Component {
-  state = {
-    items: 0,
+  itemsProduct = (productIntoCart) => {
+    let summ = 0;
+    for (let i = 0; i < productIntoCart.length; i++) {
+      summ = summ + productIntoCart[i].numbersItem;
+    }
+    return summ;
   };
 
   modalAmountImems = (amount) => {
@@ -22,7 +26,7 @@ export default class CartContent extends Component {
               <span className={styles.modalTitle}>My Bag</span>
 
               <span className={styles.modalAmountImems}>
-                , {this.state.items}items
+                , {this.itemsProduct(this.props.productIntoCart)}items
               </span>
             </>
           ) : (

@@ -1,13 +1,16 @@
 import { Component } from "react";
-import { GET_KIND_OF_CURRENCIES } from "../../api/shemas/getKindOfCurrencies";
+
 import { graphql } from "@apollo/client/react/hoc";
 import { withRouter } from "react-router";
-
-import OutsideClickHandler from "../OutsideClickHandler/OutsideClickHandler";
-
 import cn from "classnames";
 
+import { client } from "../../api/base/apolloClient";
+import { GET_KIND_OF_CURRENCIES } from "../../api/shemas/getKindOfCurrencies";
+import OutsideClickHandler from "../OutsideClickHandler/OutsideClickHandler";
+import { SELECTED_CURRENCY } from "../../api/cache/selectedCurrency";
+
 import styles from "./Select.module.scss";
+
 // import { Link } from "react-router-dom";
 
 class Select extends Component {
@@ -16,13 +19,40 @@ class Select extends Component {
     selectedOption: 0,
   };
 
+  componentDidUpdate() {
+    // const { data } = this.props;
+    // console.log("555", data);
+    this.writeQuerySelectedCurrency(this.state.selectedOption);
+  }
+
   toggleOptions = () => {
     this.setState({ isOptionsOpen: !this.state.isOptionsOpen });
   };
 
+  writeQuerySelectedCurrency = (index) => {
+    if (!this.props.data.loading) {
+      client.writeQuery({
+        query: SELECTED_CURRENCY,
+        data: {
+          selectedCurrency: {
+            __typename: "SelectedCurrency",
+            symbol: this.props.data.currencies[index].symbol,
+            label: this.props.data.currencies[index].label,
+          },
+        },
+      });
+    }
+  };
+
   setSelectedThenCloseDropdown = (index) => {
-    this.setState({ selectedOption: index });
-    this.setState({ isOptionsOpen: false });
+    this.setState(
+      {
+        selectedOption: index,
+        isOptionsOpen: false,
+      },
+      () => this.writeQuerySelectedCurrency(index)
+    );
+    // console.log("6666", this.props);
   };
 
   handleKeyDown = (index) => (e) => {

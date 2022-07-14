@@ -7,31 +7,29 @@ import cn from "classnames";
 import CartItem from "../CartItem/CartItem";
 import CartTotal from "../CartTotal";
 import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
-// import { client } from "../../api/base/apolloClient";
+import { client } from "../../api/base/apolloClient";
+import { SELECTED_CURRENCY } from "../../api/cache/selectedCurrency";
 
 import styles from "./CartList.module.scss";
 
 class CartList extends Component {
-  // state = {
-  //   numbersProduct: 0,
-  // };
-
-  componentDidUpdate() {
-    // console.log("CartList-componentDidUpdate", this.props);
-  }
-
-  // counterProducts = (amount) => {
-  //   this.setState(
-  //     (prevState) => ({
-  //       numbersProduct: prevState.numbersProduct + amount,
-  //     }),
-  //     () => this.props.modalAmountImems(this.state.numbersProduct)
+  // componentDidMount() {
+  //   console.log(
+  //     "CartList-componentDidUpdate-this.state.total",
+  //     this.state.total
   //   );
+  // }
+
+  // counterCostProducts = (amount) => {
+  //   console.log("amount", amount);
+  //   this.setState((prevState) => ({
+  //     total: prevState.total + amount,
+  //   }));
   // };
 
   render() {
     const { productIntoCart } = this.props.data;
-    // console.log("productIntoCart", productIntoCart.length);
+    console.log("productIntoCart", productIntoCart);
     return (
       <div>
         <ul
@@ -46,6 +44,8 @@ class CartList extends Component {
               productId={product.id}
               // counterProducts={this.counterProducts}
               visibleFullScreen={this.props.visibleFullScreen}
+              numbersItem={product.numbersItem}
+              // counterCostProducts={this.counterCostProducts}
             />
           ))}
         </ul>

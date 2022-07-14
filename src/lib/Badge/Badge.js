@@ -12,14 +12,10 @@ export default class Badge extends Component {
   };
 
   render() {
-    return (
-      <>
-        {this.props.productIntoCart.length > 0 && (
-          <div className={styles.badge}>
-            {this.itemsProduct(this.props.productIntoCart)}
-          </div>
-        )}
-      </>
-    );
+    return this.props.productIntoCart.length > 0 ? (
+      <div className={styles.badge}>
+        {this.itemsProduct(this.props.productIntoCart)}
+      </div>
+    ) : null;
   }
 }

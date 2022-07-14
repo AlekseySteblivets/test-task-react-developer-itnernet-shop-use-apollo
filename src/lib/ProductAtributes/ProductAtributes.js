@@ -5,9 +5,25 @@ import cn from "classnames";
 import styles from "./ProductAtributes.module.scss";
 
 export default class ProductAtributes extends Component {
+  price = (prices) => {
+    let money = null;
+    // console.log(prices);
+    if (this.props.currentCurrencySymbol) {
+      money = prices.filter(
+        (kindCurrency) =>
+          kindCurrency.currency.symbol === this.props.currentCurrencySymbol
+      );
+      // console.log(money[0].amount);
+
+      // this.props.counterCostProducts(money[0].amount);
+
+      return money[0].amount;
+    }
+  };
+
   render() {
     const visibleFullScreen = this.props.visibleFullScreen;
-    // console.log("000", this.props.attributes);
+    // console.log("000", this.props.prices);
     return (
       <div
         className={cn(styles.menuAboutThing, {
@@ -34,14 +50,14 @@ export default class ProductAtributes extends Component {
               [styles.textPriceThingFullScreen]: visibleFullScreen,
             })}
           >
-            {this.props.prices[0].currency.symbol}
-            {this.props.prices[0].amount}
+            {this.props.currentCurrencySymbol}
+            {this.price(this.props.prices)}
           </p>
         )}
 
         {this.props.attributes &&
           this.props.attributes.map((oneAtribute) => (
-            <div key={oneAtribute.id}>
+            <div key={oneAtribute.id + oneAtribute.items[0].value}>
               <p
                 className={cn(styles.textSize, {
                   [styles.textSizeFullScreen]: visibleFullScreen,

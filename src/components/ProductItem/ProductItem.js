@@ -12,6 +12,7 @@ export default class ProductItem extends Component {
   };
 
   render() {
+    // console.log("ProductItem", this.props.amountMoney);
     return (
       <li
         className={cn(styles.item, {
@@ -34,9 +35,11 @@ export default class ProductItem extends Component {
         <h3 className={styles.titleThing}>
           {this.props.brand} {this.props.name}
         </h3>
+
         <p
           className={styles.textPriceThing}
-        >{`${this.props.currencySimbol}${this.props.amountMoney}`}</p>
+        >{`${this.props.currencySymbol}${this.props.amountMoney}`}</p>
+
         <div className={styles.icon}></div>
       </li>
     );

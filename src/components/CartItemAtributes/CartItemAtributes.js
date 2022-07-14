@@ -85,6 +85,8 @@ class CartItemAtributes extends Component {
           prices={this.props.prices}
           currentColor={this.state.currentColor}
           currentAtribute={this.state.currentAtribute}
+          currentCurrencySymbol={this.props.currentCurrencySymbol}
+          // counterCostProducts={this.props.counterCostProducts}
         />
       </>
     );

@@ -41,12 +41,16 @@ class Cart extends Component {
         <Badge productIntoCart={productIntoCart} />
 
         <CartIcon onClickByIconProps={this.togleModal} />
+
         <Modal
           onClose={this.togleModal}
           visible={showModal}
           classNameProps={{ [styles.fullScreenModal]: fullScreenModal }}
         >
-          <CartContent visibleFullScreen={fullScreenModal} />
+          <CartContent
+            visibleFullScreen={fullScreenModal}
+            productIntoCart={productIntoCart}
+          />
           <CartButtons
             onClickButtonCartProps={this.onClickButton}
             visibleFullScreen={fullScreenModal}

@@ -7,6 +7,7 @@ export const READ_GET_PRODUCT_INTO_CART = gql`
       id
       atributes
       numbersItem
+      sumProduct
     }
   }
 `;

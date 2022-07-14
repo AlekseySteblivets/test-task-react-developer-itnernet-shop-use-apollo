@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { withRouter } from "react-router";
+// import { compose } from "react-compose";
 
 import { graphql } from "@apollo/client/react/hoc";
 
@@ -56,7 +57,8 @@ class Product extends Component {
     let money = null;
     if (arr) {
       money = arr.filter(
-        (kindCurrency) => kindCurrency.currency.symbol === "£"
+        (kindCurrency) =>
+          kindCurrency.currency.symbol === this.props.currencySymbol
       );
       return money[0].currency.symbol + money[0].amount;
     }
@@ -83,17 +85,31 @@ class Product extends Component {
         query: READ_GET_PRODUCT_INTO_CART,
       },
       (data) => {
-        // console.log(data);
+        const { productIntoCart } = data;
+        const copyProducts = [...productIntoCart];
+        let repeadIndex = copyProducts.findIndex(
+          (prod) => prod.id === this.state.idProduct
+        );
+        // console.log("repeadProduct", repeadProduct);
+
+        // console.log("onClickAddToCart", productIntoCart);
         const product = {
           id: this.state.idProduct,
           atributes: this.state.atributes,
           numbersItem: 1,
+          sumProduct: this.price(this.props.data.product.prices),
         };
-        const { productIntoCart } = data;
-        const copyProducts = [...productIntoCart];
-        // console.log(productIntoCart);
-        copyProducts.push(product);
-        return { productIntoCart: copyProducts };
+
+        if (repeadIndex === -1) {
+          copyProducts.push(product);
+          return { productIntoCart: copyProducts };
+        } else {
+          // repeadProduct.numbersItem = repeadProduct.numbersItem + 1;
+          console.log("copyProducts", copyProducts);
+          return {
+            productIntoCart: copyProducts,
+          };
+        }
       }
     );
     this.props.onTogleModal();
@@ -102,7 +118,7 @@ class Product extends Component {
   render() {
     // console.log("Products-props", this.props);
     const { loading, product } = this.props.data;
-    console.log("product.attributes", product);
+    // console.log("product.attributes", product);
 
     return (
       <div className={styles.cartOneThing}>
@@ -150,23 +166,13 @@ class Product extends Component {
   }
 }
 
-export default graphql(GET_ONE_PRODUCT_BY_ID, {
+const getOneProductById = graphql(GET_ONE_PRODUCT_BY_ID, {
   options: (props) => ({
     variables: {
       id: props.productId,
     },
     // fetchPolicy: "cache-first",
   }),
-})(
-  //   (
-  //   graphql(READ_GET_PRODUCT_INTO_CART, {
-  //     options: (props) => ({
-  //       // variables: {
-  //       //   id: props.productId,
-  //       // },
-  //       fetchPolicy: "cache-only",
-  //     }),
-  //   })
-  // )
-  withRouter(Product)
-);
+});
+
+export default getOneProductById(withRouter(Product));

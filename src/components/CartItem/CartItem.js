@@ -21,6 +21,7 @@ class CartItem extends Component {
     currentCurrencySymbol: "",
     sumProduct: 0,
     // numbersItem: 0,
+    currentProductImage: "",
   };
 
   componentDidMount() {
@@ -30,6 +31,7 @@ class CartItem extends Component {
     this.setState(
       {
         currentCurrencySymbol: data.selectedCurrency.symbol,
+        currentProductImage: this.props.data.product.gallery[0],
       },
       () => this.updateQuery()
     );
@@ -81,6 +83,11 @@ class CartItem extends Component {
     );
   };
 
+  onChangeMainImg = (index) => {
+    this.setState({
+      currentProductImage: this.props.data.product.gallery[index],
+    });
+  };
   render() {
     const { product } = this.props.data;
     console.log("CartItem-this.props.data", product);
@@ -108,8 +115,10 @@ class CartItem extends Component {
           productId={this.props.productId}
         />
         <CartItemImage
+          allImages={product.gallery}
           visibleFullScreen={this.props.visibleFullScreen}
-          currentProductImage={this.props.data.product.gallery[0]}
+          currentProductImage={this.state.currentProductImage}
+          onChangeMainImg={this.onChangeMainImg}
         />
       </li>
     );

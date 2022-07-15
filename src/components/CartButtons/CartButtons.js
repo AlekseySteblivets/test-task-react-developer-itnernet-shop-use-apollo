@@ -24,6 +24,7 @@ export default class CartButtons extends Component {
     return (
       <div>
         <Button
+          onClickProps={this.props.onClickButtonCartProps}
           classNameProps={{
             [styles.buttonWhenFullScreen]: this.props.visibleFullScreen,
           }}

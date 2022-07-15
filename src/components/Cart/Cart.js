@@ -46,6 +46,7 @@ class Cart extends Component {
           onClose={this.togleModal}
           visible={showModal}
           classNameProps={{ [styles.fullScreenModal]: fullScreenModal }}
+          // onClickButtonCartProps={this.onClickButton}
         >
           <CartContent
             visibleFullScreen={fullScreenModal}
@@ -54,6 +55,7 @@ class Cart extends Component {
           <CartButtons
             onClickButtonCartProps={this.onClickButton}
             visibleFullScreen={fullScreenModal}
+            // onClose={this.togleModal}
           />
         </Modal>
       </div>

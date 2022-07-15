@@ -56,9 +56,9 @@ export default class CartItemImage extends Component {
         />
         {this.props.visibleFullScreen && (
           <SliderImages
-          // onChangeMainImg={this.props.onChangeMainImg}
-          // currentProductImage={this.props.currentProductImage}
-          // allImages={this.props.allImages}
+            onChangeMainImg={this.props.onChangeMainImg}
+            // currentProductImage={this.props.currentProductImage}
+            allImages={this.props.allImages}
           />
         )}
       </div>

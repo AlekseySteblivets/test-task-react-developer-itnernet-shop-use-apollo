@@ -4,37 +4,36 @@ import styles from "./SliderImages.module.scss";
 
 export default class SliderImages extends Component {
   state = {
-    // allImages: [image1, image2, image3],
-    // currentImg: this.props.currentProductImage,
     currentImgIndex: 0,
   };
 
   onRightSliderBtn = () => {
     if (this.state.currentImgIndex < this.props.allImages.length - 1) {
-      this.setState((prevState) => ({
-        currentImgIndex: prevState.currentImgIndex + 1,
-        //   currentImg: this.state.allImages[this.state.currentImgIndex],
-      }));
-      this.props.onChangeMainImg(this.state.currentImgIndex);
+      this.setState(
+        (prevState) => ({
+          currentImgIndex: prevState.currentImgIndex + 1,
+        }),
+        () => this.props.onChangeMainImg(this.state.currentImgIndex)
+      );
     } else {
-      this.setState((prevState) => ({
-        currentImgIndex: 0,
-        //   currentImg: this.state.allImages[this.state.currentImgIndex],
-      }));
-      this.props.onChangeMainImg(this.state.currentImgIndex);
+      this.setState({ currentImgIndex: 0 }, () =>
+        this.props.onChangeMainImg(this.state.currentImgIndex)
+      );
     }
   };
-  //   onLeftSliderBtn = () => {
-  //     this.state.currentImgIndex > 0
-  //       ? this.setState((prevState) => ({
-  //           currentImgIndex: prevState.currentImgIndex - 1,
-  //           currentImg: this.state.allImages[this.state.currentImgIndex],
-  //         }))
-  //       : this.setState((prevState) => ({
-  //           currentImgIndex: this.state.allImages.length - 1,
-  //           currentImg: this.state.allImages[this.state.currentImgIndex],
-  //         }));
-  //   };
+  onLeftSliderBtn = () => {
+    this.state.currentImgIndex > 0
+      ? this.setState(
+          (prevState) => ({
+            currentImgIndex: prevState.currentImgIndex - 1,
+          }),
+          () => this.props.onChangeMainImg(this.state.currentImgIndex)
+        )
+      : this.setState(
+          { currentImgIndex: this.props.allImages.length - 1 },
+          () => this.props.onChangeMainImg(this.state.currentImgIndex)
+        );
+  };
 
   render() {
     return (

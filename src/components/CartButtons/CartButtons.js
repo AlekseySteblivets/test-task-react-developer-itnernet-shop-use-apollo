@@ -1,4 +1,5 @@
 import { Component } from "react";
+
 import Button from "../../lib/Button/Button";
 
 import styles from "./CartButtons.module.scss";
@@ -14,7 +15,6 @@ export default class CartButtons extends Component {
             View bag
           </Button>
           <Button
-          //   onClickProps={this.togleModal}
           >
             CHECK OUT
           </Button>

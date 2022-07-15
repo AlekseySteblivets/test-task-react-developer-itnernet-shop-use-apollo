@@ -1,11 +1,9 @@
 @import "_sizes";
-// @import "_colors.scss";
 
 @mixin font-navigation {
   font-weight: 600;
   font-size: 16px;
   line-height: 1.19;
-  //   color: $color-black;
 }
 
 @mixin font-navigation-text-money {
@@ -85,8 +83,6 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 1.125;
-  // font-family: "Roboto";
-  // font-style: normal;
 }
 
 @mixin font-modal-price-block-total {
@@ -169,7 +165,6 @@
 }
 
 @mixin badge {
-  // font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
   font-size: 14px;

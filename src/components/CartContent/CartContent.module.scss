@@ -10,13 +10,10 @@
 
 .title {
   display: flex;
-  // width: 118px;
-  // height: 26px;
 }
 
 .titleBigModal {
   text-transform: uppercase;
-  // padding-top: 80px;
   padding-bottom: 55px;
   @include font-big-modal-title;
 }

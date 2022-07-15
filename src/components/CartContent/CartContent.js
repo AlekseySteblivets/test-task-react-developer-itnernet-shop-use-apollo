@@ -35,7 +35,6 @@ export default class CartContent extends Component {
         </h1>
         <CartList
           visibleFullScreen={this.props.visibleFullScreen}
-          modalAmountImems={this.modalAmountImems}
         />
       </>
     );

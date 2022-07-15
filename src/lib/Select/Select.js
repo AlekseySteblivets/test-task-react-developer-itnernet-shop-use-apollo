@@ -1,17 +1,15 @@
 import { Component } from "react";
-
-import { graphql } from "@apollo/client/react/hoc";
 import { withRouter } from "react-router";
 import cn from "classnames";
 
+import { graphql } from "@apollo/client/react/hoc";
 import { client } from "../../api/base/apolloClient";
+
 import { GET_KIND_OF_CURRENCIES } from "../../api/shemas/getKindOfCurrencies";
 import OutsideClickHandler from "../OutsideClickHandler/OutsideClickHandler";
 import { SELECTED_CURRENCY } from "../../api/cache/selectedCurrency";
 
 import styles from "./Select.module.scss";
-
-// import { Link } from "react-router-dom";
 
 class Select extends Component {
   state = {
@@ -20,8 +18,6 @@ class Select extends Component {
   };
 
   componentDidUpdate() {
-    // const { data } = this.props;
-    // console.log("555", data);
     this.writeQuerySelectedCurrency(this.state.selectedOption);
   }
 
@@ -52,7 +48,6 @@ class Select extends Component {
       },
       () => this.writeQuerySelectedCurrency(index)
     );
-    // console.log("6666", this.props);
   };
 
   handleKeyDown = (index) => (e) => {
@@ -102,9 +97,6 @@ class Select extends Component {
       data: { currencies, loading },
     } = this.props;
 
-    // console.log("Select", this.props);
-    // console.log(currencies);
-
     return (
       <div className={styles.wrapper}>
         {!loading && (
@@ -125,7 +117,6 @@ class Select extends Component {
             <OutsideClickHandler
               onOutsideClick={() => {
                 this.setState({ isOptionsOpen: false });
-                // console.log("clicked outside!");
               }}
             >
               <ul
@@ -134,7 +125,6 @@ class Select extends Component {
                     [styles.show]: this.state.isOptionsOpen,
                     [styles.options]: true,
                   }
-                  // this.state.isOptionsOpen ? styles.show : ""
                 )}
                 role="listbox"
                 aria-activedescendant={currencies[this.state.selectedOption]}

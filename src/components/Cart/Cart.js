@@ -7,11 +7,9 @@ import CartContent from "../CartContent";
 import CartIcon from "../CartIcon/CartIcon";
 import Modal from "../../lib/Modal/Modal";
 import CartButtons from "../CartButtons";
-
-import styles from "./Cart.module.scss";
 import Badge from "../../lib/Badge/Badge";
 
-// import classNames from "classnames";
+import styles from "./Cart.module.scss";
 
 class Cart extends Component {
   state = {
@@ -34,19 +32,15 @@ class Cart extends Component {
   render() {
     const { showModal, fullScreenModal } = this.state;
     const { productIntoCart } = this.props.data;
-    // console.log("Cart-productIntoCart", productIntoCart);
 
     return (
       <div className={styles.cart}>
         <Badge productIntoCart={productIntoCart} />
-
         <CartIcon onClickByIconProps={this.togleModal} />
-
         <Modal
           onClose={this.togleModal}
           visible={showModal}
           classNameProps={{ [styles.fullScreenModal]: fullScreenModal }}
-          // onClickButtonCartProps={this.onClickButton}
         >
           <CartContent
             visibleFullScreen={fullScreenModal}
@@ -55,7 +49,6 @@ class Cart extends Component {
           <CartButtons
             onClickButtonCartProps={this.onClickButton}
             visibleFullScreen={fullScreenModal}
-            // onClose={this.togleModal}
           />
         </Modal>
       </div>

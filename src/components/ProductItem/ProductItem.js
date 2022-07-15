@@ -1,5 +1,4 @@
 import { Component } from "react";
-
 import cn from "classnames";
 
 import ProductImage from "../../lib/ProductImage";
@@ -12,7 +11,6 @@ export default class ProductItem extends Component {
   };
 
   render() {
-    // console.log("ProductItem", this.props.amountMoney);
     return (
       <li
         className={cn(styles.item, {
@@ -23,7 +21,6 @@ export default class ProductItem extends Component {
         <ProductImage
           image={this.props.image}
           idProduct={this.props.idProduct}
-          // classNameProps={{ [styles.itemNotActive]: !this.props.isInStock }}
         />
         {!this.props.isInStock && (
           <>

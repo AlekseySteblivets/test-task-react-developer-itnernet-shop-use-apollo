@@ -1,10 +1,9 @@
 import { Component } from "react";
 import { withRouter } from "react-router";
-// import { compose } from "react-compose";
 
 import { graphql } from "@apollo/client/react/hoc";
-
 import { client } from "../../api/base/apolloClient";
+
 import Button from "../../lib/Button";
 import CartItemImage from "../CartItemImage";
 import ProductImagesType from "../ProductImagesType/ProductImagesType";
@@ -90,9 +89,7 @@ class Product extends Component {
         let repeadIndex = copyProducts.findIndex(
           (prod) => prod.id === this.state.idProduct
         );
-        // console.log("repeadProduct", repeadProduct);
 
-        // console.log("onClickAddToCart", productIntoCart);
         const product = {
           id: this.state.idProduct,
           atributes: this.state.atributes,
@@ -104,7 +101,6 @@ class Product extends Component {
           copyProducts.push(product);
           return { productIntoCart: copyProducts };
         } else {
-          // repeadProduct.numbersItem = repeadProduct.numbersItem + 1;
           console.log("copyProducts", copyProducts);
           return {
             productIntoCart: copyProducts,
@@ -116,9 +112,7 @@ class Product extends Component {
   };
 
   render() {
-    // console.log("Products-props", this.props);
     const { loading, product } = this.props.data;
-    // console.log("product.attributes", product);
 
     return (
       <div className={styles.cartOneThing}>
@@ -171,7 +165,6 @@ const getOneProductById = graphql(GET_ONE_PRODUCT_BY_ID, {
     variables: {
       id: props.productId,
     },
-    // fetchPolicy: "cache-first",
   }),
 });
 

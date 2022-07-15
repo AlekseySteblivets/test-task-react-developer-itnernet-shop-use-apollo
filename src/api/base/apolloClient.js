@@ -1,4 +1,5 @@
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+
 import { READ_GET_PRODUCT_INTO_CART } from "../cache/getProductIntoCart";
 
 export const client = new ApolloClient({
@@ -11,10 +12,4 @@ client.writeQuery({
   data: {
     productIntoCart: [],
   },
-  // variables: {
-  //   currencySymbol: "$",
-  // },
 });
-
-// query Cart($currencySymbol: String!) {
-//       productIntoCart(currencySymbol: $currencySymbol) {

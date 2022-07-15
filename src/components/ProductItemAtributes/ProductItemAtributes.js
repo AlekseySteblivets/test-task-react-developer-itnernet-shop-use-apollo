@@ -6,24 +6,7 @@ export default class ProductItemAtributes extends Component {
   state = {
     currentColor: "",
     currentAtribute: {},
-    // idProduct: "",
   };
-
-  // componentDidMount() {
-  //   console.log("componentDidMount-CartItemDescription", this.props);
-
-  //   if (this.props.data.productIntoCart.length !== 0) {
-  //     const atribute = this.props.data.productIntoCart.filter(
-  //       (product) => product.id === this.props.productId
-  //     );
-  //     this.setState({
-  //       currentAtribute: atribute[0].atributes,
-  //       currentColor: atribute[0].atributes.color
-  //         ? atribute[0].atributes.color
-  //         : "",
-  //     });
-  //   }
-  // }
 
   onClickColorButton = (color) => {
     this.setState({ currentColor: color });

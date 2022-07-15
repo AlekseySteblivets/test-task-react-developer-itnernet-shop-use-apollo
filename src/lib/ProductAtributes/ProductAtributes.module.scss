@@ -4,7 +4,6 @@
 
 .menuAboutThing {
   flex: 3;
-  outline: 1px solid tomato;
 }
 
 .titleThing {
@@ -40,7 +39,6 @@
   width: 24px;
   height: 24px;
   outline: 1px solid $color-black;
-  // margin-right: 8px;
   text-align: center;
   padding-top: 2px;
   &:not(:last-child) {
@@ -67,7 +65,6 @@
 }
 
 .itemColor {
-  // background-color: $color-white;
   border: 2px solid $color-white;
   width: 20px;
   height: 20px;

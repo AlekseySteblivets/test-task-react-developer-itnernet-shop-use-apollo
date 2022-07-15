@@ -1,12 +1,6 @@
 @import "../../assets/styles/colors";
 @import "../../assets/styles/fonts";
 
-// .menu {
-//   display: flex;
-//   padding-left: 0;
-//   @include font-navigation;
-// }
-
 .item {
   position: relative;
   padding-left: 16px;
@@ -16,7 +10,6 @@
 .link {
   text-decoration: none;
   color: currentColor;
-  //   align-items: center;
   text-align: center;
   text-transform: uppercase;
 }

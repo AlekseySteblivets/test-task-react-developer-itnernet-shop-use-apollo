@@ -11,16 +11,14 @@ import { filterAtribute } from "../../utils/filterAtribute";
 import { GET_ONE_PRODUCT_BY_ID } from "../../api/shemas/getOneProductById";
 import CartItemAtributes from "../CartItemAtributes";
 import { SELECTED_CURRENCY } from "../../api/cache/selectedCurrency";
+import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
 
 import styles from "./CartItem.module.scss";
-import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
-// import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
 
 class CartItem extends Component {
   state = {
     currentCurrencySymbol: "",
     sumProduct: 0,
-    // numbersItem: 0,
     currentProductImage: "",
   };
 
@@ -35,22 +33,9 @@ class CartItem extends Component {
       },
       () => this.updateQuery()
     );
-    // console.log("01", this.props.data.product.prices);
-    // console.log("02", this.state.currentCurrencySymbol);
-    // console.log("03", this.props.numbersItem);
   }
 
   componentDidUpdate() {
-    // console.log("1", this.props.data.product.prices);
-    // console.log("2", this.state.currentCurrencySymbol);
-    // console.log("3", this.props.numbersItem);
-    // console.log(
-    //   this.sumProduct(
-    //     this.props.data.product.prices,
-    //     this.state.currentCurrencySymbol,
-    //     this.props.numbersItem
-    //   )
-    // );
     this.updateQuery();
   }
 
@@ -90,7 +75,6 @@ class CartItem extends Component {
   };
   render() {
     const { product } = this.props.data;
-    console.log("CartItem-this.props.data", product);
 
     return (
       <li
@@ -107,10 +91,8 @@ class CartItem extends Component {
           productId={this.props.productId}
           prices={product.prices}
           currentCurrencySymbol={this.state.currentCurrencySymbol}
-          // counterCostProducts={this.props.counterCostProducts}
         />
         <CartItemAmount
-          // counterProducts={this.props.counterProducts}
           visibleFullScreen={this.props.visibleFullScreen}
           productId={this.props.productId}
         />

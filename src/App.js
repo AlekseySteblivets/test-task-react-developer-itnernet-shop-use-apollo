@@ -1,8 +1,8 @@
 import { ApolloProvider } from "@apollo/client";
+import { BrowserRouter } from "react-router-dom";
 
 import PreviewPage from "./pages/PreviewPage/PreviewPage";
 import { client } from "./api/base/apolloClient";
-import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (

@@ -22,11 +22,9 @@ textBtnMoney:hover {
 }
 
 .textBtnMoney::after {
-  // content: "\2191";
   content: "";
   position: absolute;
   right: 0px;
-  // top: 14 px;
   bottom: 13px;
   background-image: url("../../assets/img/vector.svg");
   width: 6px;

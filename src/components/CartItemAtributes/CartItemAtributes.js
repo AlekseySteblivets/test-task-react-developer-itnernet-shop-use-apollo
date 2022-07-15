@@ -1,23 +1,18 @@
 import { Component } from "react";
 
-// import cn from "classnames";
+import { client } from "../../api/base/apolloClient";
 import { graphql } from "@apollo/client/react/hoc";
 
 import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
-import { client } from "../../api/base/apolloClient";
 import ProductAtributes from "../../lib/ProductAtributes/ProductAtributes";
-
-// import styles from "./CartItemAtributes.module.scss";
 
 class CartItemAtributes extends Component {
   state = {
     currentColor: "",
     currentAtribute: {},
-    // idProduct: "",
   };
 
   componentDidMount() {
-    // if (this.props.data.productIntoCart.length !== 0) {
     const atribute = this.props.data.productIntoCart.filter(
       (product) => product.id === this.props.productId
     );
@@ -27,7 +22,6 @@ class CartItemAtributes extends Component {
         ? atribute[0].atributes.color
         : "",
     });
-    // }
   }
 
   changeArtributeInCache = () => {
@@ -70,7 +64,6 @@ class CartItemAtributes extends Component {
   };
 
   render() {
-    // console.log("CartItemAtributes", this.props);
     return (
       <>
         <ProductAtributes
@@ -86,7 +79,6 @@ class CartItemAtributes extends Component {
           currentColor={this.state.currentColor}
           currentAtribute={this.state.currentAtribute}
           currentCurrencySymbol={this.props.currentCurrencySymbol}
-          // counterCostProducts={this.props.counterCostProducts}
         />
       </>
     );
@@ -95,9 +87,6 @@ class CartItemAtributes extends Component {
 
 export default graphql(READ_GET_PRODUCT_INTO_CART, {
   options: (props) => ({
-    // variables: {
-    //   id: props.productId,
-    // },
     fetchPolicy: "cache-only",
   }),
 })(CartItemAtributes);

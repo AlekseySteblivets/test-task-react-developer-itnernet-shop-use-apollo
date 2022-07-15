@@ -7,15 +7,11 @@ import styles from "./ProductAtributes.module.scss";
 export default class ProductAtributes extends Component {
   price = (prices) => {
     let money = null;
-    // console.log(prices);
     if (this.props.currentCurrencySymbol) {
       money = prices.filter(
         (kindCurrency) =>
           kindCurrency.currency.symbol === this.props.currentCurrencySymbol
       );
-      // console.log(money[0].amount);
-
-      // this.props.counterCostProducts(money[0].amount);
 
       return money[0].amount;
     }
@@ -23,7 +19,6 @@ export default class ProductAtributes extends Component {
 
   render() {
     const visibleFullScreen = this.props.visibleFullScreen;
-    // console.log("000", this.props.prices);
     return (
       <div
         className={cn(styles.menuAboutThing, {

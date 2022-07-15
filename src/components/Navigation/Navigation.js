@@ -1,8 +1,8 @@
 import { Component } from "react";
+
 import { graphql } from "@apollo/client/react/hoc";
 
 import { GET_CATEGORIES_NAME } from "../../api/shemas/categoriesName";
-
 import NavigationLink from "../NavigationLink/NavigationLink";
 
 import styles from "./Navigation.module.scss";
@@ -12,7 +12,6 @@ class Navigation extends Component {
     const {
       data: { loading, categories },
     } = this.props;
-    // console.log("Navigation", this.props);
 
     return (
       <nav className={styles.navigation}>

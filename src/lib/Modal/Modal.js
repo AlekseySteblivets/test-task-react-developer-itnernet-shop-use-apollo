@@ -1,10 +1,10 @@
 import { Component } from "react";
 import { createPortal } from "react-dom";
-
 import cn from "classnames";
 
-import s from "./Modal.module.scss";
 import OutsideClickHandler from "../OutsideClickHandler/OutsideClickHandler";
+
+import s from "./Modal.module.scss";
 
 const modalRoot = document.querySelector("#modal-root");
 
@@ -20,7 +20,6 @@ class Modal extends Component {
   handleKeyDown = (e) => {
     if (e.code === "Escape" && this.props.visible) {
       this.props.onClose();
-      // this.props.onClickButtonCartProps();
     }
   };
 

@@ -1,11 +1,11 @@
 import { Component } from "react";
-import { graphql } from "@apollo/client/react/hoc";
 
+import { graphql } from "@apollo/client/react/hoc";
 import { client } from "../../api/base/apolloClient";
+import { SELECTED_CURRENCY } from "../../api/cache/selectedCurrency";
 import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
 
 import styles from "./CartTotal.module.scss";
-import { SELECTED_CURRENCY } from "../../api/cache/selectedCurrency";
 
 class CartTotal extends Component {
   totalSumProducts = (productIntoCart) => {
@@ -37,7 +37,6 @@ class CartTotal extends Component {
 
   render() {
     const { productIntoCart } = this.props.data;
-    // console.log("CartTotal", productIntoCart);
     if (!this.props.visibleFullScreen) {
       return (
         <div className={styles.blockTotal}>
@@ -79,7 +78,7 @@ class CartTotal extends Component {
 }
 
 export default graphql(READ_GET_PRODUCT_INTO_CART, {
-  options: (props) => ({
+  options: () => ({
     fetchPolicy: "cache-only",
   }),
 })(CartTotal);

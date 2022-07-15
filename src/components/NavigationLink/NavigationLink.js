@@ -5,7 +5,6 @@ import styles from "./NavigationLink.module.scss";
 
 export default class NavigationLink extends Component {
   render() {
-    // console.log("NavigationLink", this.props);
     return (
       <li className={styles.item}>
         <NavLink

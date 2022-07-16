@@ -39,8 +39,8 @@ class CartTotal extends Component {
     const { productIntoCart } = this.props.data;
     if (!this.props.visibleFullScreen) {
       return (
-        <div className={styles.blockTotal}>
-          <p>
+        <div>
+          <p className={styles.blockTotal}>
             <span className={styles.textBlockTotal}>Total:</span>
             <span
               className={styles.priceBlockTotal}

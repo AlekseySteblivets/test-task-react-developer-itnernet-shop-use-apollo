@@ -10,6 +10,8 @@ import Container from "../../components/Container";
 import Header from "../../components/Header";
 import LayoutProductList from "../../components/LayoutProductList/LayoutProductList";
 
+import styles from "./PreviewPage.module.scss";
+
 class PreviewPage extends Component {
   componentDidUpdate() {
     const { data, location, history } = this.props;
@@ -21,7 +23,7 @@ class PreviewPage extends Component {
   render() {
     return (
       <>
-        <LayoutSection element="header">
+        <LayoutSection element="header" classNameProps={styles.header}>
           <Container>
             <Header />
           </Container>

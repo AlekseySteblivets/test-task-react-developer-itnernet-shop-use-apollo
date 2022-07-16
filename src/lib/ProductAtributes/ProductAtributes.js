@@ -39,16 +39,15 @@ export default class ProductAtributes extends Component {
         >
           {this.props.name}
         </p>
-        {!visibleFullScreen && (
-          <p
-            className={cn(styles.textPriceThing, {
-              [styles.textPriceThingFullScreen]: visibleFullScreen,
-            })}
-          >
-            {this.props.currentCurrencySymbol}
-            {this.price(this.props.prices)}
-          </p>
-        )}
+
+        <p
+          className={cn(styles.textPriceThing, {
+            [styles.textPriceThingFullScreen]: visibleFullScreen,
+          })}
+        >
+          {this.props.currentCurrencySymbol}
+          {this.price(this.props.prices)}
+        </p>
 
         {this.props.attributes &&
           this.props.attributes.map((oneAtribute) => (

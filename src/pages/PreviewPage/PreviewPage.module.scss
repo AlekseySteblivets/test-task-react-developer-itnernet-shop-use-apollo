@@ -1,0 +1,12 @@
+@import "../../assets/styles/colors";
+
+.header {
+  position: fixed;
+  background-color: $color-white;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 1440px;
+  text-align: center;
+}

@@ -59,7 +59,7 @@ class ProductList extends Component {
     } = this.props;
 
     return (
-      <div>
+      <div className={styles.productList}>
         <h2 className={styles.title}>{params.slug}</h2>
         {loading ? (
           <p>...Loading PRODUCTS</p>

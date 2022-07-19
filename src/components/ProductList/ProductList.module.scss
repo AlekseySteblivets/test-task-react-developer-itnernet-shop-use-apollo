@@ -1,7 +1,8 @@
 @import "../../assets/styles/fonts";
 
 .productList {
-  padding-top: 80px;
+  width: 100%;
+  margin-top: 80px;
 }
 
 .menu {
@@ -11,7 +12,8 @@
   list-style: none;
   margin: 0;
   padding-left: 0;
-  padding-top: 103px;
+  margin-top: 103px;
+  margin-bottom: 88px;
 }
 
 .title {
@@ -24,7 +26,6 @@
 
 .modalCartOfThing {
   margin: 0 auto;
-  width: 1440px;
-  height: 853px;
+  max-width: 1440px;
   padding: 80px 219px 178px 100px;
 }

@@ -3,8 +3,14 @@
 @import "../../assets/styles/colors";
 
 .fullScreenModal {
-  width: 1440px;
-  height: 1435px;
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 78px;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
   @include media-big-modal {
     padding: 80px 100px 274px 100px;
   }

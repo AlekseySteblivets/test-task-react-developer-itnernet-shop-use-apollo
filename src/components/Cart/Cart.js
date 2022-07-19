@@ -1,11 +1,12 @@
 import { Component } from "react";
+import cn from "classnames";
 
 import { graphql } from "@apollo/client/react/hoc";
 
 import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
 import CartContent from "../CartContent";
 import CartIcon from "../CartIcon/CartIcon";
-import Modal from "../../lib/Modal/Modal";
+import ModalCart from "../../lib/ModalCart/ModalCart";
 import CartButtons from "../CartButtons";
 import Badge from "../../lib/Badge/Badge";
 
@@ -37,10 +38,12 @@ class Cart extends Component {
       <div className={styles.cart}>
         <Badge productIntoCart={productIntoCart} />
         <CartIcon onClickByIconProps={this.togleModal} />
-        <Modal
+        <ModalCart
           onClose={this.togleModal}
           visible={showModal}
-          classNameProps={{ [styles.fullScreenModal]: fullScreenModal }}
+          classNameProps={cn({
+            [styles.fullScreenModal]: fullScreenModal,
+          })}
         >
           <CartContent
             visibleFullScreen={fullScreenModal}
@@ -50,7 +53,7 @@ class Cart extends Component {
             onClickButtonCartProps={this.onClickButton}
             visibleFullScreen={fullScreenModal}
           />
-        </Modal>
+        </ModalCart>
       </div>
     );
   }
@@ -58,9 +61,6 @@ class Cart extends Component {
 
 export default graphql(READ_GET_PRODUCT_INTO_CART, {
   options: (props) => ({
-    // variables: {
-    //   id: props.productId,
-    // },
     fetchPolicy: "cache-only",
   }),
 })(Cart);

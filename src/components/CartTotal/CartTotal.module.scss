@@ -22,7 +22,8 @@
 }
 
 .totalText {
-  width: 108px;
+  flex-basis: 108px;
+  // width: 108px;
   @include font-big-modal-block-total-text;
 }
 
@@ -38,7 +39,8 @@
 }
 
 .textBlockTotalFullScreen {
-  width: 108px;
+  flex-basis: 108px;
+  // width:
   @include font-big-modal-text-block-total;
 }
 

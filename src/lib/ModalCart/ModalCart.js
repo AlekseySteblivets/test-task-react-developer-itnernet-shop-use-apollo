@@ -4,11 +4,11 @@ import cn from "classnames";
 
 import OutsideClickHandler from "../OutsideClickHandler/OutsideClickHandler";
 
-import s from "./Modal.module.scss";
+import s from "./ModalCart.module.scss";
 
 const modalRoot = document.querySelector("#modal-root");
 
-class Modal extends Component {
+class ModalCart extends Component {
   componentDidMount() {
     window.addEventListener("keydown", this.handleKeyDown);
   }
@@ -23,11 +23,17 @@ class Modal extends Component {
     }
   };
 
+  handleBackdropClick = (e) => {
+    if (e.currentTarget === e.target) {
+      this.props.onClose();
+    }
+  };
+
   render() {
     if (!this.props.visible) return null;
 
     return createPortal(
-      <div>
+      <div className={s.modalBackdrop} onClick={this.handleBackdropClick}>
         <OutsideClickHandler
           onOutsideClick={() => {
             this.props.onClose();
@@ -43,4 +49,4 @@ class Modal extends Component {
   }
 }
 
-export default Modal;
+export default ModalCart;

@@ -22,6 +22,7 @@
 }
 
 .totalText {
+  width: 108px;
   @include font-big-modal-block-total-text;
 }
 
@@ -30,10 +31,14 @@
 }
 
 .text {
-  margin-bottom: 8px;
+  display: flex;
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
 }
 
 .textBlockTotalFullScreen {
+  width: 108px;
   @include font-big-modal-text-block-total;
 }
 

@@ -4,7 +4,6 @@ import { graphql } from "@apollo/client/react/hoc";
 import { client } from "../../api/base/apolloClient";
 import { SELECTED_CURRENCY } from "../../api/cache/selectedCurrency";
 import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
-// import { round } from "../../utils/round";
 
 import styles from "./CartTotal.module.scss";
 
@@ -47,9 +46,9 @@ class CartTotal extends Component {
           <p className={styles.blockTotal}>
             <span className={styles.textBlockTotal}>Total:</span>
             <span className={styles.priceBlockTotal}>
-              {`${this.queryCurrency()}${this.totalSumProducts(
-                productIntoCart
-              )}`}
+              {`${this.queryCurrency()}${
+                parseInt(this.totalSumProducts(productIntoCart) * 100) / 100
+              }`}
             </span>
           </p>
         </div>
@@ -61,7 +60,8 @@ class CartTotal extends Component {
           <span className={styles.totalText}>Tax 21%: </span>
           <span className={styles.totalNumbers}>
             {`${this.queryCurrency()}${
-              this.totalSumProducts(productIntoCart) * 0.21
+              parseInt(this.totalSumProducts(productIntoCart) * 0.21 * 100) /
+              100
             }`}
           </span>
         </p>
@@ -73,7 +73,9 @@ class CartTotal extends Component {
         <p className={styles.text}>
           <span className={styles.textBlockTotalFullScreen}>Total: </span>
           <span className={styles.priceBlockTotalFullScreen}>
-            {`${this.queryCurrency()}${this.totalSumProducts(productIntoCart)}`}
+            {`${this.queryCurrency()}${
+              parseInt(this.totalSumProducts(productIntoCart) * 100) / 100
+            }`}
           </span>
         </p>
       </div>

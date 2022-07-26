@@ -1,24 +1,25 @@
-import { Component } from "react";
-import { withRouter } from "react-router";
+import { Component } from 'react';
+import { withRouter } from 'react-router';
+import cn from 'classnames';
 
-import { graphql } from "@apollo/client/react/hoc";
-import { client } from "../../api/base/apolloClient";
+import { graphql } from '@apollo/client/react/hoc';
+import { client } from '../../api/base/apolloClient';
 
-import Button from "../../lib/Button";
-import CartItemImage from "../CartItemImage";
-import ProductImagesType from "../ProductImagesType/ProductImagesType";
-import { GET_ONE_PRODUCT_BY_ID } from "../../api/shemas/getOneProductById";
-import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
-import ProductItemAtributes from "../ProductItemAtributes/ProductItemAtributes";
-import { filterAtribute } from "../../utils/filterAtribute";
-import { colorAtribute } from "../../utils/colorAtribute";
+import Button from '../../lib/Button';
+import CartItemImage from '../CartItemImage';
+import ProductImagesType from '../ProductImagesType/ProductImagesType';
+import { GET_ONE_PRODUCT_BY_ID } from '../../api/shemas/getOneProductById';
+import { READ_GET_PRODUCT_INTO_CART } from '../../api/cache/getProductIntoCart';
+import ProductItemAtributes from '../ProductItemAtributes/ProductItemAtributes';
+import { filterAtribute } from '../../utils/filterAtribute';
+import { colorAtribute } from '../../utils/colorAtribute';
 
-import styles from "./Product.module.scss";
+import styles from './Product.module.scss';
 
 class Product extends Component {
   state = {
-    currentProductImage: "",
-    idProduct: "",
+    currentProductImage: '',
+    idProduct: '',
     atributes: {},
   };
 
@@ -42,35 +43,35 @@ class Product extends Component {
     }
   };
 
-  onChangeMainImg = (index) => {
+  onChangeMainImg = index => {
     this.setState({
       currentProductImage: this.props.data.product.gallery[index],
     });
   };
 
-  textDescription = (text) => {
+  textDescription = text => {
     return { __html: text };
   };
 
-  price = (arr) => {
+  price = arr => {
     let money = null;
     if (arr) {
       money = arr.filter(
-        (kindCurrency) =>
-          kindCurrency.currency.symbol === this.props.currencySymbol
+        kindCurrency =>
+          kindCurrency.currency.symbol === this.props.currencySymbol,
       );
       return money[0].currency.symbol + money[0].amount;
     }
   };
 
-  choosedColorByUser = (color) => {
-    this.setState((prev) => ({
+  choosedColorByUser = color => {
+    this.setState(prev => ({
       atributes: { ...prev.atributes, color: color },
     }));
   };
 
   choosedAtributesByUser = (id, sizeAtribute) => {
-    this.setState((prev) => ({
+    this.setState(prev => ({
       atributes: {
         ...prev.atributes,
         [id]: sizeAtribute,
@@ -83,11 +84,11 @@ class Product extends Component {
       {
         query: READ_GET_PRODUCT_INTO_CART,
       },
-      (data) => {
+      data => {
         const { productIntoCart } = data;
         const copyProducts = [...productIntoCart];
         let repeadIndex = copyProducts.findIndex(
-          (prod) => prod.id === this.state.idProduct
+          prod => prod.id === this.state.idProduct,
         );
 
         const product = {
@@ -101,18 +102,19 @@ class Product extends Component {
           copyProducts.push(product);
           return { productIntoCart: copyProducts };
         } else {
-          console.log("copyProducts", copyProducts);
+          console.log('copyProducts', copyProducts);
           return {
             productIntoCart: copyProducts,
           };
         }
-      }
+      },
     );
     this.props.onTogleModal();
   };
 
   render() {
-    const { loading, product } = this.props.data;
+    const { loading, product, inStock } = this.props.data;
+    console.log(product);
 
     return (
       <div className={styles.cartOneThing}>
@@ -141,15 +143,18 @@ class Product extends Component {
               <p className={styles.priceText}>Price:</p>
               <p className={styles.priceNumber}>{this.price(product.prices)}</p>
               <Button
-                classNameProps={styles.buttonAddToCart}
+                classNameProps={cn(styles.buttonAddToCart, {
+                  [styles.buttonDisable]: !inStock,
+                })}
                 onClickProps={this.onClickAddToCart}
+                disableProps={!inStock}
               >
                 Add to cart
               </Button>
               <div
                 className={styles.textDescription}
                 dangerouslySetInnerHTML={this.textDescription(
-                  product.description
+                  product.description,
                 )}
               ></div>
             </div>
@@ -161,7 +166,7 @@ class Product extends Component {
 }
 
 const getOneProductById = graphql(GET_ONE_PRODUCT_BY_ID, {
-  options: (props) => ({
+  options: props => ({
     variables: {
       id: props.productId,
     },

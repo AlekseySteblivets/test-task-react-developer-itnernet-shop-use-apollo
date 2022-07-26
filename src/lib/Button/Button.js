@@ -1,12 +1,13 @@
-import cn from "classnames";
+import cn from 'classnames';
 
-import styles from "./Button.module.scss";
+import styles from './Button.module.scss';
 
 export default function Button({
   children,
   onClickProps,
-  type = "button",
-  classNameProps = "",
+  type = 'button',
+  classNameProps = '',
+  disableProps = false,
 }) {
   return (
     <>
@@ -14,6 +15,7 @@ export default function Button({
         type={type}
         onClick={onClickProps}
         className={cn(styles.button, classNameProps)}
+        disabled={disableProps}
       >
         {children}
       </button>

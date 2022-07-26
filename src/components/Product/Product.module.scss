@@ -18,6 +18,13 @@
   height: 52px;
 }
 
+.buttonDisable {
+  pointer-events: none;
+  color: $color-white;
+  background-color: $color-light-grey;
+  border: transparent;
+}
+
 .textDescription {
   display: block;
   margin-top: 40px;
@@ -36,6 +43,7 @@
 }
 
 .priceText {
+  font-family: 'Roboto Condensed';
   margin-top: 36px;
   margin-bottom: 10px;
   font-weight: 700;

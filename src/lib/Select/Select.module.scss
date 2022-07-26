@@ -1,5 +1,5 @@
-@import "../../assets/styles/fonts";
-@import "../../assets/styles/colors";
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/colors';
 
 .textBtnMoney {
   width: 38px;
@@ -8,6 +8,7 @@
   background-color: $color-white;
   border: transparent;
   cursor: pointer;
+  @include font-navigation-text-money;
 }
 
 .wrapper {
@@ -22,11 +23,11 @@ textBtnMoney:hover {
 }
 
 .textBtnMoney::after {
-  content: "";
+  content: '';
   position: absolute;
   right: 0px;
   bottom: 13px;
-  background-image: url("../../assets/img/vector.svg");
+  background-image: url('../../assets/img/vector.svg');
   width: 6px;
   height: 3px;
   background-position: center;
@@ -35,7 +36,7 @@ textBtnMoney:hover {
 }
 
 .expanded::after {
-  content: "";
+  content: '';
   transform: rotate(180deg);
 }
 
@@ -63,7 +64,7 @@ textBtnMoney:hover {
 .item:active,
 .item:focus,
 .item:hover,
-.item[aria-selected="true"] {
+.item[aria-selected='true'] {
   background: $color-light-grey;
   cursor: pointer;
 }

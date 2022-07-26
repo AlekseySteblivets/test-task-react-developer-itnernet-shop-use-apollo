@@ -1,5 +1,5 @@
-@import "../../assets/styles/fonts";
-@import "../../assets/styles/colors";
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/colors';
 
 .item {
   position: relative;
@@ -16,7 +16,6 @@
 }
 
 .itemNotActive {
-  pointer-events: none;
   color: $color-grey-transparent;
 }
 
@@ -26,7 +25,8 @@
   right: 0;
   bottom: 100px;
   top: 0;
-  background-color: $color-light-grey;
+  background-color: $color-white;
+  opacity: 0.5;
 }
 
 .icon {

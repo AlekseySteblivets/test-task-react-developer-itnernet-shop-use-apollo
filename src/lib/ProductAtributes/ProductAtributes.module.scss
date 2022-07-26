@@ -1,6 +1,6 @@
-@import "../../assets/styles/colors";
-@import "../../assets/styles/fonts";
-@import "../../assets/styles/media";
+@import '../../assets/styles/colors';
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/media';
 
 .menuAboutThing {
   flex: 3;
@@ -30,7 +30,7 @@
 
 .menuSize {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   margin-bottom: 8px;
   @include font-modal-items-size;
 }
@@ -97,6 +97,7 @@
 }
 
 .textSizeFullScreen {
+  font-family: 'Roboto Condensed';
   margin-bottom: 7px;
   @include font-modal-text-size-full-screen;
 }
@@ -113,6 +114,7 @@
 }
 
 .textColorFullScreen {
+  font-family: 'Roboto Condensed';
   @include font-modal-text-color-full-screen;
 }
 

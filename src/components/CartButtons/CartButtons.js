@@ -1,8 +1,8 @@
-import { Component } from "react";
+import { Component } from 'react';
 
-import Button from "../../lib/Button/Button";
+import Button from '../../lib/Button/Button';
 
-import styles from "./CartButtons.module.scss";
+import styles from './CartButtons.module.scss';
 
 export default class CartButtons extends Component {
   state = {};
@@ -14,10 +14,7 @@ export default class CartButtons extends Component {
           <Button onClickProps={this.props.onClickButtonCartProps}>
             View bag
           </Button>
-          <Button
-          >
-            CHECK OUT
-          </Button>
+          <Button>CHECK OUT</Button>
         </div>
       );
 

@@ -72,7 +72,13 @@ class CartItemAmount extends Component {
           })}
           onClick={this.handleIncrement}
         ></button>
-        <p className={styles.textAmount}>{this.state.amount}</p>
+        <p
+          className={cn(styles.textAmount, {
+            [styles.textAmountFullScreen]: visibleFullScreen,
+          })}
+        >
+          {this.state.amount}
+        </p>
         <button
           className={cn(styles.buttonAmount, {
             [styles.buttonAmountFullScreen]: visibleFullScreen,

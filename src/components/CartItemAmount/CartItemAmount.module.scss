@@ -1,6 +1,6 @@
-@import "../../assets/styles/colors";
-@import "../../assets/styles/fonts";
-@import "../../assets/styles/media";
+@import '../../assets/styles/colors';
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/media';
 
 .menuAmount {
   display: flex;
@@ -20,7 +20,7 @@
 }
 
 .buttonAmount::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 8px;
   top: 10px;
@@ -29,7 +29,7 @@
 }
 
 .increment::before {
-  content: "";
+  content: '';
   position: absolute;
   width: 8px;
   top: 10px;
@@ -43,6 +43,10 @@
 }
 
 // styles for full screen
+
+.textAmountFullScreen {
+  @include font-modal-text-amount-full-screen;
+}
 
 .menuAmountFullScreen {
   padding-right: 24px;

@@ -1,15 +1,15 @@
-import { Component } from "react";
-import { withRouter } from "react-router";
-import cn from "classnames";
+import { Component } from 'react';
+import { withRouter } from 'react-router';
+import cn from 'classnames';
 
-import { graphql } from "@apollo/client/react/hoc";
-import { client } from "../../api/base/apolloClient";
+import { graphql } from '@apollo/client/react/hoc';
+import { client } from '../../api/base/apolloClient';
 
-import { GET_KIND_OF_CURRENCIES } from "../../api/shemas/getKindOfCurrencies";
-import OutsideClickHandler from "../OutsideClickHandler/OutsideClickHandler";
-import { SELECTED_CURRENCY } from "../../api/cache/selectedCurrency";
+import { GET_KIND_OF_CURRENCIES } from '../../api/shemas/getKindOfCurrencies';
+import OutsideClickHandler from '../OutsideClickHandler/OutsideClickHandler';
+import { SELECTED_CURRENCY } from '../../api/cache/selectedCurrency';
 
-import styles from "./Select.module.scss";
+import styles from './Select.module.scss';
 
 class Select extends Component {
   state = {
@@ -25,13 +25,13 @@ class Select extends Component {
     this.setState({ isOptionsOpen: !this.state.isOptionsOpen });
   };
 
-  writeQuerySelectedCurrency = (index) => {
+  writeQuerySelectedCurrency = index => {
     if (!this.props.data.loading) {
       client.writeQuery({
         query: SELECTED_CURRENCY,
         data: {
           selectedCurrency: {
-            __typename: "SelectedCurrency",
+            __typename: 'SelectedCurrency',
             symbol: this.props.data.currencies[index].symbol,
             label: this.props.data.currencies[index].label,
           },
@@ -40,21 +40,21 @@ class Select extends Component {
     }
   };
 
-  setSelectedThenCloseDropdown = (index) => {
+  setSelectedThenCloseDropdown = index => {
     this.setState(
       {
         selectedOption: index,
         isOptionsOpen: false,
       },
-      () => this.writeQuerySelectedCurrency(index)
+      () => this.writeQuerySelectedCurrency(index),
     );
   };
 
-  handleKeyDown = (index) => (e) => {
+  handleKeyDown = index => e => {
     switch (e.key) {
-      case " ":
-      case "SpaceBar":
-      case "Enter":
+      case ' ':
+      case 'SpaceBar':
+      case 'Enter':
         e.preventDefault();
         this.setSelectedThenCloseDropdown(index);
         break;
@@ -63,13 +63,13 @@ class Select extends Component {
     }
   };
 
-  handleListKeyDown = (e) => {
+  handleListKeyDown = e => {
     switch (e.key) {
-      case "Escape":
+      case 'Escape':
         e.preventDefault();
         this.setState({ isOptionsOpen: false });
         break;
-      case "ArrowUp":
+      case 'ArrowUp':
         e.preventDefault();
         this.setState({
           selectedOption:
@@ -78,7 +78,7 @@ class Select extends Component {
               : this.props.data.currencies.length - 1,
         });
         break;
-      case "ArrowDown":
+      case 'ArrowDown':
         e.preventDefault();
         this.setState({
           selectedOption:
@@ -107,7 +107,7 @@ class Select extends Component {
               aria-expanded={this.state.isOptionsOpen}
               className={cn(
                 styles.textBtnMoney,
-                this.state.isOptionsOpen ? styles.expanded : ""
+                this.state.isOptionsOpen ? styles.expanded : '',
               )}
               onClick={this.toggleOptions}
               onKeyDown={this.handleListKeyDown}
@@ -120,12 +120,10 @@ class Select extends Component {
               }}
             >
               <ul
-                className={cn(
-                  {
-                    [styles.show]: this.state.isOptionsOpen,
-                    [styles.options]: true,
-                  }
-                )}
+                className={cn({
+                  [styles.show]: this.state.isOptionsOpen,
+                  [styles.options]: true,
+                })}
                 role="listbox"
                 aria-activedescendant={currencies[this.state.selectedOption]}
                 tabIndex={-1}
@@ -136,7 +134,7 @@ class Select extends Component {
                     className={styles.item}
                     key={currency.label}
                     id={currency.label}
-                    role="options"
+                    role={currency.label}
                     aria-selected={this.state.selectedOption === index}
                     tabIndex={0}
                     onKeyDown={this.handleKeyDown(index)}
@@ -144,7 +142,7 @@ class Select extends Component {
                       this.setSelectedThenCloseDropdown(index);
                     }}
                   >
-                    {currency.symbol + " " + currency.label}
+                    {currency.symbol + ' ' + currency.label}
                   </li>
                 ))}
               </ul>

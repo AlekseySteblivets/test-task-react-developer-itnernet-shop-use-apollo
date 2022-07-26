@@ -1,4 +1,4 @@
-@import "_sizes";
+@import '_sizes';
 
 @mixin font-navigation {
   font-weight: 600;
@@ -64,7 +64,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 1.57;
-  font-family: "Source Sans Pro";
+  font-family: 'Source Sans Pro';
 }
 
 @mixin font-modal-text-color {
@@ -77,6 +77,12 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 1.63;
+}
+
+@mixin font-modal-text-amount-full-screen {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.58;
 }
 
 @mixin font-modal-text-block-total {
@@ -95,6 +101,12 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 1.214;
+}
+
+@mixin font-modal-text-button-product {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.19;
 }
 
 @mixin font-big-modal-title {
@@ -155,7 +167,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.125;
-  font-family: "Source Sans Pro";
+  font-family: 'Source Sans Pro';
 }
 
 @mixin font-modal-text-color-full-screen {

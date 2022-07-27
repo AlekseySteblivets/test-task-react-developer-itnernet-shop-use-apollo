@@ -1,25 +1,25 @@
-import { Component } from "react";
+import { Component } from 'react';
 
-import { graphql } from "@apollo/client/react/hoc";
-import { client } from "../../api/base/apolloClient";
-import cn from "classnames";
+import { graphql } from '@apollo/client/react/hoc';
+import { client } from '../../api/base/apolloClient';
+import cn from 'classnames';
 
-import CartItemAmount from "../CartItemAmount";
-import CartItemImage from "../CartItemImage";
-import { colorAtribute } from "../../utils/colorAtribute";
-import { filterAtribute } from "../../utils/filterAtribute";
-import { GET_ONE_PRODUCT_BY_ID } from "../../api/shemas/getOneProductById";
-import CartItemAtributes from "../CartItemAtributes";
-import { SELECTED_CURRENCY } from "../../api/cache/selectedCurrency";
-import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
+import CartItemAmount from '../CartItemAmount';
+import CartItemImage from '../CartItemImage';
+import { colorAtribute } from '../../utils/colorAtribute';
+import { filterAtribute } from '../../utils/filterAtribute';
+import { GET_ONE_PRODUCT_BY_ID } from '../../api/shemas/getOneProductById';
+import CartItemAtributes from '../CartItemAtributes';
+import { SELECTED_CURRENCY } from '../../api/cache/selectedCurrency';
+import { READ_GET_PRODUCT_INTO_CART } from '../../api/cache/getProductIntoCart';
 
-import styles from "./CartItem.module.scss";
+import styles from './CartItem.module.scss';
 
 class CartItem extends Component {
   state = {
-    currentCurrencySymbol: "",
+    currentCurrencySymbol: '',
     sumProduct: 0,
-    currentProductImage: "",
+    currentProductImage: '',
   };
 
   componentDidMount() {
@@ -31,7 +31,7 @@ class CartItem extends Component {
         currentCurrencySymbol: data.selectedCurrency.symbol,
         currentProductImage: this.props.data.product.gallery[0],
       },
-      () => this.updateQuery()
+      () => this.updateQuery(),
     );
   }
 
@@ -44,37 +44,38 @@ class CartItem extends Component {
       {
         query: READ_GET_PRODUCT_INTO_CART,
       },
-      (data) => ({
-        productIntoCart: data.productIntoCart.map((product) => ({
+      data => ({
+        productIntoCart: data.productIntoCart.map(product => ({
           ...product,
           sumProduct:
             product.id === this.props.productId
               ? this.sumProduct(
                   this.props.data.product.prices,
                   this.state.currentCurrencySymbol,
-                  this.props.numbersItem
+                  this.props.numbersItem,
                 )
               : product.sumProduct,
         })),
-      })
+      }),
     );
   };
 
   sumProduct = (prices, symbolCurrency, numbersItem) => {
     return (
       prices.find(
-        (kindOfCurrency) => kindOfCurrency.currency.symbol === symbolCurrency
+        kindOfCurrency => kindOfCurrency.currency.symbol === symbolCurrency,
       )?.amount * numbersItem
     );
   };
 
-  onChangeMainImg = (index) => {
+  onChangeMainImg = index => {
     this.setState({
       currentProductImage: this.props.data.product.gallery[index],
     });
   };
   render() {
     const { product } = this.props.data;
+    console.log('product', product);
 
     return (
       <li
@@ -107,10 +108,10 @@ class CartItem extends Component {
   }
 }
 export default graphql(GET_ONE_PRODUCT_BY_ID, {
-  options: (props) => ({
+  options: props => ({
     variables: {
       id: props.productId,
     },
-    fetchPolicy: "cache-only",
+    fetchPolicy: 'cache-only',
   }),
 })(CartItem);

@@ -16,7 +16,6 @@ class CartItemAtributes extends Component {
     const atribute = this.props.data.productIntoCart.filter(
       product => product.id === this.props.productId,
     );
-    console.log('CartItemAtributes', atribute);
     this.setState({
       currentAtribute: atribute[0].atributes,
       currentColor: atribute[0].atributes.color

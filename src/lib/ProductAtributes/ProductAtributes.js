@@ -1,16 +1,16 @@
-import { Component } from "react";
+import { Component } from 'react';
 
-import cn from "classnames";
+import cn from 'classnames';
 
-import styles from "./ProductAtributes.module.scss";
+import styles from './ProductAtributes.module.scss';
 
 export default class ProductAtributes extends Component {
-  price = (prices) => {
+  price = prices => {
     let money = null;
     if (this.props.currentCurrencySymbol) {
       money = prices.filter(
-        (kindCurrency) =>
-          kindCurrency.currency.symbol === this.props.currentCurrencySymbol
+        kindCurrency =>
+          kindCurrency.currency.symbol === this.props.currentCurrencySymbol,
       );
 
       return money[0].amount;
@@ -50,7 +50,7 @@ export default class ProductAtributes extends Component {
         </p>
 
         {this.props.attributes &&
-          this.props.attributes.map((oneAtribute) => (
+          this.props.attributes.map(oneAtribute => (
             <div key={oneAtribute.id + oneAtribute.items[0].value}>
               <p
                 className={cn(styles.textSize, {
@@ -64,7 +64,7 @@ export default class ProductAtributes extends Component {
                   [styles.menuSizeFullScreen]: visibleFullScreen,
                 })}
               >
-                {oneAtribute.items.map((oneSize) => (
+                {oneAtribute.items.map(oneSize => (
                   <li
                     onClick={() =>
                       this.props.onClickAtributes(oneAtribute.id, oneSize.value)
@@ -88,11 +88,11 @@ export default class ProductAtributes extends Component {
             [styles.textColorFullScreen]: visibleFullScreen,
           })}
         >
-          {this.props.color && "Color:"}
+          {this.props.color && 'Color:'}
         </p>
         <ul className={styles.menuColor}>
           {this.props.color &&
-            this.props.color.items.map((color) => (
+            this.props.color.items.map(color => (
               <li
                 onClick={() => this.props.onClickColorButton(color.id)}
                 key={color.value}
@@ -101,11 +101,11 @@ export default class ProductAtributes extends Component {
                   [styles.activeColor]: this.props.currentColor === color.id,
                 })}
                 style={
-                  color.value !== "#FFFFFF"
+                  color.value !== '#FFFFFF'
                     ? { backgroundColor: color.value }
                     : {
                         backgroundColor: color.value,
-                        borderColor: "#000000",
+                        borderColor: '#000000',
                       }
                 }
               ></li>

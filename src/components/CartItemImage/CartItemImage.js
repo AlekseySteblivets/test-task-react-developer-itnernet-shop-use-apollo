@@ -1,13 +1,14 @@
-import { Component } from "react";
-import cn from "classnames";
+import { Component } from 'react';
+import cn from 'classnames';
 
-import ProductImage from "../../lib/ProductImage";
-import SliderImages from "../../lib/SliderImages/SliderImages";
+import ProductImage from '../../lib/ProductImage';
+import SliderImages from '../../lib/SliderImages/SliderImages';
 
-import styles from "./CartItemImage.module.scss";
+import styles from './CartItemImage.module.scss';
 
 export default class CartItemImage extends Component {
   render() {
+    console.log('allImages', this.props.allImages);
     return (
       <div className={styles.menuAvatar}>
         <ProductImage
@@ -18,15 +19,15 @@ export default class CartItemImage extends Component {
             {
               [styles.thingTemplateForSmallModallFullScreen]:
                 this.props.visibleFullScreen,
-            }
+            },
           )}
         />
-        {this.props.visibleFullScreen && (
+        {this.props.visibleFullScreen && this.props.allImages.length > 1 ? (
           <SliderImages
             onChangeMainImg={this.props.onChangeMainImg}
             allImages={this.props.allImages}
           />
-        )}
+        ) : null}
       </div>
     );
   }

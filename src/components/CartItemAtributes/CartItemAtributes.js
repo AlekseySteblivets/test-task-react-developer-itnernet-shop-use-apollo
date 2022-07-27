@@ -1,26 +1,27 @@
-import { Component } from "react";
+import { Component } from 'react';
 
-import { client } from "../../api/base/apolloClient";
-import { graphql } from "@apollo/client/react/hoc";
+import { client } from '../../api/base/apolloClient';
+import { graphql } from '@apollo/client/react/hoc';
 
-import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
-import ProductAtributes from "../../lib/ProductAtributes/ProductAtributes";
+import { READ_GET_PRODUCT_INTO_CART } from '../../api/cache/getProductIntoCart';
+import ProductAtributes from '../../lib/ProductAtributes/ProductAtributes';
 
 class CartItemAtributes extends Component {
   state = {
-    currentColor: "",
+    currentColor: '',
     currentAtribute: {},
   };
 
   componentDidMount() {
     const atribute = this.props.data.productIntoCart.filter(
-      (product) => product.id === this.props.productId
+      product => product.id === this.props.productId,
     );
+    console.log('CartItemAtributes', atribute);
     this.setState({
       currentAtribute: atribute[0].atributes,
       currentColor: atribute[0].atributes.color
         ? atribute[0].atributes.color
-        : "",
+        : '',
     });
   }
 
@@ -29,37 +30,37 @@ class CartItemAtributes extends Component {
       {
         query: READ_GET_PRODUCT_INTO_CART,
       },
-      (data) => ({
-        productIntoCart: data.productIntoCart.map((product) => ({
+      data => ({
+        productIntoCart: data.productIntoCart.map(product => ({
           ...product,
           atributes:
             product.id === this.props.productId
               ? this.state.currentAtribute
               : product.atributes,
         })),
-      })
+      }),
     );
   };
 
-  onClickColorButton = (color) => {
+  onClickColorButton = color => {
     this.setState(
-      (prev) => ({
+      prev => ({
         currentColor: color,
         currentAtribute: { ...prev.currentAtribute, color: color },
       }),
-      () => this.changeArtributeInCache()
+      () => this.changeArtributeInCache(),
     );
   };
 
   onClickAtributes = (id, sizeAtribute) => {
     this.setState(
-      (prev) => ({
+      prev => ({
         currentAtribute: {
           ...prev.currentAtribute,
           [id]: sizeAtribute,
         },
       }),
-      () => this.changeArtributeInCache()
+      () => this.changeArtributeInCache(),
     );
   };
 
@@ -86,7 +87,7 @@ class CartItemAtributes extends Component {
 }
 
 export default graphql(READ_GET_PRODUCT_INTO_CART, {
-  options: (props) => ({
-    fetchPolicy: "cache-only",
+  options: props => ({
+    fetchPolicy: 'cache-only',
   }),
 })(CartItemAtributes);

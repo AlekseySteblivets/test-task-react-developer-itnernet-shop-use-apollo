@@ -1,28 +1,110 @@
-import { Component } from "react";
-import cn from "classnames";
+import { Component } from 'react';
+import cn from 'classnames';
 
-import ProductImage from "../../lib/ProductImage";
+import { graphql } from '@apollo/client/react/hoc';
 
-import styles from "./ProductItem.module.scss";
+import { client } from '../../api/base/apolloClient';
+import { READ_GET_PRODUCT_INTO_CART } from '../../api/cache/getProductIntoCart';
+import { GET_ONE_PRODUCT_BY_ID } from '../../api/shemas/getOneProductById';
+import ProductImage from '../../lib/ProductImage';
 
-export default class ProductItem extends Component {
-  handleClick = (id) => {
-    this.props.onTogleModal(id);
+import styles from './ProductItem.module.scss';
+
+class ProductItem extends Component {
+  state = {
+    currentAtribute: {},
+  };
+
+  handleClick = () => {
+    const { onTogleModal, idProduct } = this.props;
+    onTogleModal(idProduct);
+  };
+
+  price = arr => {
+    console.log('this.props.currencySymbol', this.props.currencySymbol);
+    let money = null;
+    if (arr) {
+      money = arr.filter(
+        kindCurrency =>
+          kindCurrency.currency.symbol === this.props.currencySymbol,
+      );
+      return money[0].currency.symbol + money[0].amount;
+    }
+  };
+
+  updateQuery = () => {
+    client.cache.updateQuery(
+      {
+        query: READ_GET_PRODUCT_INTO_CART,
+      },
+      data => {
+        console.log('data', data);
+        const { productIntoCart } = data;
+        const copyProducts = [...productIntoCart];
+        console.log('this.props.idProduct', this.props.idProduct);
+        let repeadIndex = copyProducts.findIndex(
+          prod => prod.id === this.props.idProduct,
+        );
+
+        const product = {
+          id: this.props.idProduct,
+          atributes: this.state.currentAtribute,
+          numbersItem: 1,
+          sumProduct: this.price(this.props.data.product.prices),
+        };
+
+        if (repeadIndex === -1) {
+          copyProducts.push(product);
+          return { productIntoCart: copyProducts };
+        } else {
+          console.log('copyProducts', copyProducts);
+          return {
+            productIntoCart: copyProducts,
+          };
+        }
+      },
+    );
+  };
+
+  addToCart = () => {
+    alert('ты кликнул по корзине на лишке');
+    const { attributes, prices } = this.props.data.product;
+    console.log('prices', prices);
+    console.log('attributes', attributes);
+
+    attributes.map(oneAttribute =>
+      this.setState(prev => ({
+        currentAtribute: {
+          ...prev.currentAtribute,
+          [oneAttribute.id]: oneAttribute.items[0].displayValue,
+        },
+      })),
+    );
+    setTimeout(() => this.updateQuery(), 1000);
+
+    this.handleClick();
   };
 
   render() {
+    const {
+      isInStock,
+      image,
+      idProduct,
+      brand,
+      name,
+      currencySymbol,
+      amountMoney,
+    } = this.props;
+
     return (
       <li
         className={cn(styles.item, {
-          [styles.itemNotActive]: !this.props.isInStock,
+          [styles.itemNotActive]: !isInStock,
         })}
-        onClick={() => this.handleClick(this.props.idProduct)}
+        onClick={this.handleClick}
       >
-        <ProductImage
-          image={this.props.image}
-          idProduct={this.props.idProduct}
-        />
-        {!this.props.isInStock && (
+        <ProductImage image={image} idProduct={idProduct} />
+        {!isInStock && (
           <>
             <div className={styles.blockOutOfStock}> </div>
             <p className={styles.textOutOfStock}>OUT OF STOCK</p>
@@ -30,15 +112,28 @@ export default class ProductItem extends Component {
         )}
 
         <h3 className={styles.titleThing}>
-          {this.props.brand} {this.props.name}
+          {brand} {name}
         </h3>
 
         <p
           className={styles.textPriceThing}
-        >{`${this.props.currencySymbol}${this.props.amountMoney}`}</p>
+        >{`${currencySymbol}${amountMoney}`}</p>
 
-        <div className={styles.icon}></div>
+        {isInStock && (
+          <div className={styles.icon} onClick={this.addToCart}></div>
+        )}
       </li>
     );
   }
 }
+
+const getOneProductById = graphql(GET_ONE_PRODUCT_BY_ID, {
+  options: props => ({
+    variables: {
+      id: props.idProduct,
+    },
+    // fetchPolicy: 'cache-only',
+  }),
+});
+
+export default getOneProductById(ProductItem);

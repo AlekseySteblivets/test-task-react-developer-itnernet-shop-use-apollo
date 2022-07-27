@@ -1,20 +1,20 @@
-import { Component } from "react";
-import { withRouter } from "react-router";
+import { Component } from 'react';
+import { withRouter } from 'react-router';
 
-import { graphql } from "@apollo/client/react/hoc";
+import { graphql } from '@apollo/client/react/hoc';
 
-import Modal from "../../lib/Modal/Modal";
-import Product from "../Product";
-import ProductItem from "../ProductItem";
-import { GET_PRODUCTS_BY_NAME } from "../../api/shemas/getProductsByName";
+import Modal from '../../lib/Modal/Modal';
+import Product from '../Product';
+import ProductItem from '../ProductItem';
+import { GET_PRODUCTS_BY_NAME } from '../../api/shemas/getProductsByName';
 
-import styles from "./ProductList.module.scss";
+import styles from './ProductList.module.scss';
 
 class ProductList extends Component {
   state = {
     showCartOfThing: false,
-    idProduct: "",
-    currentCurrencySymbol: "",
+    idProduct: '',
+    currentCurrencySymbol: '',
     currentValute: [],
   };
 
@@ -22,7 +22,7 @@ class ProductList extends Component {
     this.selectedCurrencyQuery(this.props.takenCurrency.selectedCurrency);
   }
 
-  selectedCurrencyQuery = (currency) => {
+  selectedCurrencyQuery = currency => {
     if (!currency) {
       return;
     }
@@ -38,17 +38,17 @@ class ProductList extends Component {
     }
   };
 
-  togleModal = (id) => {
-    this.setState((state) => ({
+  togleModal = id => {
+    this.setState(state => ({
       showCartOfThing: !state.showCartOfThing,
       idProduct: id,
     }));
   };
 
-  amountMoney = (currencies) => {
+  amountMoney = currencies => {
     return currencies.find(
-      (kindOfCurrency) =>
-        kindOfCurrency.currency.symbol === this.state.currentCurrencySymbol
+      kindOfCurrency =>
+        kindOfCurrency.currency.symbol === this.state.currentCurrencySymbol,
     )?.amount;
   };
 
@@ -65,7 +65,7 @@ class ProductList extends Component {
           <p>...Loading PRODUCTS</p>
         ) : (
           <ul className={styles.menu}>
-            {category?.products.map((oneProduct) => (
+            {category?.products.map(oneProduct => (
               <ProductItem
                 onTogleModal={this.togleModal}
                 key={oneProduct.id}
@@ -97,7 +97,7 @@ class ProductList extends Component {
 }
 
 export default graphql(GET_PRODUCTS_BY_NAME, {
-  options: (props) => ({
+  options: props => ({
     variables: {
       type: props.slug,
     },

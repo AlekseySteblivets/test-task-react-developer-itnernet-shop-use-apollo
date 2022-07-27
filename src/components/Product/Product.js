@@ -113,8 +113,8 @@ class Product extends Component {
   };
 
   render() {
-    const { loading, product, inStock } = this.props.data;
-    console.log(product);
+    const { loading, product } = this.props.data;
+    console.log('product', product);
 
     return (
       <div className={styles.cartOneThing}>
@@ -144,10 +144,10 @@ class Product extends Component {
               <p className={styles.priceNumber}>{this.price(product.prices)}</p>
               <Button
                 classNameProps={cn(styles.buttonAddToCart, {
-                  [styles.buttonDisable]: !inStock,
+                  [styles.buttonDisable]: !product.inStock,
                 })}
                 onClickProps={this.onClickAddToCart}
-                disableProps={!inStock}
+                disableProps={!product.inStock}
               >
                 Add to cart
               </Button>

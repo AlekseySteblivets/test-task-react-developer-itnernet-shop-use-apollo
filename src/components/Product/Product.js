@@ -77,6 +77,18 @@ class Product extends Component {
   };
 
   onClickAddToCart = () => {
+    const isEmptyAtributes = Object.keys(this.state.atributes);
+
+    const allAtributesfromQuery = this.props.data.product.attributes;
+    let allAtributesIDfromQuery = [];
+
+    for (let i = 0; i < allAtributesfromQuery.length; i++) {
+      allAtributesIDfromQuery.push(allAtributesfromQuery[i].id);
+    }
+
+    if (isEmptyAtributes.length !== allAtributesIDfromQuery.length) {
+      return;
+    }
     client.cache.updateQuery(
       {
         query: READ_GET_PRODUCT_INTO_CART,
@@ -111,7 +123,6 @@ class Product extends Component {
 
   render() {
     const { loading, product } = this.props.data;
-    console.log('product', product);
 
     return (
       <div className={styles.cartOneThing}>

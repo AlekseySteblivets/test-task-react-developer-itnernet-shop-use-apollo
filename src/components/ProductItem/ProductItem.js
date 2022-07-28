@@ -69,9 +69,7 @@ class ProductItem extends Component {
   };
 
   addToCart = () => {
-    const { attributes, prices } = this.props.data.product;
-    console.log('prices', prices);
-    console.log('attributes', attributes);
+    const { attributes } = this.props.data.product;
 
     const fierstAttributes = attributes?.reduce((acc, atribute) => {
       return { ...acc, [atribute.id]: atribute.items[0].displayValue };

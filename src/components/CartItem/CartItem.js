@@ -75,7 +75,6 @@ class CartItem extends Component {
   };
   render() {
     const { product } = this.props.data;
-    console.log('product', product);
 
     return (
       <li

@@ -39,8 +39,9 @@
   width: 24px;
   height: 24px;
   outline: 1px solid $color-black;
-  text-align: center;
-  padding-top: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &:not(:last-child) {
     margin-right: 8px;
   }

@@ -15,6 +15,8 @@ class ProductItem extends Component {
     currentAtribute: {},
   };
 
+  componentDidUpdate() {}
+
   handleClick = () => {
     const { onTogleModal, idProduct } = this.props;
     onTogleModal(idProduct);
@@ -32,7 +34,7 @@ class ProductItem extends Component {
     }
   };
 
-  updateQuery = () => {
+  updateQuery = attributes => {
     client.cache.updateQuery(
       {
         query: READ_GET_PRODUCT_INTO_CART,
@@ -48,7 +50,7 @@ class ProductItem extends Component {
 
         const product = {
           id: this.props.idProduct,
-          atributes: this.state.currentAtribute,
+          atributes: attributes,
           numbersItem: 1,
           sumProduct: this.price(this.props.data.product.prices),
         };
@@ -67,20 +69,15 @@ class ProductItem extends Component {
   };
 
   addToCart = () => {
-    alert('ты кликнул по корзине на лишке');
     const { attributes, prices } = this.props.data.product;
     console.log('prices', prices);
     console.log('attributes', attributes);
 
-    attributes.map(oneAttribute =>
-      this.setState(prev => ({
-        currentAtribute: {
-          ...prev.currentAtribute,
-          [oneAttribute.id]: oneAttribute.items[0].displayValue,
-        },
-      })),
-    );
-    setTimeout(() => this.updateQuery(), 1000);
+    const fierstAttributes = attributes?.reduce((acc, atribute) => {
+      return { ...acc, [atribute.id]: atribute.items[0].displayValue };
+    }, {});
+
+    this.updateQuery(fierstAttributes);
 
     this.handleClick();
   };

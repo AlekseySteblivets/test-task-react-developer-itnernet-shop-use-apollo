@@ -25,7 +25,7 @@
   width: 8px;
   top: 10px;
   left: 7px;
-  border: 1px solid $color-black;
+  border-top: 1px solid $color-black;
 }
 
 .increment::before {
@@ -35,7 +35,7 @@
   top: 10px;
   left: 7px;
   transform: rotate(90deg);
-  border: 1px solid $color-black;
+  border-top: 1px solid $color-black;
 }
 
 .textAmount {

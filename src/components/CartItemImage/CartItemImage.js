@@ -8,7 +8,6 @@ import styles from './CartItemImage.module.scss';
 
 export default class CartItemImage extends Component {
   render() {
-    console.log('allImages', this.props.allImages);
     return (
       <div className={styles.menuAvatar}>
         <ProductImage

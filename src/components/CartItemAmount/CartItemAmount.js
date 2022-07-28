@@ -39,6 +39,19 @@ class CartItemAmount extends Component {
     );
   };
 
+  updateQueryForDelete = () => {
+    client.cache.updateQuery(
+      {
+        query: READ_GET_PRODUCT_INTO_CART,
+      },
+      data => ({
+        productIntoCart: data.productIntoCart.filter(
+          product => product.id !== this.props.productId,
+        ),
+      }),
+    );
+  };
+
   handleIncrement = () => {
     this.setState(
       prevState => ({ amount: prevState.amount + 1 }),
@@ -48,7 +61,7 @@ class CartItemAmount extends Component {
 
   handleDecrement = () => {
     if (this.state.amount === 1) {
-      this.setState({ amount: 1 }, () => this.updateQuery());
+      this.updateQueryForDelete();
     } else {
       this.setState(
         prevState => ({ amount: prevState.amount - 1 }),

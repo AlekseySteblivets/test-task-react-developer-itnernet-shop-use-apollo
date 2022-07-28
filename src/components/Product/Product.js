@@ -3,8 +3,9 @@ import { withRouter } from 'react-router';
 import cn from 'classnames';
 
 import { graphql } from '@apollo/client/react/hoc';
-import { client } from '../../api/base/apolloClient';
+import { Interweave } from 'interweave';
 
+import { client } from '../../api/base/apolloClient';
 import Button from '../../lib/Button';
 import CartItemImage from '../CartItemImage';
 import ProductImagesType from '../ProductImagesType/ProductImagesType';
@@ -47,10 +48,6 @@ class Product extends Component {
     this.setState({
       currentProductImage: this.props.data.product.gallery[index],
     });
-  };
-
-  textDescription = text => {
-    return { __html: text };
   };
 
   price = arr => {
@@ -151,12 +148,9 @@ class Product extends Component {
               >
                 Add to cart
               </Button>
-              <div
-                className={styles.textDescription}
-                dangerouslySetInnerHTML={this.textDescription(
-                  product.description,
-                )}
-              ></div>
+              <div className={styles.textDescription}>
+                <Interweave content={product.description} />
+              </div>
             </div>
           </>
         )}

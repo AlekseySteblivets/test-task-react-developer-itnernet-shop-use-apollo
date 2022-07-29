@@ -24,6 +24,7 @@
 }
 
 .textSize {
+  text-align: left;
   margin-bottom: 8px;
   @include font-modal-text-size;
 }
@@ -111,7 +112,7 @@
 .itemSizeFullScreen {
   width: 63px;
   height: 45px;
-  padding-top: 12px;
+  // padding-top: 12px;
 }
 
 .textColorFullScreen {

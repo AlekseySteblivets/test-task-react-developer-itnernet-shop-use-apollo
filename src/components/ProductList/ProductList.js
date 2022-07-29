@@ -76,11 +76,12 @@ class ProductList extends Component {
                 name={oneProduct.name}
                 isInStock={oneProduct.inStock}
                 currencySymbol={this.state.currentCurrencySymbol}
+                slug={this.props.slug}
               />
             ))}
           </ul>
         )}
-        <Modal
+        {/* <Modal
           onClose={this.togleModal}
           visible={this.state.showCartOfThing}
           classNameProps={styles.modalCartOfThing}
@@ -90,7 +91,7 @@ class ProductList extends Component {
             onTogleModal={this.togleModal}
             currencySymbol={this.state.currentCurrencySymbol}
           />
-        </Modal>
+        </Modal> */}
       </div>
     );
   }

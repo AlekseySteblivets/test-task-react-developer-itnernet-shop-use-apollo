@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
 import { graphql } from '@apollo/client/react/hoc';
@@ -17,10 +18,10 @@ class ProductItem extends Component {
 
   componentDidUpdate() {}
 
-  handleClick = () => {
-    const { onTogleModal, idProduct } = this.props;
-    onTogleModal(idProduct);
-  };
+  // handleClick = () => {
+  //   const { onTogleModal, idProduct } = this.props;
+  //   // onTogleModal(idProduct);
+  // };
 
   price = arr => {
     console.log('this.props.currencySymbol', this.props.currencySymbol);
@@ -68,7 +69,8 @@ class ProductItem extends Component {
     );
   };
 
-  addToCart = () => {
+  addToCart = e => {
+    e.preventDefault();
     const { attributes } = this.props.data.product;
 
     const fierstAttributes = attributes?.reduce((acc, atribute) => {
@@ -77,7 +79,7 @@ class ProductItem extends Component {
 
     this.updateQuery(fierstAttributes);
 
-    this.handleClick();
+    // this.handleClick();
   };
 
   render() {
@@ -96,27 +98,26 @@ class ProductItem extends Component {
         className={cn(styles.item, {
           [styles.itemNotActive]: !isInStock,
         })}
-        onClick={this.handleClick}
+        // onClick={this.handleClick}
       >
-        <ProductImage image={image} idProduct={idProduct} />
-        {!isInStock && (
-          <>
-            <div className={styles.blockOutOfStock}> </div>
-            <p className={styles.textOutOfStock}>OUT OF STOCK</p>
-          </>
-        )}
-
-        <h3 className={styles.titleThing}>
-          {brand} {name}
-        </h3>
-
-        <p
-          className={styles.textPriceThing}
-        >{`${currencySymbol}${amountMoney}`}</p>
-
-        {isInStock && (
-          <div className={styles.icon} onClick={this.addToCart}></div>
-        )}
+        <Link to={`${this.props.slug}/${this.props.idProduct}`}>
+          <ProductImage image={image} idProduct={idProduct} />
+          {!isInStock && (
+            <>
+              <div className={styles.blockOutOfStock}> </div>
+              <p className={styles.textOutOfStock}>OUT OF STOCK</p>
+            </>
+          )}
+          <h3 className={styles.titleThing}>
+            {brand} {name}
+          </h3>
+          <p
+            className={styles.textPriceThing}
+          >{`${currencySymbol}${amountMoney}`}</p>
+          {isInStock && (
+            <div className={styles.icon} onClick={this.addToCart}></div>
+          )}
+        </Link>
       </li>
     );
   }

@@ -1,13 +1,14 @@
-import { Component } from "react";
-import cn from "classnames";
+import { Component } from 'react';
+import cn from 'classnames';
 
-import { graphql } from "@apollo/client/react/hoc";
+import { graphql } from '@apollo/client/react/hoc';
 
-import CartItem from "../CartItem/CartItem";
-import CartTotal from "../CartTotal";
-import { READ_GET_PRODUCT_INTO_CART } from "../../api/cache/getProductIntoCart";
+import { READ_GET_PRODUCT_INTO_CART } from '../../api/cache/getProductIntoCart';
 
-import styles from "./CartList.module.scss";
+import CartItem from '../CartItem/CartItem';
+import CartTotal from '../CartTotal';
+
+import styles from './CartList.module.scss';
 
 class CartList extends Component {
   render() {
@@ -20,7 +21,7 @@ class CartList extends Component {
             [styles.menuFullScreen]: this.props.visibleFullScreen,
           })}
         >
-          {productIntoCart.map((product) => (
+          {productIntoCart.map(product => (
             <CartItem
               key={product.id}
               productId={product.id}
@@ -36,7 +37,7 @@ class CartList extends Component {
 }
 
 export default graphql(READ_GET_PRODUCT_INTO_CART, {
-  options: (props) => ({
-    fetchPolicy: "cache-only",
+  options: props => ({
+    fetchPolicy: 'cache-only',
   }),
 })(CartList);

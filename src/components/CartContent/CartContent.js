@@ -1,20 +1,16 @@
-import { Component } from "react";
+import { Component } from 'react';
 
-import CartList from "../CartList/CartList";
+import CartList from '../CartList/CartList';
 
-import styles from "./CartContent.module.scss";
+import styles from './CartContent.module.scss';
 
 export default class CartContent extends Component {
-  itemsProduct = (productIntoCart) => {
+  itemsProduct = productIntoCart => {
     let summ = 0;
     for (let i = 0; i < productIntoCart.length; i++) {
       summ = summ + productIntoCart[i].numbersItem;
     }
     return summ;
-  };
-
-  modalAmountImems = (amount) => {
-    this.setState({ items: amount });
   };
 
   render() {
@@ -33,9 +29,7 @@ export default class CartContent extends Component {
             <span className={styles.titleBigModal}> cart</span>
           )}
         </h1>
-        <CartList
-          visibleFullScreen={this.props.visibleFullScreen}
-        />
+        <CartList visibleFullScreen={this.props.visibleFullScreen} />
       </>
     );
   }

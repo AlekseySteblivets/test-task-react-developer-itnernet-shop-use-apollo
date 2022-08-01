@@ -1,5 +1,5 @@
-@import "../../assets/styles/fonts";
-@import "../../assets/styles/colors";
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/colors';
 
 .blockTotal {
   display: flex;
@@ -23,7 +23,6 @@
 
 .totalText {
   flex-basis: 108px;
-  // width: 108px;
   @include font-big-modal-block-total-text;
 }
 

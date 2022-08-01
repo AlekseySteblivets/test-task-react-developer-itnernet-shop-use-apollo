@@ -1,4 +1,5 @@
 import { Component } from 'react';
+
 import cn from 'classnames';
 
 import ProductImage from '../../lib/ProductImage';

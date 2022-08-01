@@ -1,9 +1,10 @@
 import { Component } from 'react';
 
-import { client } from '../../api/base/apolloClient';
 import { graphql } from '@apollo/client/react/hoc';
 
 import { READ_GET_PRODUCT_INTO_CART } from '../../api/cache/getProductIntoCart';
+import { client } from '../../api/base/apolloClient';
+
 import ProductAtributes from '../../lib/ProductAtributes/ProductAtributes';
 
 class CartItemAtributes extends Component {
@@ -17,8 +18,6 @@ class CartItemAtributes extends Component {
       product => product.id === this.props.productId,
     );
 
-    console.log('atributeDM', atribute);
-    console.log('atribute[0].atributes.color', atribute[0].atributes.Color);
     this.setState({
       currentAtribute: atribute[0].atributes,
       currentColor: atribute[0].atributes.Color

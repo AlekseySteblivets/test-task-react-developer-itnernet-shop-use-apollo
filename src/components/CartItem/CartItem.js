@@ -4,14 +4,16 @@ import { graphql } from '@apollo/client/react/hoc';
 import { client } from '../../api/base/apolloClient';
 import cn from 'classnames';
 
+import CartItemAtributes from '../CartItemAtributes';
 import CartItemAmount from '../CartItemAmount';
 import CartItemImage from '../CartItemImage';
-import { colorAtribute } from '../../utils/colorAtribute';
-import { filterAtribute } from '../../utils/filterAtribute';
+
 import { GET_ONE_PRODUCT_BY_ID } from '../../api/shemas/getOneProductById';
-import CartItemAtributes from '../CartItemAtributes';
 import { SELECTED_CURRENCY } from '../../api/cache/selectedCurrency';
 import { READ_GET_PRODUCT_INTO_CART } from '../../api/cache/getProductIntoCart';
+
+import { colorAtribute } from '../../utils/colorAtribute';
+import { filterAtribute } from '../../utils/filterAtribute';
 
 import styles from './CartItem.module.scss';
 

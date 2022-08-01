@@ -5,8 +5,6 @@ import Button from '../../lib/Button/Button';
 import styles from './CartButtons.module.scss';
 
 export default class CartButtons extends Component {
-  state = {};
-
   render() {
     if (!this.props.visibleFullScreen)
       return (

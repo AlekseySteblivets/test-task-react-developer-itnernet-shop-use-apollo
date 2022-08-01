@@ -3,8 +3,9 @@ import { withRouter } from 'react-router';
 
 import { graphql } from '@apollo/client/react/hoc';
 
-import ProductItem from '../ProductItem';
 import { GET_PRODUCTS_BY_NAME } from '../../api/shemas/getProductsByName';
+
+import ProductItem from '../ProductItem';
 
 import styles from './ProductList.module.scss';
 

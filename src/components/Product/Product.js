@@ -6,12 +6,14 @@ import { graphql } from '@apollo/client/react/hoc';
 import { Interweave } from 'interweave';
 
 import { client } from '../../api/base/apolloClient';
-import Button from '../../lib/Button';
-import CartItemImage from '../CartItemImage';
-import ProductImagesType from '../ProductImagesType/ProductImagesType';
 import { GET_ONE_PRODUCT_BY_ID } from '../../api/shemas/getOneProductById';
 import { READ_GET_PRODUCT_INTO_CART } from '../../api/cache/getProductIntoCart';
+
+import CartItemImage from '../CartItemImage';
+import ProductImagesType from '../ProductImagesType/ProductImagesType';
 import ProductItemAtributes from '../ProductItemAtributes/ProductItemAtributes';
+
+import Button from '../../lib/Button';
 
 import { filterAtribute } from '../../utils/filterAtribute';
 import { colorAtribute } from '../../utils/colorAtribute';
@@ -110,7 +112,6 @@ class Product extends Component {
           copyProducts.push(product);
           return { productIntoCart: copyProducts };
         } else {
-          console.log('copyProducts', copyProducts);
           return {
             productIntoCart: copyProducts,
           };

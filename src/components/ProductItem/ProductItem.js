@@ -7,6 +7,7 @@ import { graphql } from '@apollo/client/react/hoc';
 import { client } from '../../api/base/apolloClient';
 import { READ_GET_PRODUCT_INTO_CART } from '../../api/cache/getProductIntoCart';
 import { GET_ONE_PRODUCT_BY_ID } from '../../api/shemas/getOneProductById';
+
 import ProductImage from '../../lib/ProductImage';
 
 import styles from './ProductItem.module.scss';
@@ -17,7 +18,6 @@ class ProductItem extends Component {
   };
 
   price = arr => {
-    console.log('this.props.currencySymbol', this.props.currencySymbol);
     let money = null;
     if (arr) {
       money = arr.filter(
@@ -36,7 +36,6 @@ class ProductItem extends Component {
       data => {
         const { productIntoCart } = data;
         const copyProducts = [...productIntoCart];
-        // console.log('this.props.idProduct', this.props.idProduct);
         let repeadIndex = copyProducts.findIndex(
           prod => prod.id === this.props.idProduct,
         );
@@ -52,7 +51,6 @@ class ProductItem extends Component {
           copyProducts.push(product);
           return { productIntoCart: copyProducts };
         } else {
-          console.log('copyProducts', copyProducts);
           return {
             productIntoCart: copyProducts,
           };
@@ -64,13 +62,11 @@ class ProductItem extends Component {
   addToCart = e => {
     e.preventDefault();
     const { attributes } = this.props.data.product;
-    console.log('attributes', attributes);
 
     const fierstAttributes = attributes?.reduce((acc, atribute) => {
       return { ...acc, [atribute.id]: atribute.items[0].displayValue };
     }, {});
 
-    console.log('fierstAttributes', fierstAttributes);
     this.updateQuery(fierstAttributes);
   };
 

@@ -1,11 +1,12 @@
-import { Component } from "react";
+import { Component } from 'react';
 
-import { graphql } from "@apollo/client/react/hoc";
+import { graphql } from '@apollo/client/react/hoc';
 
-import { GET_CATEGORIES_NAME } from "../../api/shemas/categoriesName";
-import NavigationLink from "../NavigationLink/NavigationLink";
+import { GET_CATEGORIES_NAME } from '../../api/shemas/categoriesName';
 
-import styles from "./Navigation.module.scss";
+import NavigationLink from '../NavigationLink/NavigationLink';
+
+import styles from './Navigation.module.scss';
 
 class Navigation extends Component {
   render() {
@@ -19,7 +20,7 @@ class Navigation extends Component {
           <p>Loading...</p>
         ) : (
           <ul className={styles.menu}>
-            {categories.map((category) => (
+            {categories.map(category => (
               <NavigationLink
                 title={category.name}
                 href={`/${category.name}`}

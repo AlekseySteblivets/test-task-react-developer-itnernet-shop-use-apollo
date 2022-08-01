@@ -3,11 +3,12 @@ import { withRouter } from 'react-router';
 import cn from 'classnames';
 
 import { graphql } from '@apollo/client/react/hoc';
-import { client } from '../../api/base/apolloClient';
 
+import { client } from '../../api/base/apolloClient';
 import { GET_KIND_OF_CURRENCIES } from '../../api/shemas/getKindOfCurrencies';
-import OutsideClickHandler from '../OutsideClickHandler/OutsideClickHandler';
 import { SELECTED_CURRENCY } from '../../api/cache/selectedCurrency';
+
+import OutsideClickHandler from '../OutsideClickHandler/OutsideClickHandler';
 
 import styles from './Select.module.scss';
 

@@ -2,9 +2,9 @@ import { Component } from 'react';
 import cn from 'classnames';
 
 import { graphql } from '@apollo/client/react/hoc';
-import { client } from '../../api/base/apolloClient';
 
 import { READ_GET_PRODUCT_INTO_CART } from '../../api/cache/getProductIntoCart';
+import { client } from '../../api/base/apolloClient';
 
 import styles from './CartItemAmount.module.scss';
 
@@ -72,6 +72,7 @@ class CartItemAmount extends Component {
 
   render() {
     const visibleFullScreen = this.props.visibleFullScreen;
+
     return (
       <div
         className={cn(styles.menuAmount, {

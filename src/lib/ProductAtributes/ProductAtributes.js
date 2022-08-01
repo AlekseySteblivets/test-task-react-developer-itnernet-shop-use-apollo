@@ -19,6 +19,7 @@ export default class ProductAtributes extends Component {
 
   render() {
     const visibleFullScreen = this.props.visibleFullScreen;
+
     return (
       <div
         className={cn(styles.menuAboutThing, {
@@ -67,14 +68,17 @@ export default class ProductAtributes extends Component {
                 {oneAtribute.items.map(oneSize => (
                   <li
                     onClick={() =>
-                      this.props.onClickAtributes(oneAtribute.id, oneSize.value)
+                      this.props.onClickAtributes(
+                        oneAtribute.id,
+                        oneSize.displayValue,
+                      )
                     }
-                    key={oneSize.value}
+                    key={oneSize.displayValue}
                     className={cn(styles.itemSize, {
                       [styles.itemSizeFullScreen]: visibleFullScreen,
                       [styles.activeItemSize]:
                         this.props.currentAtribute[oneAtribute.id] ===
-                        oneSize.value,
+                        oneSize.displayValue,
                     })}
                   >
                     {oneSize.value}

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { graphql } from '@apollo/client/react/hoc';
 
 import { SELECTED_CURRENCY } from '../../api/cache/selectedCurrency';
+
 import Product from '../Product';
 
 class LayoutProduct extends Component {

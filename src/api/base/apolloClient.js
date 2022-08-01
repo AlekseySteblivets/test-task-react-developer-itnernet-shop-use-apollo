@@ -7,7 +7,7 @@ export const client = new ApolloClient({
   cache: new InMemoryCache({
     typePolicies: {
       AttributeSet: {
-        keyFields: ['items', ['id']],
+        keyFields: [['id'], 'items'],
       },
     },
   }),

@@ -50,10 +50,12 @@
   margin-top: 24px;
   margin-bottom: 0px;
   text-align: start;
+  color: initial;
   @include font-heading-h3;
 }
 
 .textPriceThing {
+  color: initial;
   margin: 0;
   text-align: start;
   @include font-text-h3;
@@ -61,7 +63,12 @@
 
 .textOutOfStock {
   position: absolute;
+  color: $color-grey-transparent;
   top: 180px;
   left: 119px;
   @include textOutOfStock;
+}
+
+.linkRoute {
+  text-decoration: none;
 }

@@ -1,20 +1,20 @@
-import { Component } from "react";
+import { Component } from 'react';
 
-import ProductAtributes from "../../lib/ProductAtributes/ProductAtributes";
+import ProductAtributes from '../../lib/ProductAtributes/ProductAtributes';
 
 export default class ProductItemAtributes extends Component {
   state = {
-    currentColor: "",
+    currentColor: '',
     currentAtribute: {},
   };
 
-  onClickColorButton = (color) => {
+  onClickColorButton = color => {
     this.setState({ currentColor: color });
     this.props.choosedColorByUser(color);
   };
 
   onClickAtributes = (id, sizeAtribute) => {
-    this.setState((prev) => ({
+    this.setState(prev => ({
       currentAtribute: {
         ...prev.currentAtribute,
         [id]: sizeAtribute,

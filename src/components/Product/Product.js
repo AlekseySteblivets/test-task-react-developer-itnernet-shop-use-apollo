@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { withRouter } from 'react-router';
-import { Link, Route, Switch } from 'react-router-dom';
 import cn from 'classnames';
 
 import { graphql } from '@apollo/client/react/hoc';
@@ -13,45 +12,21 @@ import ProductImagesType from '../ProductImagesType/ProductImagesType';
 import { GET_ONE_PRODUCT_BY_ID } from '../../api/shemas/getOneProductById';
 import { READ_GET_PRODUCT_INTO_CART } from '../../api/cache/getProductIntoCart';
 import ProductItemAtributes from '../ProductItemAtributes/ProductItemAtributes';
+
 import { filterAtribute } from '../../utils/filterAtribute';
 import { colorAtribute } from '../../utils/colorAtribute';
 
 import styles from './Product.module.scss';
-import OutsideClickHandler from '../../lib/OutsideClickHandler/OutsideClickHandler';
-import { SELECTED_CURRENCY } from '../../api/cache/selectedCurrency';
-import LayoutProductList from '../LayoutProductList/LayoutProductList';
 
 class Product extends Component {
   state = {
     currentProductImage: '',
-    idProduct: '',
     atributes: {},
-    infoAboutProductById: null,
     curCurrency: '',
   };
 
   componentDidMount() {
-    const data = client.readQuery({
-      query: GET_ONE_PRODUCT_BY_ID,
-      variables: {
-        id: this.props.match.params.idProduct,
-      },
-    });
-    console.log('data', data);
-    const curCurrency = client.readQuery({
-      query: SELECTED_CURRENCY,
-    });
-
-    this.setState(
-      {
-        idProduct: this.props.match.params.idProduct,
-        infoAboutProductById: { ...data.product },
-        curCurrency: curCurrency.selectedCurrency.symbol,
-      },
-      () => this.setFirstProductAsCurrent(),
-    );
-
-    // console.log('curCurrencyDM', curCurrency.selectedCurrency.symbol);
+    this.setFirstProductAsCurrent();
   }
 
   componentDidUpdate() {
@@ -59,17 +34,17 @@ class Product extends Component {
   }
 
   setFirstProductAsCurrent = () => {
-    // if (!this.state.currentProductImage && !data.loading) {
-    if (!this.state.currentProductImage) {
+    const { data } = this.props;
+    if (!this.state.currentProductImage && !data.loading) {
       this.setState({
-        currentProductImage: this.state.infoAboutProductById.gallery[0],
+        currentProductImage: data.product.gallery[0],
       });
     }
   };
 
   onChangeMainImg = index => {
     this.setState({
-      currentProductImage: this.state.infoAboutProductById.gallery[index],
+      currentProductImage: this.props.data.product.gallery[index],
     });
   };
 
@@ -77,7 +52,9 @@ class Product extends Component {
     let money = null;
     if (arr) {
       money = arr.filter(
-        kindCurrency => kindCurrency.currency.symbol === this.state.curCurrency,
+        kindCurrency =>
+          kindCurrency.currency.symbol ===
+          this.props.takenCurrency.selectedCurrency.symbol,
       );
       return money[0].currency.symbol + money[0].amount;
     }
@@ -101,7 +78,7 @@ class Product extends Component {
   onClickAddToCart = () => {
     const isEmptyAtributes = Object.keys(this.state.atributes);
 
-    const allAtributesfromQuery = this.state.infoAboutProductById.attributes;
+    const allAtributesfromQuery = this.props.data.product.attributes;
     let allAtributesIDfromQuery = [];
 
     for (let i = 0; i < allAtributesfromQuery.length; i++) {
@@ -119,14 +96,14 @@ class Product extends Component {
         const { productIntoCart } = data;
         const copyProducts = [...productIntoCart];
         let repeadIndex = copyProducts.findIndex(
-          prod => prod.id === this.state.idProduct,
+          prod => prod.id === this.props.match.params.idProduct,
         );
 
         const product = {
-          id: this.state.idProduct,
+          id: this.props.match.params.idProduct,
           atributes: this.state.atributes,
           numbersItem: 1,
-          sumProduct: this.price(this.state.infoAboutProductById.prices),
+          sumProduct: this.price(this.props.data.product.prices),
         };
 
         if (repeadIndex === -1) {
@@ -141,92 +118,67 @@ class Product extends Component {
       },
     );
 
-    // this.props.onTogleModal();
+    this.props.history.goBack();
   };
 
   render() {
-    // const { gallery, brand, name, attributes, prices, inStock, description } =
-    //   this.state.infoAboutProductById;
-    // console.log('gallery', gallery);
-    console.log('this.props', this.props);
-
     return (
-      <OutsideClickHandler
-        onOutsideClick={() => {
-          // this.props.onClose();
-          console.log('onOutsideClick');
-          // <Link to="/"></Link>;
-        }}
-      >
-        <div className={styles.cartOneThing}>
-          {!this.state.infoAboutProductById ? (
-            <p>loading product...</p>
-          ) : (
-            <>
-              <ProductImagesType
-                allImages={this.state.infoAboutProductById.gallery}
-                onChangeMainImg={this.onChangeMainImg}
+      <div className={styles.cartOneThing}>
+        {this.props.data.loading ||
+        !this.props.takenCurrency.selectedCurrency ? (
+          <p>loading product...</p>
+        ) : (
+          <>
+            <ProductImagesType
+              allImages={this.props.data.product.gallery}
+              onChangeMainImg={this.onChangeMainImg}
+            />
+            <CartItemImage
+              currentProductImage={this.state.currentProductImage}
+              classNameProps={styles.thingMainView}
+            />
+            <div>
+              <ProductItemAtributes
+                choosedAtributesByUser={this.choosedAtributesByUser}
+                choosedColorByUser={this.choosedColorByUser}
+                visibleFullScreen={true}
+                brand={this.props.data.product.brand}
+                name={this.props.data.product.name}
+                color={colorAtribute(this.props.data.product.attributes)}
+                attributes={filterAtribute(this.props.data.product.attributes)}
               />
-              <CartItemImage
-                currentProductImage={this.state.currentProductImage}
-                classNameProps={styles.thingMainView}
-              />
-              <div>
-                <ProductItemAtributes
-                  choosedAtributesByUser={this.choosedAtributesByUser}
-                  choosedColorByUser={this.choosedColorByUser}
-                  visibleFullScreen={true}
-                  brand={this.state.infoAboutProductById.brand}
-                  name={this.state.infoAboutProductById.name}
-                  color={colorAtribute(
-                    this.state.infoAboutProductById.attributes,
-                  )}
-                  attributes={filterAtribute(
-                    this.state.infoAboutProductById.attributes,
-                  )}
-                />
-                <p className={styles.priceText}>Price:</p>
-                <p className={styles.priceNumber}>
-                  {this.price(this.state.infoAboutProductById.prices)}
-                </p>
-                <Link to="/">
-                  <Button
-                    classNameProps={cn(styles.buttonAddToCart, {
-                      [styles.buttonDisable]:
-                        !this.state.infoAboutProductById.inStock,
-                    })}
-                    onClickProps={this.onClickAddToCart}
-                    disableProps={!this.state.infoAboutProductById.inStock}
-                  >
-                    Add to cart
-                  </Button>
-                </Link>
-                <div className={styles.textDescription}>
-                  <Interweave
-                    content={this.state.infoAboutProductById.description}
-                  />
-                </div>
+              <p className={styles.priceText}>Price:</p>
+              <p className={styles.priceNumber}>
+                {this.price(this.props.data.product.prices)}
+              </p>
+
+              <Button
+                classNameProps={cn(styles.buttonAddToCart, {
+                  [styles.buttonDisable]: !this.props.data.product.inStock,
+                })}
+                onClickProps={this.onClickAddToCart}
+                disableProps={!this.props.data.product.inStock}
+              >
+                Add to cart
+              </Button>
+
+              <div className={styles.textDescription}>
+                <Interweave content={this.props.data.product.description} />
               </div>
-            </>
-          )}
-        </div>
-      </OutsideClickHandler>
+            </div>
+          </>
+        )}
+      </div>
     );
   }
 }
 
-// const getOneProductById = graphql(GET_ONE_PRODUCT_BY_ID, {
-//   options: props => ({
-//     variables: {
-//       id: this.props.match.params.idProduct,
-//     },
-//   }),
-// });
+const getOneProductById = graphql(GET_ONE_PRODUCT_BY_ID, {
+  options: props => ({
+    variables: {
+      id: props.match.params.idProduct,
+    },
+  }),
+});
 
-export default withRouter(Product);
-
-// export default graphql(SELECTED_CURRENCY, {
-//   options: () => ({
-//     fetchPolicy: 'cache-only',
-//   }),
-// })(withRouter(Product));
+export default withRouter(getOneProductById(Product));

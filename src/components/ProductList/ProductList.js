@@ -3,53 +3,26 @@ import { withRouter } from 'react-router';
 
 import { graphql } from '@apollo/client/react/hoc';
 
-import Modal from '../../lib/Modal/Modal';
-import Product from '../Product';
 import ProductItem from '../ProductItem';
 import { GET_PRODUCTS_BY_NAME } from '../../api/shemas/getProductsByName';
 
 import styles from './ProductList.module.scss';
 
 class ProductList extends Component {
-  state = {
-    showCartOfThing: false,
-    idProduct: '',
-    currentCurrencySymbol: '',
-    currentValute: [],
-  };
-
-  componentDidUpdate() {
-    this.selectedCurrencyQuery(this.props.takenCurrency.selectedCurrency);
-  }
-
-  selectedCurrencyQuery = currency => {
-    if (!currency) {
-      return;
-    }
-    if (!this.state.currentCurrencySymbol)
-      this.setState({
-        currentCurrencySymbol: currency.symbol,
-      });
-
-    if (this.state.currentCurrencySymbol !== currency.symbol) {
-      this.setState({
-        currentCurrencySymbol: currency.symbol,
-      });
-    }
-  };
-
-  togleModal = id => {
-    this.setState(state => ({
-      showCartOfThing: !state.showCartOfThing,
-      idProduct: id,
-    }));
-  };
-
   amountMoney = currencies => {
     return currencies.find(
       kindOfCurrency =>
-        kindOfCurrency.currency.symbol === this.state.currentCurrencySymbol,
+        kindOfCurrency.currency.symbol ===
+        this.props.takenCurrency.selectedCurrency.symbol,
     )?.amount;
+  };
+
+  currencySymbolOfProduct = currencies => {
+    return currencies.find(
+      kindOfCurrency =>
+        kindOfCurrency.currency.symbol ===
+        this.props.takenCurrency.selectedCurrency.symbol,
+    )?.currency.symbol;
   };
 
   render() {
@@ -61,7 +34,7 @@ class ProductList extends Component {
     return (
       <div className={styles.productList}>
         <h2 className={styles.title}>{params.slug}</h2>
-        {loading ? (
+        {loading || !this.props.takenCurrency.selectedCurrency ? (
           <p>...Loading PRODUCTS</p>
         ) : (
           <ul className={styles.menu}>
@@ -75,23 +48,12 @@ class ProductList extends Component {
                 image={oneProduct.gallery[0]}
                 name={oneProduct.name}
                 isInStock={oneProduct.inStock}
-                currencySymbol={this.state.currentCurrencySymbol}
+                currencySymbol={this.currencySymbolOfProduct(oneProduct.prices)}
                 slug={this.props.slug}
               />
             ))}
           </ul>
         )}
-        {/* <Modal
-          onClose={this.togleModal}
-          visible={this.state.showCartOfThing}
-          classNameProps={styles.modalCartOfThing}
-        >
-          <Product
-            productId={this.state.idProduct}
-            onTogleModal={this.togleModal}
-            currencySymbol={this.state.currentCurrencySymbol}
-          />
-        </Modal> */}
       </div>
     );
   }

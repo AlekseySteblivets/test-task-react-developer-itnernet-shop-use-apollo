@@ -9,7 +9,7 @@ import LayoutSection from '../../views/LayoutSection/LayoutSection';
 import Container from '../../components/Container';
 import Header from '../../components/Header';
 import LayoutProductList from '../../components/LayoutProductList/LayoutProductList';
-import Product from '../../components/Product';
+import LayoutProduct from '../../components/LayoutProduct/LayoutProduct';
 
 import styles from './PreviewPage.module.scss';
 
@@ -34,7 +34,7 @@ class PreviewPage extends Component {
             <Container>
               <Switch>
                 <Route exact path="/:slug/" component={LayoutProductList} />
-                <Route path="/:slug/:idProduct" component={Product} />
+                <Route path="/:slug/:idProduct" component={LayoutProduct} />
               </Switch>
             </Container>
           </LayoutSection>

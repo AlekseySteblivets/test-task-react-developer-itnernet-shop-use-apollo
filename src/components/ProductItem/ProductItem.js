@@ -16,13 +16,6 @@ class ProductItem extends Component {
     currentAtribute: {},
   };
 
-  componentDidUpdate() {}
-
-  // handleClick = () => {
-  //   const { onTogleModal, idProduct } = this.props;
-  //   // onTogleModal(idProduct);
-  // };
-
   price = arr => {
     console.log('this.props.currencySymbol', this.props.currencySymbol);
     let money = null;
@@ -41,10 +34,9 @@ class ProductItem extends Component {
         query: READ_GET_PRODUCT_INTO_CART,
       },
       data => {
-        console.log('data', data);
         const { productIntoCart } = data;
         const copyProducts = [...productIntoCart];
-        console.log('this.props.idProduct', this.props.idProduct);
+        // console.log('this.props.idProduct', this.props.idProduct);
         let repeadIndex = copyProducts.findIndex(
           prod => prod.id === this.props.idProduct,
         );
@@ -72,14 +64,14 @@ class ProductItem extends Component {
   addToCart = e => {
     e.preventDefault();
     const { attributes } = this.props.data.product;
+    console.log('attributes', attributes);
 
     const fierstAttributes = attributes?.reduce((acc, atribute) => {
       return { ...acc, [atribute.id]: atribute.items[0].displayValue };
     }, {});
 
+    console.log('fierstAttributes', fierstAttributes);
     this.updateQuery(fierstAttributes);
-
-    // this.handleClick();
   };
 
   render() {
@@ -98,9 +90,11 @@ class ProductItem extends Component {
         className={cn(styles.item, {
           [styles.itemNotActive]: !isInStock,
         })}
-        // onClick={this.handleClick}
       >
-        <Link to={`${this.props.slug}/${this.props.idProduct}`}>
+        <Link
+          to={`${this.props.slug}/${this.props.idProduct}`}
+          className={styles.linkRoute}
+        >
           <ProductImage image={image} idProduct={idProduct} />
           {!isInStock && (
             <>
@@ -128,7 +122,6 @@ const getOneProductById = graphql(GET_ONE_PRODUCT_BY_ID, {
     variables: {
       id: props.idProduct,
     },
-    // fetchPolicy: 'cache-only',
   }),
 });
 

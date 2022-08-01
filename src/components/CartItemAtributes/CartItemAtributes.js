@@ -16,10 +16,13 @@ class CartItemAtributes extends Component {
     const atribute = this.props.data.productIntoCart.filter(
       product => product.id === this.props.productId,
     );
+
+    console.log('atributeDM', atribute);
+    console.log('atribute[0].atributes.color', atribute[0].atributes.Color);
     this.setState({
       currentAtribute: atribute[0].atributes,
-      currentColor: atribute[0].atributes.color
-        ? atribute[0].atributes.color
+      currentColor: atribute[0].atributes.Color
+        ? atribute[0].atributes.Color
         : '',
     });
   }

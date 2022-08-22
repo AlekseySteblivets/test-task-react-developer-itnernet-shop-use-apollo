@@ -19,10 +19,9 @@ export default class CartContent extends Component {
         <h1 className={styles.title}>
           {!this.props.visibleFullScreen ? (
             <>
-              <span className={styles.modalTitle}>My Bag</span>
-
+              <span className={styles.modalTitle}>My Bag, &nbsp;</span>
               <span className={styles.modalAmountImems}>
-                , {this.itemsProduct(this.props.productIntoCart)}items
+                {this.itemsProduct(this.props.productIntoCart)} items
               </span>
             </>
           ) : (

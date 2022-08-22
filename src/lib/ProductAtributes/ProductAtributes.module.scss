@@ -1,6 +1,5 @@
 @import '../../assets/styles/colors';
 @import '../../assets/styles/fonts';
-@import '../../assets/styles/media';
 
 .menuAboutThing {
   flex: 3;
@@ -115,6 +114,7 @@
 }
 
 .textColorFullScreen {
+  display: flex;
   font-family: 'Roboto Condensed';
   @include font-modal-text-color-full-screen;
 }

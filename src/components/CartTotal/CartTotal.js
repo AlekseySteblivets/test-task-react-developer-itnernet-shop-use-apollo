@@ -25,7 +25,7 @@ class CartTotal extends Component {
     const data = client.readQuery({
       query: SELECTED_CURRENCY,
     });
-    return data.selectedCurrency.symbol;
+    return data?.selectedCurrency.symbol;
   };
 
   queryQuantity = () => {

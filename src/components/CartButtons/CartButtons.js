@@ -1,6 +1,8 @@
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import Button from '../../lib/Button/Button';
+import { nameCartPage } from '../../utils/nameCartPage';
 
 import styles from './CartButtons.module.scss';
 
@@ -9,9 +11,10 @@ export default class CartButtons extends Component {
     if (!this.props.visibleFullScreen)
       return (
         <div className={styles.blockButtons}>
-          <Button onClickProps={this.props.onClickButtonCartProps}>
-            View bag
-          </Button>
+          <Link to={`/${nameCartPage}`}>
+            <Button onClickProps={this.props.onClose}>View bag</Button>
+          </Link>
+
           <Button>CHECK OUT</Button>
         </div>
       );

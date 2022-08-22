@@ -11,6 +11,9 @@ import Container from '../../components/Container';
 import Header from '../../components/Header';
 import LayoutProductList from '../../components/LayoutProductList/LayoutProductList';
 import LayoutProduct from '../../components/LayoutProduct/LayoutProduct';
+import CartPage from '../../components/CartPage/CartPage';
+import { nameCartPage } from '../../utils/nameCartPage';
+import { nameCategory } from '../../utils/nameCategory';
 
 import styles from './PreviewPage.module.scss';
 
@@ -18,7 +21,7 @@ class PreviewPage extends Component {
   componentDidUpdate() {
     const { data, location, history } = this.props;
     if (location.pathname === '/') {
-      history.push(data.categories[0].name);
+      history.push(`/${nameCategory}/${data.categories[0].name}`);
     }
   }
 
@@ -34,8 +37,16 @@ class PreviewPage extends Component {
           <LayoutSection>
             <Container>
               <Switch>
-                <Route exact path="/:slug/" component={LayoutProductList} />
-                <Route path="/:slug/:idProduct" component={LayoutProduct} />
+                <Route exact path={`/${nameCartPage}`} component={CartPage} />
+                <Route
+                  exact
+                  path={`/${nameCategory}/:slug`}
+                  component={LayoutProductList}
+                />
+                <Route
+                  path={`/${nameCategory}/:slug/:idProduct`}
+                  component={LayoutProduct}
+                />
               </Switch>
             </Container>
           </LayoutSection>

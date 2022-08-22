@@ -14,20 +14,6 @@
   }
 }
 
-.itemNotActive {
-  color: $color-grey-transparent;
-}
-
-.blockOutOfStock {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 100px;
-  top: 0;
-  background-color: $color-white;
-  opacity: 0.5;
-}
-
 .icon {
   position: absolute;
   opacity: 0;
@@ -42,6 +28,35 @@
     cursor: pointer;
   }
 }
+
+.itemNotActive {
+  color: $color-grey-transparent;
+}
+
+.blockOutOfStock {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100px;
+  top: 0;
+  background-color: $color-white;
+  opacity: 0.5;
+}
+
+// .icon {
+//   position: absolute;
+//   opacity: 0;
+//   background-image: url(../../assets/img/circle-icon.svg);
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   width: 52px;
+//   height: 52px;
+//   right: 30px;
+//   bottom: 69px;
+//   &:hover {
+//     cursor: pointer;
+//   }
+// }
 
 .titleThing {
   margin-top: 24px;

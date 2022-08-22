@@ -2,8 +2,6 @@ import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
-import { graphql } from '@apollo/client/react/hoc';
-
 import { client } from '../../api/base/apolloClient';
 import { READ_GET_PRODUCT_INTO_CART } from '../../api/cache/getProductIntoCart';
 import { GET_ONE_PRODUCT_BY_ID } from '../../api/shemas/getOneProductById';
@@ -11,6 +9,7 @@ import { GET_ONE_PRODUCT_BY_ID } from '../../api/shemas/getOneProductById';
 import ProductImage from '../../lib/ProductImage';
 
 import styles from './ProductItem.module.scss';
+import { nameCategory } from '../../utils/nameCategory';
 
 class ProductItem extends Component {
   state = {
@@ -28,7 +27,8 @@ class ProductItem extends Component {
     }
   };
 
-  updateQuery = attributes => {
+  updateQuery = (attributes, prices) => {
+    console.log('client', client);
     client.cache.updateQuery(
       {
         query: READ_GET_PRODUCT_INTO_CART,
@@ -44,7 +44,7 @@ class ProductItem extends Component {
           id: this.props.idProduct,
           atributes: attributes,
           numbersItem: 1,
-          sumProduct: this.price(this.props.data.product.prices),
+          sumProduct: this.price(prices),
         };
 
         if (repeadIndex === -1) {
@@ -59,15 +59,23 @@ class ProductItem extends Component {
     );
   };
 
-  addToCart = e => {
+  addToCart = async e => {
     e.preventDefault();
-    const { attributes } = this.props.data.product;
+    const { data } = await client.query({
+      query: GET_ONE_PRODUCT_BY_ID,
+      variables: {
+        id: this.props.idProduct,
+      },
+    });
+    console.log('product', data);
 
-    const fierstAttributes = attributes?.reduce((acc, atribute) => {
+    const { attributes, prices } = data.product;
+
+    const firstAttributes = attributes?.reduce((acc, atribute) => {
       return { ...acc, [atribute.id]: atribute.items[0].displayValue };
     }, {});
 
-    this.updateQuery(fierstAttributes);
+    this.updateQuery(firstAttributes, prices);
   };
 
   render() {
@@ -88,7 +96,7 @@ class ProductItem extends Component {
         })}
       >
         <Link
-          to={`${this.props.slug}/${this.props.idProduct}`}
+          to={`/${nameCategory}/${this.props.slug}/${this.props.idProduct}`}
           className={styles.linkRoute}
         >
           <ProductImage image={image} idProduct={idProduct} />
@@ -113,12 +121,4 @@ class ProductItem extends Component {
   }
 }
 
-const getOneProductById = graphql(GET_ONE_PRODUCT_BY_ID, {
-  options: props => ({
-    variables: {
-      id: props.idProduct,
-    },
-  }),
-});
-
-export default getOneProductById(ProductItem);
+export default ProductItem;

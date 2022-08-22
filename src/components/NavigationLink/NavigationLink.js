@@ -1,7 +1,7 @@
-import { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
-import styles from "./NavigationLink.module.scss";
+import styles from './NavigationLink.module.scss';
 
 export default class NavigationLink extends Component {
   render() {

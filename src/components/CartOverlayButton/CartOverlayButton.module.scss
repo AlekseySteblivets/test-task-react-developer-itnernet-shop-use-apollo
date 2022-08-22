@@ -1,0 +1,17 @@
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/colors';
+
+.fullScreenModal {
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 78px;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.cart {
+  position: relative;
+}

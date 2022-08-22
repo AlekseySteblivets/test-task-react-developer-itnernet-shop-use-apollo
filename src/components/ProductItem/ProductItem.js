@@ -28,7 +28,6 @@ class ProductItem extends Component {
   };
 
   updateQuery = (attributes, prices) => {
-    console.log('client', client);
     client.cache.updateQuery(
       {
         query: READ_GET_PRODUCT_INTO_CART,
@@ -67,7 +66,6 @@ class ProductItem extends Component {
         id: this.props.idProduct,
       },
     });
-    console.log('product', data);
 
     const { attributes, prices } = data.product;
 

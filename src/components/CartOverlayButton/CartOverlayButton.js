@@ -21,10 +21,6 @@ class CartOverlayButton extends Component {
     if (this.props.location.pathname === '/cart') {
       return;
     }
-    console.log(
-      'this.props.location.pathnameCartIcon',
-      this.props.location.pathname,
-    );
     this.setState(state => ({
       showModal: !state.showModal,
     }));

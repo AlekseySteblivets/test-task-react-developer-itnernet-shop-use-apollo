@@ -64,7 +64,7 @@ class Product extends Component {
 
   choosedColorByUser = color => {
     this.setState(prev => ({
-      atributes: { ...prev.atributes, color: color },
+      atributes: { ...prev.atributes, Color: color },
     }));
   };
 
